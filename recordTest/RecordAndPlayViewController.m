@@ -8,13 +8,16 @@
 
 #import "RecordAndPlayViewController.h"
 #import "PlayViewController.h"
+#import <AssetsLibrary/AssetsLibrary.h>
+
 
 @interface RecordAndPlayViewController ()
 {
     BOOL recording;
     AVCaptureDevice *frontCamera;
     
-    NSURL *movieOutputURL;
+    NSURL *movieOutputURL;//after record
+    NSURL *finalOutputFileURL;// after composition
     AVCaptureSession *session;
     __weak IBOutlet UIButton *bStartOrStop;
 }
@@ -91,7 +94,7 @@
         bStartOrStop.backgroundColor = [UIColor redColor];
         
         
-        NSString *outputPath = [[NSString alloc] initWithFormat:@"%@%@", NSTemporaryDirectory(), @"output.mp4"];
+        NSString *outputPath = [[NSString alloc] initWithFormat:@"%@%@", NSTemporaryDirectory(), @"output.mov"];
         NSURL *testoutputURL = [[NSURL alloc] initFileURLWithPath:outputPath];
         NSFileManager *fileManager = [NSFileManager defaultManager];
         if ([fileManager fileExistsAtPath:outputPath])
@@ -120,11 +123,7 @@
     }
 }
 
-- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    PlayViewController *playerVC = [segue destinationViewController];
-    playerVC.movieURL = movieOutputURL;
-}
+
 
 #pragma mark cameara delegate
 - (void) captureOutput:(AVCaptureFileOutput *)captureOutput didStartRecordingToOutputFileAtURL:(NSURL *)fileURL fromConnections:(NSArray *)connections
@@ -135,8 +134,81 @@
 - (void) captureOutput:(AVCaptureFileOutput *)captureOutput didFinishRecordingToOutputFileAtURL:(NSURL *)outputFileURL fromConnections:(NSArray *)connections error:(NSError *)error
 {
     NSLog(@"did finish recording, error is %@",[error description]);
-    [self performSegueWithIdentifier:@"goToPlay" sender:nil];
+//    [self performSegueWithIdentifier:@"goToPlay" sender:nil];
+
+    [self mergeAndSave];
+}
+
+- (void) mergeAndSave
+{
+    NSLog(@"begin merge and save");
+    AVMutableComposition *mixComposition = [AVMutableComposition composition];
     
+    //audio
+    NSURL *audioURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"dia" ofType:@"mp3"]];
+    AVURLAsset *audioAsset = [[AVURLAsset alloc] initWithURL:audioURL options:nil];
+    CMTimeRange audio_timeRange = CMTimeRangeMake(kCMTimeZero, audioAsset.duration);
+    
+    AVMutableCompositionTrack *audioTrack = [mixComposition addMutableTrackWithMediaType:AVMediaTypeAudio preferredTrackID:kCMPersistentTrackID_Invalid];
+    [audioTrack insertTimeRange:audio_timeRange ofTrack:[[audioAsset tracksWithMediaType:AVMediaTypeAudio] objectAtIndex:0] atTime:kCMTimeZero error:nil];
+    
+    //video
+    NSURL *videoURL = movieOutputURL;
+    AVURLAsset *videoAsset = [[AVURLAsset alloc] initWithURL:videoURL options:nil];
+    CMTimeRange video_timeRange = CMTimeRangeMake(kCMTimeZero, videoAsset.duration);
+    AVMutableCompositionTrack *videoTrack = [mixComposition addMutableTrackWithMediaType:AVMediaTypeVideo preferredTrackID:kCMPersistentTrackID_Invalid];
+    [videoTrack insertTimeRange:video_timeRange ofTrack:[[videoAsset tracksWithMediaType:AVMediaTypeVideo] objectAtIndex:0] atTime:kCMTimeZero error:nil];
+    
+    //path of compisited video
+    NSArray *dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *docDir = [dirPaths objectAtIndex:0];
+    NSString *finalOutputPath = [docDir stringByAppendingPathComponent:@"Final.mov"];
+    finalOutputFileURL = [NSURL fileURLWithPath:finalOutputPath];
+    
+    if ([[NSFileManager defaultManager] fileExistsAtPath:finalOutputPath]) {
+        [[NSFileManager defaultManager] removeItemAtPath:finalOutputPath error:nil];
+    }
+    
+    //avasset export session
+    AVAssetExportSession *exportSession = [[AVAssetExportSession alloc] initWithAsset:mixComposition presetName:AVAssetExportPresetMediumQuality];
+    exportSession.outputFileType = AVFileTypeQuickTimeMovie;
+    exportSession.outputURL = finalOutputFileURL;
+    
+    [exportSession exportAsynchronouslyWithCompletionHandler:^{
+//        NSLog(@"export final composited file complete");
+//        [self performSegueWithIdentifier:@"goToPlay" sender:nil];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self exportDidFinish:exportSession];
+        });
+    }];
+}
+
+- (void) exportDidFinish: (AVAssetExportSession *)exportSession
+{
+    if (exportSession.status == AVAssetExportSessionStatusCompleted) {
+        NSURL *sessionURL = exportSession.outputURL;
+        ALAssetsLibrary *lib = [[ALAssetsLibrary alloc] init];
+        if ([lib videoAtPathIsCompatibleWithSavedPhotosAlbum:sessionURL]) {
+            [lib writeVideoAtPathToSavedPhotosAlbum:sessionURL completionBlock:^(NSURL *assetURL, NSError *error) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    if (error) {
+                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"error" message:@"video saving failed" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+                        [alert show];
+                    } else {
+                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"finished" message:@"video saved" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+                        [alert show];
+                    }
+                });
+            }];
+        }
+        
+    }
+}
+
+- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    PlayViewController *playerVC = [segue destinationViewController];
+    playerVC.movieURL = finalOutputFileURL;
 }
 
 /*

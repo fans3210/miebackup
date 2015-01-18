@@ -20,6 +20,8 @@
 		38E7A2891A6A29860079B975 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38E7A2881A6A29860079B975 /* UIKit.framework */; };
 		38E7A28D1A6A72050079B975 /* PlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E7A28C1A6A72050079B975 /* PlayViewController.m */; };
 		38E7A2901A6A88970079B975 /* RecordAndPlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E7A28F1A6A88970079B975 /* RecordAndPlayViewController.m */; };
+		38E7A29D1A6B8F4A0079B975 /* dia.amr in Resources */ = {isa = PBXBuildFile; fileRef = 38E7A29C1A6B8F4A0079B975 /* dia.amr */; };
+		38E7A29F1A6B98DA0079B975 /* dia.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 38E7A29E1A6B98DA0079B975 /* dia.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +55,8 @@
 		38E7A28C1A6A72050079B975 /* PlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayViewController.m; sourceTree = "<group>"; };
 		38E7A28E1A6A88970079B975 /* RecordAndPlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordAndPlayViewController.h; sourceTree = "<group>"; };
 		38E7A28F1A6A88970079B975 /* RecordAndPlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordAndPlayViewController.m; sourceTree = "<group>"; };
+		38E7A29C1A6B8F4A0079B975 /* dia.amr */ = {isa = PBXFileReference; lastKnownFileType = file; path = dia.amr; sourceTree = "<group>"; };
+		38E7A29E1A6B98DA0079B975 /* dia.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = dia.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +114,7 @@
 				38E7A2601A6A27A40079B975 /* recordTest.xcdatamodeld */,
 				38E7A28A1A6A6E570079B975 /* ViewControllers */,
 				38E7A2591A6A27A40079B975 /* Supporting Files */,
+				38E7A29B1A6B8F2C0079B975 /* Assets */,
 			);
 			path = recordTest;
 			sourceTree = "<group>";
@@ -149,6 +154,15 @@
 				38E7A28F1A6A88970079B975 /* RecordAndPlayViewController.m */,
 			);
 			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		38E7A29B1A6B8F2C0079B975 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				38E7A29E1A6B98DA0079B975 /* dia.mp3 */,
+				38E7A29C1A6B8F4A0079B975 /* dia.amr */,
+			);
+			path = Assets;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -234,6 +248,8 @@
 				38E7A2681A6A27A40079B975 /* Main.storyboard in Resources */,
 				38E7A26D1A6A27A40079B975 /* LaunchScreen.xib in Resources */,
 				38E7A26A1A6A27A40079B975 /* Images.xcassets in Resources */,
+				38E7A29D1A6B8F4A0079B975 /* dia.amr in Resources */,
+				38E7A29F1A6B98DA0079B975 /* dia.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

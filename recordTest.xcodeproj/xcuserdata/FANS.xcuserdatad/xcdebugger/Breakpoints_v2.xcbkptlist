@@ -74,12 +74,28 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "recordTest/RecordAndPlayViewController.m"
-            timestampString = "443191034.46063"
+            timestampString = "443258749.339986"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "108"
-            endingLineNumber = "108"
-            landmarkName = "-recordOrStop:"
+            startingLineNumber = "149"
+            endingLineNumber = "149"
+            landmarkName = "-mergeAndSave"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "recordTest/RecordAndPlayViewController.m"
+            timestampString = "443259912.554509"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "154"
+            endingLineNumber = "154"
+            landmarkName = "-mergeAndSave"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
