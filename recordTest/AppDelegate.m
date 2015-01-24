@@ -7,6 +7,10 @@
 //
 
 #import "AppDelegate.h"
+#import <BmobSDK/Bmob.h>
+#import <Realm.h>
+
+#import "FirstViewController.h"
 
 @interface AppDelegate ()
 
@@ -17,6 +21,22 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    NSLog(@"bomb app key is %@",kBombAppkey);
+    [Bmob registerWithAppKey:kBombAppkey];
+    BOOL firstLaunch = NO;
+    
+    if (firstLaunch) {
+        self.window = [[UIWindow alloc] initWithFrame:UIScreen.mainScreen.bounds];
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        FirstViewController *firstVC = [storyboard instantiateViewControllerWithIdentifier:@"FirstViewController"];
+        self.window.rootViewController = firstVC;
+        [self.window makeKeyAndVisible];
+    }
+
+
+
+    
     return YES;
 }
 

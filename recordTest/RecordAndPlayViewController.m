@@ -134,9 +134,9 @@
 - (void) captureOutput:(AVCaptureFileOutput *)captureOutput didFinishRecordingToOutputFileAtURL:(NSURL *)outputFileURL fromConnections:(NSArray *)connections error:(NSError *)error
 {
     NSLog(@"did finish recording, error is %@",[error description]);
-//    [self performSegueWithIdentifier:@"goToPlay" sender:nil];
+    [self performSegueWithIdentifier:@"goToPlay" sender:nil];
 
-    [self mergeAndSave];
+//    [self mergeAndSave];
 }
 
 - (void) mergeAndSave
@@ -208,7 +208,8 @@
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     PlayViewController *playerVC = [segue destinationViewController];
-    playerVC.movieURL = finalOutputFileURL;
+//    playerVC.movieURL = finalOutputFileURL;//final url
+    playerVC.movieURL = movieOutputURL;//tmp url
 }
 
 /*
