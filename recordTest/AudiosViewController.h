@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AudiosViewController : UIViewController
+@interface AudiosViewController : UIViewController<UITableViewDataSource, UITableViewDelegate>
 
 @end

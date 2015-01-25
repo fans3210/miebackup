@@ -11,6 +11,7 @@
 		384E068B1A7388190008AFF8 /* AudiosViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 384E068A1A7388190008AFF8 /* AudiosViewController.m */; };
 		384E068E1A738C990008AFF8 /* Audio.m in Sources */ = {isa = PBXBuildFile; fileRef = 384E068D1A738C990008AFF8 /* Audio.m */; };
 		384E06911A738D150008AFF8 /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 384E06901A738D150008AFF8 /* FirstViewController.m */; };
+		385E16BB1A73F41200D61DD8 /* AudioFileCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 385E16BA1A73F41200D61DD8 /* AudioFileCell.m */; };
 		38A80A5B1A73A72100FAA28B /* WanwanStyleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 38A80A5A1A73A72100FAA28B /* WanwanStyleCell.m */; };
 		38E7A25C1A6A27A40079B975 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E7A25B1A6A27A40079B975 /* main.m */; };
 		38E7A25F1A6A27A40079B975 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E7A25E1A6A27A40079B975 /* AppDelegate.m */; };
@@ -52,6 +53,8 @@
 		384E068D1A738C990008AFF8 /* Audio.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Audio.m; sourceTree = "<group>"; };
 		384E068F1A738D150008AFF8 /* FirstViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
 		384E06901A738D150008AFF8 /* FirstViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
+		385E16B91A73F41200D61DD8 /* AudioFileCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioFileCell.h; sourceTree = "<group>"; };
+		385E16BA1A73F41200D61DD8 /* AudioFileCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioFileCell.m; sourceTree = "<group>"; };
 		38A80A591A73A72100FAA28B /* WanwanStyleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WanwanStyleCell.h; sourceTree = "<group>"; };
 		38A80A5A1A73A72100FAA28B /* WanwanStyleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WanwanStyleCell.m; sourceTree = "<group>"; };
 		38E7A2561A6A27A40079B975 /* recordTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = recordTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -127,6 +130,8 @@
 			children = (
 				38A80A591A73A72100FAA28B /* WanwanStyleCell.h */,
 				38A80A5A1A73A72100FAA28B /* WanwanStyleCell.m */,
+				385E16B91A73F41200D61DD8 /* AudioFileCell.h */,
+				385E16BA1A73F41200D61DD8 /* AudioFileCell.m */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -136,10 +141,6 @@
 			children = (
 				38E7A4D21A737A900079B975 /* miepai.pch */,
 				38E7A4CC1A7379910079B975 /* Podfile */,
-				38E7A2881A6A29860079B975 /* UIKit.framework */,
-				38E7A2861A6A29800079B975 /* CoreGraphics.framework */,
-				38E7A2841A6A28B50079B975 /* Foundation.framework */,
-				38E7A2821A6A28A30079B975 /* AVFoundation.framework */,
 				38E7A2581A6A27A40079B975 /* recordTest */,
 				38E7A2751A6A27A50079B975 /* recordTestTests */,
 				38E7A2571A6A27A40079B975 /* Products */,
@@ -237,6 +238,10 @@
 		78D19ADB12535080A3764C47 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				38E7A2881A6A29860079B975 /* UIKit.framework */,
+				38E7A2861A6A29800079B975 /* CoreGraphics.framework */,
+				38E7A2841A6A28B50079B975 /* Foundation.framework */,
+				38E7A2821A6A28A30079B975 /* AVFoundation.framework */,
 				384E06861A7380DB0008AFF8 /* libc++.dylib */,
 				38E7A4D31A737C0B0079B975 /* libPods-BmobSDK.a */,
 				38E7A4D01A737A230079B975 /* libicucore.dylib */,
@@ -390,6 +395,7 @@
 				384E068B1A7388190008AFF8 /* AudiosViewController.m in Sources */,
 				384E068E1A738C990008AFF8 /* Audio.m in Sources */,
 				38A80A5B1A73A72100FAA28B /* WanwanStyleCell.m in Sources */,
+				385E16BB1A73F41200D61DD8 /* AudioFileCell.m in Sources */,
 				38E7A28D1A6A72050079B975 /* PlayViewController.m in Sources */,
 				38E7A25C1A6A27A40079B975 /* main.m in Sources */,
 				384E06911A738D150008AFF8 /* FirstViewController.m in Sources */,
