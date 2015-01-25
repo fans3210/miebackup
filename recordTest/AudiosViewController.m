@@ -19,7 +19,7 @@
     NSMutableArray *cellModels;
     __weak IBOutlet UITableView *tvAudios;
     __weak IBOutlet UIActivityIndicatorView *indicator;
-
+    
 }
 @property (nonatomic, strong) AVAudioPlayer *player;
 @end
@@ -39,7 +39,7 @@
     _player = [[AVAudioPlayer alloc] init];
     
     BmobQuery *bQuery = [BmobQuery queryWithClassName:@"Audio"];
-
+    
     
     [bQuery findObjectsInBackgroundWithBlock:^(NSArray *array, NSError *error) {
         for (BmobObject *obj in array) {
@@ -52,7 +52,7 @@
     }];
     
     
-//    cellModels = @[@"title 1", @"title 2", @"title 3"];
+    //    cellModels = @[@"title 1", @"title 2", @"title 3"];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -77,60 +77,88 @@
     cell.lbTitle.text = [bObj objectForKey:kAudioTitle];
     cell.bPlay.tag = indexPath.row;
     [cell.bPlay addTarget:self action:@selector(goPressed:) forControlEvents:UIControlEventTouchUpInside];
-//    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.indicator.hidden = YES;
+    
     return cell;
 }
+//{
+//            AudioFileCell *cell = (AudioFileCell *)[tableView cellForRowAtIndexPath:indexPath];
+//    NSLog(@"select index path %li",indexPath.row);
+//    NSLog(@"cell label is %@",cell.lbTitle.text);
+//
+//}
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    NSLog(@"cell at %li selected",(long)indexPath.row);
-    //download audio file mp3
+
+
     BmobObject *bObj = cellModels[indexPath.row];
     NSString *songName = [bObj objectForKey:kAudioTitle];
     BmobFile *songFile = [bObj objectForKey:kAudioFile];
     NSString *songURL = songFile.url;
-    NSLog(@"play button at %ld pressed, download file %@ with link:%@",indexPath.row, songName, songURL);
     
-    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
-    AFURLSessionManager *sessionManager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:songURL]];
-    NSURLSessionDownloadTask *downloadTask = [sessionManager downloadTaskWithRequest:request progress:nil destination:^NSURL *(NSURL *targetPath, NSURLResponse *response) {
-//        NSURL *documentDirectoryURL = [[NSFileManager defaultManager] URLForDirectory:NSDocumentationDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:NO error:nil];
-        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-        NSString *documentDirectoryPath = [paths objectAtIndex:0];
-        
-        NSURL *destinationURL = [NSURL fileURLWithPath:[documentDirectoryPath stringByAppendingPathComponent:[response suggestedFilename]]];
-        return destinationURL;
-        
-    } completionHandler:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
-        NSLog(@"file downloaded to %@",filePath);
-//        [player url] = filePath;
-        NSLog(@"error is %@",error.description);
-        BOOL exists = [[NSFileManager defaultManager] fileExistsAtPath:[filePath path]];
-        
+    //check whether file exists
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentDirectoryPath = [paths objectAtIndex:0];
+    
+    NSString *fileNameToBeChecked = [songURL lastPathComponent];
+    NSString *filePathToBeChecked = [documentDirectoryPath stringByAppendingPathComponent:fileNameToBeChecked];
+    if ([[NSFileManager defaultManager] fileExistsAtPath:filePathToBeChecked]) {
+        NSLog(@"file: %@ exists already", filePathToBeChecked);
+        NSURL *filePath = [NSURL URLWithString:filePathToBeChecked];
         AVAudioPlayer *tmpPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:filePath error:nil];
         _player = tmpPlayer;
         tmpPlayer = nil;
         [_player prepareToPlay];
         [_player play];
-
+    } else {
+        //file not exists, need to download
+        //download audio file mp3
+        AudioFileCell *cell = (AudioFileCell *)[tableView cellForRowAtIndexPath:indexPath];
         
-    }];
-    [downloadTask resume];
+        cell.indicator.hidden = NO;
+        [tableView reloadData];
+        NSLog(@"download file %@ with link:%@", songName, songURL);
+        
+        NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+        AFURLSessionManager *sessionManager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+        NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:songURL]];
+        NSURLSessionDownloadTask *downloadTask = [sessionManager downloadTaskWithRequest:request progress:nil destination:^NSURL *(NSURL *targetPath, NSURLResponse *response) {
+            
+            NSURL *destinationURL = [NSURL fileURLWithPath:[documentDirectoryPath stringByAppendingPathComponent:[response suggestedFilename]]];
+            return destinationURL;
+            
+        } completionHandler:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
+            NSLog(@"file downloaded to %@",filePath);
+            //        [player url] = filePath;
+            NSLog(@"error is %@",error.description);
+//            BOOL exists = [[NSFileManager defaultManager] fileExistsAtPath:[filePath path]];
+            
+            cell.indicator.hidden = YES;
+            [tableView reloadData];
+            
+            //play audio
+            AVAudioPlayer *tmpPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:filePath error:nil];
+            _player = tmpPlayer;
+            tmpPlayer = nil;
+            [_player prepareToPlay];
+            [_player play];
+            
+        }];
+        [downloadTask resume];
+    }
 }
 
 
 - (void) goPressed: (UIButton *)sender
 {
-
+    
     NSLog(@"go pressed at %li",(long)sender.tag);
-//    //download audio file mp3
-//    BmobObject *bObj = cellModels[sender.tag];
-//    NSString *songName = [bObj objectForKey:kAudioTitle];
-//    BmobFile *songFile = [bObj objectForKey:kAudioFile];
-//    NSString *songURL = songFile.url;
-//    NSLog(@"play button at %ld pressed, download file %@ with link:%@",(long)sender.tag, songName, songURL);
+    //    //download audio file mp3
+    //    BmobObject *bObj = cellModels[sender.tag];
+    //    NSString *songName = [bObj objectForKey:kAudioTitle];
+    //    BmobFile *songFile = [bObj objectForKey:kAudioFile];
+    //    NSString *songURL = songFile.url;
+    //    NSLog(@"play button at %ld pressed, download file %@ with link:%@",(long)sender.tag, songName, songURL);
     
 }
 
