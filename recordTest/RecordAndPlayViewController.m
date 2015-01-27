@@ -21,7 +21,7 @@
     AVCaptureSession *session;
     __weak IBOutlet UIButton *bStartOrStop;
 }
-
+@property (nonatomic, strong) AVAudioPlayer *player;
 @end
 
 @implementation RecordAndPlayViewController
@@ -40,7 +40,7 @@
     
     session = [[AVCaptureSession alloc] init];
     [session beginConfiguration];
-    
+
     [session setSessionPreset:AVCaptureSessionPresetMedium];
     
     //    AVCaptureDevice *inputDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
@@ -54,13 +54,16 @@
         [session addInput:deviceInput];
     }
     
+    
     AVCaptureVideoPreviewLayer *previewLayer = [[AVCaptureVideoPreviewLayer alloc] initWithSession:session];
-    [previewLayer setVideoGravity:AVLayerVideoGravityResizeAspectFill];
+    [previewLayer setVideoGravity:AVLayerVideoGravityResizeAspect];
+
     
     CALayer *rootLayer = self.view.layer;
     //    [rootLayer setMasksToBounds:YES];
-    [previewLayer setFrame:CGRectMake(0, 0, rootLayer.bounds.size.width, rootLayer.bounds.size.height/2)];
+    [previewLayer setFrame:CGRectMake(0, 0, rootLayer.bounds.size.width, 0+bStartOrStop.frame.origin.y - 50)];
     //    [previewLayer setFrame:rootLayer.frame];
+//    previewLayer.connection.videoOrientation = AVCaptureVideoOrientationPortrait;
     [rootLayer addSublayer:previewLayer];
     
     
@@ -76,6 +79,7 @@
     if ([session canAddOutput:_movieFileOutput]) {
         NSLog(@"add movie file output");
         [session addOutput:_movieFileOutput];
+
     }
     [session commitConfiguration];
     [session startRunning];
@@ -109,13 +113,15 @@
         movieOutputURL = testoutputURL;
         
         [self.movieFileOutput startRecordingToOutputFileURL:movieOutputURL recordingDelegate:self];
+        [self playAudioWithURL:_songURL];
         
     } else {
         //stop recording
         recording = NO;
         [bStartOrStop setTitle:@"START" forState:UIControlStateNormal];
-        bStartOrStop.backgroundColor = [UIColor clearColor];
-        
+        bStartOrStop.backgroundColor = [UIColor blueColor];
+        bStartOrStop.tintColor = [UIColor whiteColor];
+    
         [self.movieFileOutput stopRecording];
         //        [self performSegueWithIdentifier:@"goToPlayVC" sender:sender];
         
@@ -134,30 +140,111 @@
 - (void) captureOutput:(AVCaptureFileOutput *)captureOutput didFinishRecordingToOutputFileAtURL:(NSURL *)outputFileURL fromConnections:(NSArray *)connections error:(NSError *)error
 {
     NSLog(@"did finish recording, error is %@",[error description]);
-    [self performSegueWithIdentifier:@"goToPlay" sender:nil];
+//    [self performSegueWithIdentifier:@"goToPlay" sender:nil];
 
-//    [self mergeAndSave];
+    [self mergeAndSave];
+}
+
+- (void) playAudioWithURL: (NSURL *)filePath
+{
+    if (_player.isPlaying) {
+        [_player stop];
+        return;
+    }
+    
+    AVAudioPlayer *tmpPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:filePath error:nil];
+    _player = tmpPlayer;
+    
+    
+    //play audio
+    tmpPlayer = nil;
+    [_player prepareToPlay];
+    [_player play];
+    
 }
 
 - (void) mergeAndSave
 {
     NSLog(@"begin merge and save");
     AVMutableComposition *mixComposition = [AVMutableComposition composition];
-    
-    //audio
-    NSURL *audioURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"dia" ofType:@"mp3"]];
-    AVURLAsset *audioAsset = [[AVURLAsset alloc] initWithURL:audioURL options:nil];
-    CMTimeRange audio_timeRange = CMTimeRangeMake(kCMTimeZero, audioAsset.duration);
-    
-    AVMutableCompositionTrack *audioTrack = [mixComposition addMutableTrackWithMediaType:AVMediaTypeAudio preferredTrackID:kCMPersistentTrackID_Invalid];
-    [audioTrack insertTimeRange:audio_timeRange ofTrack:[[audioAsset tracksWithMediaType:AVMediaTypeAudio] objectAtIndex:0] atTime:kCMTimeZero error:nil];
-    
+//    mixComposition.naturalSize = CGSizeMake(300, 300);
+
     //video
     NSURL *videoURL = movieOutputURL;
     AVURLAsset *videoAsset = [[AVURLAsset alloc] initWithURL:videoURL options:nil];
     CMTimeRange video_timeRange = CMTimeRangeMake(kCMTimeZero, videoAsset.duration);
     AVMutableCompositionTrack *videoTrack = [mixComposition addMutableTrackWithMediaType:AVMediaTypeVideo preferredTrackID:kCMPersistentTrackID_Invalid];
+
     [videoTrack insertTimeRange:video_timeRange ofTrack:[[videoAsset tracksWithMediaType:AVMediaTypeVideo] objectAtIndex:0] atTime:kCMTimeZero error:nil];
+    
+    
+//    //rotate the composite video, to be portrait
+//    CGAffineTransform rotationTransform = CGAffineTransformMakeRotation(M_PI_2);
+//    videoTrack.preferredTransform = rotationTransform;
+    
+    
+    /*
+     *corp!!!!!
+     */
+    //create video video compositioninstruction
+    AVMutableVideoCompositionInstruction *instruction = [AVMutableVideoCompositionInstruction videoCompositionInstruction];
+    instruction.timeRange = CMTimeRangeMake(kCMTimeZero, videoAsset.duration);
+    //create video video composition layer instruction
+    AVAssetTrack *videoAssetTrack = [[videoAsset tracksWithMediaType:AVMediaTypeVideo] objectAtIndex:0];
+    AVMutableVideoCompositionLayerInstruction *layerInstruction = [AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:videoAssetTrack];
+    
+    //new rotate methods
+    UIImageOrientation videoAssetOrientation = UIImageOrientationUp;
+    BOOL isVideoAssetPortrait = NO;
+    CGAffineTransform videoTransform = videoAssetTrack.preferredTransform;
+    if (videoTransform.a == 0 && videoTransform.b == 1.0 && videoTransform.c == -1.0 && videoTransform.d == 0) {
+        videoAssetOrientation = UIImageOrientationRight;
+        isVideoAssetPortrait = YES;
+    }
+    if (videoTransform.a == 0 && videoTransform.b == -1.0 && videoTransform.c == 1.0 && videoTransform.d == 0) {
+        videoAssetOrientation = UIImageOrientationLeft;
+        isVideoAssetPortrait = YES;
+    }
+    if (videoTransform.a == 1.0 && videoTransform.b == 0 && videoTransform.c == 0 && videoTransform.d == 1.0) {
+        videoAssetOrientation = UIImageOrientationUp;
+    }
+    if (videoTransform.a == -1.0 && videoTransform.b == 0 && videoTransform.c == 0 && videoTransform.d == -1.0) {
+        videoAssetOrientation = UIImageOrientationDown;
+    }
+    
+    CGAffineTransform Scale = CGAffineTransformMakeScale(0.8f,0.8f);
+    CGAffineTransform translateToCenter = CGAffineTransformMakeTranslation( 0,-320);
+    CGAffineTransform rotationTransform1 = CGAffineTransformMakeRotation(M_PI_2);
+    [layerInstruction setTransform:CGAffineTransformConcat(Scale, CGAffineTransformConcat(translateToCenter,rotationTransform1))  atTime:kCMTimeZero];
+    
+    //.......
+    instruction.layerInstructions = [NSArray arrayWithObject:layerInstruction];
+    AVMutableVideoComposition *videoCompositionInst = [AVMutableVideoComposition videoComposition];
+    videoCompositionInst.instructions = [NSArray arrayWithObject:instruction];
+    videoCompositionInst.frameDuration = CMTimeMake(1, 30);//looks like setting framerate to be 30
+    
+    CGSize naturalSize;
+//    if (isVideoAssetPortrait) {
+//
+//        naturalSize = videoAssetTrack.naturalSize;
+//    } else {
+//            naturalSize = CGSizeMake(videoAssetTrack.naturalSize.height, videoAssetTrack.naturalSize.width);
+//    }
+    naturalSize = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height/2);
+    
+    float renderWidth = naturalSize.width;
+    float renderHeight = naturalSize.height;
+    videoCompositionInst.renderSize = CGSizeMake(renderWidth, renderHeight);
+    
+    NSURL *audioURL = _songURL;
+    AVURLAsset *audioAsset = [[AVURLAsset alloc] initWithURL:audioURL options:nil];
+    CMTimeRange audio_timeRange = CMTimeRangeMake(kCMTimeZero, audioAsset.duration);
+    
+    AVMutableCompositionTrack *audioTrack = [mixComposition addMutableTrackWithMediaType:AVMediaTypeAudio preferredTrackID:kCMPersistentTrackID_Invalid];
+    AVAssetTrack *audioAssetTrack = [[audioAsset tracksWithMediaType:AVMediaTypeAudio] objectAtIndex:0];
+    [audioTrack insertTimeRange:audio_timeRange ofTrack: audioAssetTrack atTime:kCMTimeZero error:nil];
+    
+    
     
     //path of compisited video
     NSArray *dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -170,12 +257,16 @@
     }
     
     //avasset export session
-    AVAssetExportSession *exportSession = [[AVAssetExportSession alloc] initWithAsset:mixComposition presetName:AVAssetExportPresetMediumQuality];
+    AVAssetExportSession *exportSession = [[AVAssetExportSession alloc] initWithAsset:mixComposition presetName:AVAssetExportPresetHighestQuality];
+
     exportSession.outputFileType = AVFileTypeQuickTimeMovie;
     exportSession.outputURL = finalOutputFileURL;
-    
+    exportSession.shouldOptimizeForNetworkUse = YES;
+
+    exportSession.videoComposition = videoCompositionInst; //add video composition to exporter
     [exportSession exportAsynchronouslyWithCompletionHandler:^{
-//        NSLog(@"export final composited file complete");
+        NSLog(@"export final composited file complete no matter succeed or failed");
+        NSLog(@"Export Status %ld %@", exportSession.status, exportSession.error);
 //        [self performSegueWithIdentifier:@"goToPlay" sender:nil];
         dispatch_async(dispatch_get_main_queue(), ^{
             [self exportDidFinish:exportSession];

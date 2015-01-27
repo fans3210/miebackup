@@ -13,6 +13,7 @@
 #import <AVFoundation/AVFoundation.h>
 @interface RecordAndPlayViewController : UIViewController<AVCaptureFileOutputRecordingDelegate>
 
+@property (nonatomic, strong) NSURL *songURL;
 @property (nonatomic, strong) AVCaptureMovieFileOutput *movieFileOutput;
 
 @end

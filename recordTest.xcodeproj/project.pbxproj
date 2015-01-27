@@ -26,8 +26,6 @@
 		38E7A2891A6A29860079B975 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38E7A2881A6A29860079B975 /* UIKit.framework */; };
 		38E7A28D1A6A72050079B975 /* PlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E7A28C1A6A72050079B975 /* PlayViewController.m */; };
 		38E7A2901A6A88970079B975 /* RecordAndPlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E7A28F1A6A88970079B975 /* RecordAndPlayViewController.m */; };
-		38E7A29D1A6B8F4A0079B975 /* dia.amr in Resources */ = {isa = PBXBuildFile; fileRef = 38E7A29C1A6B8F4A0079B975 /* dia.amr */; };
-		38E7A29F1A6B98DA0079B975 /* dia.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 38E7A29E1A6B98DA0079B975 /* dia.mp3 */; };
 		38E7A4CD1A7379910079B975 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 38E7A4CC1A7379910079B975 /* Podfile */; };
 		38E7A4CF1A737A0B0079B975 /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 38E7A4CE1A737A0B0079B975 /* libz.1.2.5.dylib */; };
 		38E7A4D11A737A230079B975 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 38E7A4D01A737A230079B975 /* libicucore.dylib */; };
@@ -77,8 +75,6 @@
 		38E7A28C1A6A72050079B975 /* PlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayViewController.m; sourceTree = "<group>"; };
 		38E7A28E1A6A88970079B975 /* RecordAndPlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordAndPlayViewController.h; sourceTree = "<group>"; };
 		38E7A28F1A6A88970079B975 /* RecordAndPlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordAndPlayViewController.m; sourceTree = "<group>"; };
-		38E7A29C1A6B8F4A0079B975 /* dia.amr */ = {isa = PBXFileReference; lastKnownFileType = file; path = dia.amr; sourceTree = "<group>"; };
-		38E7A29E1A6B98DA0079B975 /* dia.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = dia.mp3; sourceTree = "<group>"; };
 		38E7A4CC1A7379910079B975 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		38E7A4CE1A737A0B0079B975 /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
 		38E7A4D01A737A230079B975 /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
@@ -220,8 +216,6 @@
 		38E7A29B1A6B8F2C0079B975 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
-				38E7A29E1A6B98DA0079B975 /* dia.mp3 */,
-				38E7A29C1A6B8F4A0079B975 /* dia.amr */,
 			);
 			path = Assets;
 			sourceTree = "<group>";
@@ -337,8 +331,6 @@
 				38E7A2681A6A27A40079B975 /* Main.storyboard in Resources */,
 				38E7A26D1A6A27A40079B975 /* LaunchScreen.xib in Resources */,
 				38E7A26A1A6A27A40079B975 /* Images.xcassets in Resources */,
-				38E7A29D1A6B8F4A0079B975 /* dia.amr in Resources */,
-				38E7A29F1A6B98DA0079B975 /* dia.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

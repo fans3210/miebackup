@@ -7,6 +7,7 @@
 //
 
 #import "AudiosViewController.h"
+#import "RecordAndPlayViewController.h"
 #import <BmobSDK/Bmob.h>
 #import <AFNetworking.h>
 
@@ -19,6 +20,7 @@
     NSMutableArray *cellModels;
     __weak IBOutlet UITableView *tvAudios;
     __weak IBOutlet UIActivityIndicatorView *indicator;
+    NSURL *chosenAudioLocalUrl;
     
 }
 @property (nonatomic, strong) AVAudioPlayer *player;
@@ -35,8 +37,8 @@
     [indicator startAnimating];
     cellModels = [NSMutableArray array];
     
-    //config preview player
-    _player = [[AVAudioPlayer alloc] init];
+//    //config preview player
+//    _player = [[AVAudioPlayer alloc] init];
     
     BmobQuery *bQuery = [BmobQuery queryWithClassName:@"Audio"];
     
@@ -90,11 +92,12 @@
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
 
-
+    AudioFileCell *cell = (AudioFileCell *)[tableView cellForRowAtIndexPath:indexPath];
     BmobObject *bObj = cellModels[indexPath.row];
     NSString *songName = [bObj objectForKey:kAudioTitle];
     BmobFile *songFile = [bObj objectForKey:kAudioFile];
     NSString *songURL = songFile.url;
+    
     
     //check whether file exists
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -102,19 +105,17 @@
     
     NSString *fileNameToBeChecked = [songURL lastPathComponent];
     NSString *filePathToBeChecked = [documentDirectoryPath stringByAppendingPathComponent:fileNameToBeChecked];
+    
+    chosenAudioLocalUrl = [NSURL fileURLWithPath:[documentDirectoryPath stringByAppendingPathComponent:fileNameToBeChecked]];
+    
     if ([[NSFileManager defaultManager] fileExistsAtPath:filePathToBeChecked]) {
         NSLog(@"file: %@ exists already", filePathToBeChecked);
         NSURL *filePath = [NSURL URLWithString:filePathToBeChecked];
-        AVAudioPlayer *tmpPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:filePath error:nil];
-        _player = tmpPlayer;
-        tmpPlayer = nil;
-        [_player prepareToPlay];
-        [_player play];
+        [self playAudioWithURL:filePath forCell:cell];
     } else {
         //file not exists, need to download
         //download audio file mp3
-        AudioFileCell *cell = (AudioFileCell *)[tableView cellForRowAtIndexPath:indexPath];
-        
+
         cell.indicator.hidden = NO;
         [tableView reloadData];
         NSLog(@"download file %@ with link:%@", songName, songURL);
@@ -131,18 +132,11 @@
             NSLog(@"file downloaded to %@",filePath);
             //        [player url] = filePath;
             NSLog(@"error is %@",error.description);
-//            BOOL exists = [[NSFileManager defaultManager] fileExistsAtPath:[filePath path]];
+
             
             cell.indicator.hidden = YES;
             [tableView reloadData];
-            
-            //play audio
-            AVAudioPlayer *tmpPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:filePath error:nil];
-            _player = tmpPlayer;
-            tmpPlayer = nil;
-            [_player prepareToPlay];
-            [_player play];
-            
+            [self playAudioWithURL:filePath forCell:cell];
         }];
         [downloadTask resume];
     }
@@ -153,14 +147,42 @@
 {
     
     NSLog(@"go pressed at %li",(long)sender.tag);
-    //    //download audio file mp3
-    //    BmobObject *bObj = cellModels[sender.tag];
-    //    NSString *songName = [bObj objectForKey:kAudioTitle];
-    //    BmobFile *songFile = [bObj objectForKey:kAudioFile];
-    //    NSString *songURL = songFile.url;
-    //    NSLog(@"play button at %ld pressed, download file %@ with link:%@",(long)sender.tag, songName, songURL);
-    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentDirectoryPath = [paths objectAtIndex:0];
+    BmobObject *bObj = cellModels[sender.tag];
+    BmobFile *songFile = [bObj objectForKey:kAudioFile];
+    NSString *songURL = songFile.url;
+    NSString *fileNameToBeChecked = [songURL lastPathComponent];
+
+        chosenAudioLocalUrl = [NSURL fileURLWithPath:[documentDirectoryPath stringByAppendingPathComponent:fileNameToBeChecked]];
+    [self performSegueWithIdentifier:@"goToRecord" sender:sender];
 }
+
+- (void) playAudioWithURL: (NSURL *)filePath forCell: (AudioFileCell *)cell
+{
+    if (_player.isPlaying) {
+        [_player stop];
+        return;
+    }
+    
+    AVAudioPlayer *tmpPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:filePath error:nil];
+    _player = tmpPlayer;
+    
+
+    //play audio
+    tmpPlayer = nil;
+    [_player prepareToPlay];
+    [_player play];
+
+}
+
+- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    self.navigationItem.title = @"";
+    RecordAndPlayViewController *recordVC = [segue destinationViewController];
+    recordVC.songURL = chosenAudioLocalUrl;
+}
+
 
 
 @end
