@@ -64,26 +64,42 @@
     
     CALayer *rootLayer = self.view.layer;
     //    [rootLayer setMasksToBounds:YES];
-    [previewLayer setFrame:CGRectMake(0, vPlayAudio.frame.origin.y + vPlayAudio.frame.size.height, rootLayer.bounds.size.width, rootLayer.bounds.size.width)];
+    [previewLayer setFrame:CGRectMake(0, vPlayAudio.frame.origin.y/2 + vPlayAudio.frame.size.height + 1, rootLayer.bounds.size.width, rootLayer.bounds.size.width)];
     //    [previewLayer setFrame:rootLayer.frame];
-//    previewLayer.connection.videoOrientation = AVCaptureVideoOrientationPortrait;
+
     [rootLayer addSublayer:previewLayer];
     
     
-    //set path for file
-//    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-//    NSString *documentPath = [paths objectAtIndex:0];
+
     _movieFileOutput = [[AVCaptureMovieFileOutput alloc] init];
     
-//    NSString *archivePath = [documentPath stringByAppendingPathComponent:@"archives"];
-//    
-//    NSString *movieOutputPath = [[archivePath stringByAppendingPathComponent:@"Test"] stringByAppendingString:@".mov"];
-//    movieOutputURL = [[NSURL alloc] initFileURLWithPath:movieOutputPath];
     if ([session canAddOutput:_movieFileOutput]) {
         NSLog(@"add movie file output");
         [session addOutput:_movieFileOutput];
 
     }
+    
+    AVCaptureConnection *videoConnection = nil;
+    
+//    for ( AVCaptureConnection *connection in [_movieFileOutput connections] )
+//    {
+//        NSLog(@"%@", connection);
+//        for ( AVCaptureInputPort *port in [connection inputPorts] )
+//        {
+//            NSLog(@"%@", port);
+//            if ( [[port mediaType] isEqual:AVMediaTypeVideo] )
+//            {
+//                videoConnection = connection;
+//            }
+//        }
+//    }
+    videoConnection = [_movieFileOutput connectionWithMediaType:AVMediaTypeVideo];
+    
+    if([videoConnection isVideoOrientationSupported]) // **Here it is, its always false**
+    {
+        [videoConnection setVideoOrientation:AVCaptureVideoOrientationPortrait];
+    }
+    
     [session commitConfiguration];
     [session startRunning];
 
@@ -196,34 +212,51 @@
     AVAssetTrack *videoAssetTrack = [[videoAsset tracksWithMediaType:AVMediaTypeVideo] objectAtIndex:0];
     AVMutableVideoCompositionLayerInstruction *layerInstruction = [AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:videoAssetTrack];
     
-    //new rotate methods
-    UIImageOrientation videoAssetOrientation = UIImageOrientationUp;
-    BOOL isVideoAssetPortrait = NO;
-    CGAffineTransform videoTransform = videoAssetTrack.preferredTransform;
-    if (videoTransform.a == 0 && videoTransform.b == 1.0 && videoTransform.c == -1.0 && videoTransform.d == 0) {
-        videoAssetOrientation = UIImageOrientationRight;
-        isVideoAssetPortrait = YES;
-    }
-    if (videoTransform.a == 0 && videoTransform.b == -1.0 && videoTransform.c == 1.0 && videoTransform.d == 0) {
-        videoAssetOrientation = UIImageOrientationLeft;
-        isVideoAssetPortrait = YES;
-    }
-    if (videoTransform.a == 1.0 && videoTransform.b == 0 && videoTransform.c == 0 && videoTransform.d == 1.0) {
-        videoAssetOrientation = UIImageOrientationUp;
-    }
-    if (videoTransform.a == -1.0 && videoTransform.b == 0 && videoTransform.c == 0 && videoTransform.d == -1.0) {
-        videoAssetOrientation = UIImageOrientationDown;
-    }
+//    //new rotate methods
+//    UIImageOrientation videoAssetOrientation = UIImageOrientationUp;
+//    BOOL isVideoAssetPortrait = NO;
+//    CGAffineTransform videoTransform = videoAssetTrack.preferredTransform;
+//    if (videoTransform.a == 0 && videoTransform.b == 1.0 && videoTransform.c == -1.0 && videoTransform.d == 0) {
+//        videoAssetOrientation = UIImageOrientationRight;
+//        isVideoAssetPortrait = YES;
+//    }
+//    if (videoTransform.a == 0 && videoTransform.b == -1.0 && videoTransform.c == 1.0 && videoTransform.d == 0) {
+//        videoAssetOrientation = UIImageOrientationLeft;
+//        isVideoAssetPortrait = YES;
+//    }
+//    if (videoTransform.a == 1.0 && videoTransform.b == 0 && videoTransform.c == 0 && videoTransform.d == 1.0) {
+//        videoAssetOrientation = UIImageOrientationUp;
+//    }
+//    if (videoTransform.a == -1.0 && videoTransform.b == 0 && videoTransform.c == 0 && videoTransform.d == -1.0) {
+//        videoAssetOrientation = UIImageOrientationDown;
+//    }
     
-    CGAffineTransform Scale = CGAffineTransformMakeScale(0.8f,0.8f);
+//    CGAffineTransform Scale = CGAffineTransformMakeScale(0.8f,0.8f);
+    CGAffineTransform Scale = CGAffineTransformMakeScale(1.0f,1.0f);
     
     CGAffineTransform rotationTransform1 = CGAffineTransformMakeRotation(M_PI_2);
-    CGAffineTransform translateToCenter = CGAffineTransformMakeTranslation( 0,-320);
+    NSLog(@"self view frame %f, %f",self.view.frame.size.width, self.view.frame.size.height);
+    
+    CGAffineTransform translateToCenter = CGAffineTransformMakeTranslation( -(self.view.frame.size.height - videoAssetTrack.naturalSize.width),-self.view.frame.size.width + 0);// this config is for 5s, for 6, need another config after testing
+    
     CGAffineTransform finalTransform = CGAffineTransformConcat(Scale, CGAffineTransformConcat(translateToCenter,rotationTransform1));
-    //flip
-//    finalTransform = CGAffineTransformScale(finalTransform, -1, 1);
     
     [layerInstruction setTransform: finalTransform atTime:kCMTimeZero];
+    
+    //watermark
+    CATextLayer *titleLayer = [CATextLayer layer];
+    titleLayer.string = @"@咩拍";
+    //?? titleLayer.shadowOpacity = 0.5;
+    titleLayer.alignmentMode = kCAAlignmentRight;
+    titleLayer.foregroundColor = (__bridge CGColorRef)([UIColor blackColor]);
+    titleLayer.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.width/6);
+    
+    CALayer *parentLayer = [CALayer layer];
+    CALayer *videoLayer = [CALayer layer];
+    parentLayer.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.width);
+    videoLayer.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.width);
+    [parentLayer addSublayer:videoLayer];
+    [parentLayer addSublayer:titleLayer]; //ONLY IF WE ADDED TEXT
     
     //.......
     instruction.layerInstructions = [NSArray arrayWithObject:layerInstruction];
@@ -238,12 +271,21 @@
 //    } else {
 //            naturalSize = CGSizeMake(videoAssetTrack.naturalSize.height, videoAssetTrack.naturalSize.width);
 //    }
-    naturalSize = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height/2);
+    
+    CGSize tmpNaturalSize = videoAssetTrack.naturalSize;
+    NSLog(@"tmp natural size is %f, %f",tmpNaturalSize.width, tmpNaturalSize.height);
+    
+    naturalSize = CGSizeMake(self.view.frame.size.width, self.view.frame.size.width);//square
     
     float renderWidth = naturalSize.width;
     float renderHeight = naturalSize.height;
     videoCompositionInst.renderSize = CGSizeMake(renderWidth, renderHeight);
     
+    //add watermark
+    videoCompositionInst.animationTool = [AVVideoCompositionCoreAnimationTool videoCompositionCoreAnimationToolWithPostProcessingAsVideoLayer:videoLayer inLayer:parentLayer];
+    
+    
+    //audio
     NSURL *audioURL = _songURL;
     AVURLAsset *audioAsset = [[AVURLAsset alloc] initWithURL:audioURL options:nil];
     CMTimeRange audio_timeRange = CMTimeRangeMake(kCMTimeZero, audioAsset.duration);

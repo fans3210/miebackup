@@ -20,7 +20,7 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PQp-pd-crR" userLabel="AudioPreviewView">
                                 <rect key="frame" x="0.0" y="44" width="600" height="90"/>
-                                <color key="backgroundColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="62" id="BMd-02-XsZ"/>
                                     <constraint firstAttribute="width" secondItem="PQp-pd-crR" secondAttribute="height" multiplier="300:31" id="Dxm-n2-OFZ"/>
@@ -34,7 +34,7 @@
                                 </variation>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="REp-Vc-KiV">
-                                <rect key="frame" x="63" y="498" width="474" height="65"/>
+                                <rect key="frame" x="46" y="493.5" width="508" height="69.5"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="47" id="9TI-gR-ciB"/>
@@ -56,14 +56,14 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailingMargin" secondItem="REp-Vc-KiV" secondAttribute="trailing" constant="47" id="7Mq-NX-XGw"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="REp-Vc-KiV" secondAttribute="trailing" constant="30" id="7Mq-NX-XGw"/>
                             <constraint firstItem="REp-Vc-KiV" firstAttribute="centerX" secondItem="PQp-pd-crR" secondAttribute="centerX" id="CIA-mW-hNl"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="REp-Vc-KiV" secondAttribute="bottom" constant="37" id="DMU-0C-huR"/>
                             <constraint firstAttribute="bottom" secondItem="PQp-pd-crR" secondAttribute="bottom" constant="496" id="kb3-zb-Z4L"/>
                             <constraint firstItem="PQp-pd-crR" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" id="md9-TH-k8Y"/>
                             <constraint firstItem="PQp-pd-crR" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="owL-Ep-DuC"/>
-                            <constraint firstItem="REp-Vc-KiV" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="47" id="rre-0n-8Ah"/>
-                            <constraint firstItem="REp-Vc-KiV" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="47" id="suM-xp-BwM"/>
+                            <constraint firstItem="REp-Vc-KiV" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="30" id="rre-0n-8Ah"/>
+                            <constraint firstItem="REp-Vc-KiV" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="30" id="suM-xp-BwM"/>
                             <constraint firstAttribute="centerX" secondItem="REp-Vc-KiV" secondAttribute="centerX" id="xtH-0n-CTh"/>
                             <constraint firstItem="PQp-pd-crR" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="yq7-5q-LpU"/>
                         </constraints>
