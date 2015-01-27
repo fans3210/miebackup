@@ -20,6 +20,7 @@
     NSURL *finalOutputFileURL;// after composition
     AVCaptureSession *session;
     __weak IBOutlet UIButton *bStartOrStop;
+    __weak IBOutlet UIView *vPlayAudio;
 }
 @property (nonatomic, strong) AVAudioPlayer *player;
 @end
@@ -30,6 +31,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     //get front camera capture device
+    
+    
     NSArray *devices = [AVCaptureDevice devices];
     for(AVCaptureDevice *device in devices) {
         if (device.position == AVCaptureDevicePositionFront) {
@@ -56,12 +59,12 @@
     
     
     AVCaptureVideoPreviewLayer *previewLayer = [[AVCaptureVideoPreviewLayer alloc] initWithSession:session];
-    [previewLayer setVideoGravity:AVLayerVideoGravityResizeAspect];
+    [previewLayer setVideoGravity:AVLayerVideoGravityResizeAspectFill];
 
     
     CALayer *rootLayer = self.view.layer;
     //    [rootLayer setMasksToBounds:YES];
-    [previewLayer setFrame:CGRectMake(0, 0, rootLayer.bounds.size.width, 0+bStartOrStop.frame.origin.y - 50)];
+    [previewLayer setFrame:CGRectMake(0, vPlayAudio.frame.origin.y + vPlayAudio.frame.size.height, rootLayer.bounds.size.width, rootLayer.bounds.size.width)];
     //    [previewLayer setFrame:rootLayer.frame];
 //    previewLayer.connection.videoOrientation = AVCaptureVideoOrientationPortrait;
     [rootLayer addSublayer:previewLayer];
@@ -213,9 +216,14 @@
     }
     
     CGAffineTransform Scale = CGAffineTransformMakeScale(0.8f,0.8f);
-    CGAffineTransform translateToCenter = CGAffineTransformMakeTranslation( 0,-320);
+    
     CGAffineTransform rotationTransform1 = CGAffineTransformMakeRotation(M_PI_2);
-    [layerInstruction setTransform:CGAffineTransformConcat(Scale, CGAffineTransformConcat(translateToCenter,rotationTransform1))  atTime:kCMTimeZero];
+    CGAffineTransform translateToCenter = CGAffineTransformMakeTranslation( 0,-320);
+    CGAffineTransform finalTransform = CGAffineTransformConcat(Scale, CGAffineTransformConcat(translateToCenter,rotationTransform1));
+    //flip
+//    finalTransform = CGAffineTransformScale(finalTransform, -1, 1);
+    
+    [layerInstruction setTransform: finalTransform atTime:kCMTimeZero];
     
     //.......
     instruction.layerInstructions = [NSArray arrayWithObject:layerInstruction];
