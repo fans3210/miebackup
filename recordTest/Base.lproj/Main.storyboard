@@ -86,7 +86,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="891" y="-148"/>
+            <point key="canvasLocation" x="687" y="340"/>
         </scene>
         <!--Play View Controller-->
         <scene sceneID="ieh-d5-HKc">
@@ -97,7 +97,7 @@
                         <viewControllerLayoutGuide type="bottom" id="JFm-ee-e7M"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="mDv-Ey-hlm">
-                        <rect key="frame" x="0.0" y="74" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8OZ-yt-iql">
@@ -112,7 +112,6 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BtU-qT-n7s" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -192,7 +191,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M4K-Ly-jJt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="176" y="108"/>
+            <point key="canvasLocation" x="-128" y="452"/>
         </scene>
         <!--FirstVC-->
         <scene sceneID="QfX-6z-hu1">
@@ -203,14 +202,14 @@
                         <viewControllerLayoutGuide type="bottom" id="gw4-so-XzK"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Rp4-5R-Twy">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" bounces="NO" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="hwP-n6-Eug">
-                                <rect key="frame" x="0.0" y="-8" width="320" height="568"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="hwP-n6-Eug">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="560"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="EjS-KO-j75">
-                                    <size key="itemSize" width="319.5" height="568"/>
+                                    <size key="itemSize" width="600.5" height="568"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -220,18 +219,35 @@
                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="319.5" height="568"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600.5" height="568"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="safslfjlskjflsd" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r9r-6R-nyi">
-                                                    <rect key="frame" x="8" y="242" width="303.5" height="63"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r9r-6R-nyi">
+                                                    <rect key="frame" x="75" y="252" width="304" height="63"/>
+                                                    <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="63" id="Rqt-fX-exl"/>
+                                                        <constraint firstAttribute="height" constant="63" id="ZNi-DX-1Uu"/>
+                                                        <constraint firstAttribute="width" constant="304" id="a30-oO-Y6b"/>
+                                                        <constraint firstAttribute="width" constant="304" id="s4l-7i-aXg"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
+                                                    <variation key="default">
+                                                        <mask key="constraints">
+                                                            <exclude reference="ZNi-DX-1Uu"/>
+                                                            <exclude reference="a30-oO-Y6b"/>
+                                                        </mask>
+                                                    </variation>
                                                 </label>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
+                                        <constraints>
+                                            <constraint firstItem="r9r-6R-nyi" firstAttribute="leading" secondItem="pF7-xm-hHL" secondAttribute="leadingMargin" constant="67" id="aER-VS-MU2"/>
+                                            <constraint firstAttribute="centerY" secondItem="r9r-6R-nyi" secondAttribute="centerY" id="ylK-0W-t02"/>
+                                        </constraints>
                                         <connections>
                                             <outlet property="lbTxt" destination="r9r-6R-nyi" id="wbG-nF-mpG"/>
                                         </connections>
@@ -242,18 +258,35 @@
                                     <outlet property="delegate" destination="CWR-9c-ti6" id="TpG-tO-e4W"/>
                                 </connections>
                             </collectionView>
-                            <button opaque="NO" alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TKn-Iw-WQl">
-                                <rect key="frame" x="56" y="476" width="208" height="46"/>
-                                <color key="backgroundColor" red="0.34671443860000001" green="0.56381446560000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TKn-Iw-WQl">
+                                <rect key="frame" x="46" y="474" width="508" height="62.5"/>
+                                <color key="backgroundColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="208" id="Hmw-40-MeJ"/>
+                                    <constraint firstAttribute="width" secondItem="TKn-Iw-WQl" secondAttribute="height" multiplier="187:23" id="oSG-mn-QO2"/>
+                                </constraints>
                                 <state key="normal" title="咩">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="Hmw-40-MeJ"/>
+                                    </mask>
+                                </variation>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="hwP-n6-Eug" firstAttribute="top" secondItem="Rp4-5R-Twy" secondAttribute="topMargin" id="41z-It-eXn"/>
+                            <constraint firstItem="TKn-Iw-WQl" firstAttribute="top" secondItem="hwP-n6-Eug" secondAttribute="bottom" constant="-86" id="5YC-yN-x1D"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="TKn-Iw-WQl" secondAttribute="trailing" constant="30" id="82J-36-aXE"/>
+                            <constraint firstItem="hwP-n6-Eug" firstAttribute="leading" secondItem="Rp4-5R-Twy" secondAttribute="leading" id="Mqg-Km-U2u"/>
+                            <constraint firstAttribute="trailing" secondItem="hwP-n6-Eug" secondAttribute="trailing" id="Uj7-AU-FYw"/>
+                            <constraint firstItem="gw4-so-XzK" firstAttribute="top" secondItem="hwP-n6-Eug" secondAttribute="bottom" constant="40" id="VeF-7l-Oq4"/>
+                            <constraint firstItem="TKn-Iw-WQl" firstAttribute="leading" secondItem="Rp4-5R-Twy" secondAttribute="leadingMargin" constant="30" id="esc-LU-YkH"/>
+                        </constraints>
                     </view>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="bMie" destination="TKn-Iw-WQl" id="Q7a-UV-CS5"/>
                         <outlet property="cvWanwan" destination="hwP-n6-Eug" id="YaW-eH-X4z"/>
@@ -282,7 +315,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="A8I-Ko-7eK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-439" y="46"/>
+            <point key="canvasLocation" x="-979" y="506"/>
         </scene>
     </scenes>
 </document>

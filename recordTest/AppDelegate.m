@@ -24,7 +24,7 @@
     
     NSLog(@"bomb app key is %@",kBombAppkey);
     [Bmob registerWithAppKey:kBombAppkey];
-    BOOL firstLaunch = NO;
+    BOOL firstLaunch = YES;
     
     if (firstLaunch) {
         self.window = [[UIWindow alloc] initWithFrame:UIScreen.mainScreen.bounds];

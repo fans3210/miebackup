@@ -112,6 +112,7 @@
 - (IBAction)recordOrStop:(id)sender {
     if(!recording) {
         //start recording
+        [self playAudioWithURL:_songURL];
         recording = YES;
         [bStartOrStop setTitle:@"STOP" forState:UIControlStateNormal];
         bStartOrStop.backgroundColor = [UIColor redColor];
@@ -132,7 +133,7 @@
         movieOutputURL = testoutputURL;
         
         [self.movieFileOutput startRecordingToOutputFileURL:movieOutputURL recordingDelegate:self];
-        [self playAudioWithURL:_songURL];
+        
         
     } else {
         //stop recording
@@ -154,6 +155,7 @@
 - (void) captureOutput:(AVCaptureFileOutput *)captureOutput didStartRecordingToOutputFileAtURL:(NSURL *)fileURL fromConnections:(NSArray *)connections
 {
     NSLog(@"did start recording at url %@ from connectsions count %lu",[fileURL path],(unsigned long)connections.count);
+    
 }
 
 - (void) captureOutput:(AVCaptureFileOutput *)captureOutput didFinishRecordingToOutputFileAtURL:(NSURL *)outputFileURL fromConnections:(NSArray *)connections error:(NSError *)error
@@ -188,13 +190,19 @@
     AVMutableComposition *mixComposition = [AVMutableComposition composition];
 //    mixComposition.naturalSize = CGSizeMake(300, 300);
 
+    //calculate time range, should be same as audio one
+    NSURL *audioURL = _songURL;
+    AVURLAsset *audioAsset = [[AVURLAsset alloc] initWithURL:audioURL options:nil];
+    CMTimeRange common_timeRange = CMTimeRangeMake(kCMTimeZero, audioAsset.duration);
+    
+    
     //video
     NSURL *videoURL = movieOutputURL;
     AVURLAsset *videoAsset = [[AVURLAsset alloc] initWithURL:videoURL options:nil];
-    CMTimeRange video_timeRange = CMTimeRangeMake(kCMTimeZero, videoAsset.duration);
+//    CMTimeRange video_timeRange = CMTimeRangeMake(kCMTimeZero, videoAsset.duration);
     AVMutableCompositionTrack *videoTrack = [mixComposition addMutableTrackWithMediaType:AVMediaTypeVideo preferredTrackID:kCMPersistentTrackID_Invalid];
 
-    [videoTrack insertTimeRange:video_timeRange ofTrack:[[videoAsset tracksWithMediaType:AVMediaTypeVideo] objectAtIndex:0] atTime:kCMTimeZero error:nil];
+    [videoTrack insertTimeRange:common_timeRange ofTrack:[[videoAsset tracksWithMediaType:AVMediaTypeVideo] objectAtIndex:0] atTime:kCMTimeZero error:nil];
     
     
 //    //rotate the composite video, to be portrait
@@ -207,7 +215,7 @@
      */
     //create video video compositioninstruction
     AVMutableVideoCompositionInstruction *instruction = [AVMutableVideoCompositionInstruction videoCompositionInstruction];
-    instruction.timeRange = CMTimeRangeMake(kCMTimeZero, videoAsset.duration);
+    instruction.timeRange = CMTimeRangeMake(kCMTimeZero, audioAsset.duration);//should be audio duration
     //create video video composition layer instruction
     AVAssetTrack *videoAssetTrack = [[videoAsset tracksWithMediaType:AVMediaTypeVideo] objectAtIndex:0];
     AVMutableVideoCompositionLayerInstruction *layerInstruction = [AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:videoAssetTrack];
@@ -249,7 +257,7 @@
     //?? titleLayer.shadowOpacity = 0.5;
     titleLayer.alignmentMode = kCAAlignmentRight;
     titleLayer.foregroundColor = (__bridge CGColorRef)([UIColor blackColor]);
-    titleLayer.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.width/6);
+    titleLayer.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.width/5);
     
     CALayer *parentLayer = [CALayer layer];
     CALayer *videoLayer = [CALayer layer];
@@ -262,7 +270,7 @@
     instruction.layerInstructions = [NSArray arrayWithObject:layerInstruction];
     AVMutableVideoComposition *videoCompositionInst = [AVMutableVideoComposition videoComposition];
     videoCompositionInst.instructions = [NSArray arrayWithObject:instruction];
-    videoCompositionInst.frameDuration = CMTimeMake(1, 30);//looks like setting framerate to be 30
+    videoCompositionInst.frameDuration = CMTimeMake(1, 24);//looks like setting framerate to be 30
     
     CGSize naturalSize;
 //    if (isVideoAssetPortrait) {
@@ -286,13 +294,13 @@
     
     
     //audio
-    NSURL *audioURL = _songURL;
-    AVURLAsset *audioAsset = [[AVURLAsset alloc] initWithURL:audioURL options:nil];
-    CMTimeRange audio_timeRange = CMTimeRangeMake(kCMTimeZero, audioAsset.duration);
+//    NSURL *audioURL = _songURL;
+//    AVURLAsset *audioAsset = [[AVURLAsset alloc] initWithURL:audioURL options:nil];
+//    CMTimeRange audio_timeRange = CMTimeRangeMake(kCMTimeZero, audioAsset.duration);
     
     AVMutableCompositionTrack *audioTrack = [mixComposition addMutableTrackWithMediaType:AVMediaTypeAudio preferredTrackID:kCMPersistentTrackID_Invalid];
     AVAssetTrack *audioAssetTrack = [[audioAsset tracksWithMediaType:AVMediaTypeAudio] objectAtIndex:0];
-    [audioTrack insertTimeRange:audio_timeRange ofTrack: audioAssetTrack atTime:kCMTimeZero error:nil];
+    [audioTrack insertTimeRange:common_timeRange ofTrack: audioAssetTrack atTime:kCMTimeZero error:nil];
     
     
     
@@ -307,7 +315,7 @@
     }
     
     //avasset export session
-    AVAssetExportSession *exportSession = [[AVAssetExportSession alloc] initWithAsset:mixComposition presetName:AVAssetExportPresetHighestQuality];
+    AVAssetExportSession *exportSession = [[AVAssetExportSession alloc] initWithAsset:mixComposition presetName:AVAssetExportPresetMediumQuality];
 
     exportSession.outputFileType = AVFileTypeQuickTimeMovie;
     exportSession.outputURL = finalOutputFileURL;

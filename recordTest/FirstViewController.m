@@ -76,6 +76,11 @@
     return cellModels.count;
 }
 
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    return CGSizeMake(cvWanwan.frame.size.width, cvWanwan.frame.size.height);
+}
+
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     WanwanStyleCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"wanwanStyleCell" forIndexPath:indexPath];
