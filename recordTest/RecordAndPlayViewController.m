@@ -21,6 +21,8 @@
     AVCaptureSession *session;
     __weak IBOutlet UIButton *bStartOrStop;
     __weak IBOutlet UIView *vPlayAudio;
+    __weak IBOutlet UIProgressView *audioProgress;
+    NSTimer *timer;
 }
 @property (nonatomic, strong) AVAudioPlayer *player;
 @end
@@ -114,7 +116,7 @@
         //start recording
         [self playAudioWithURL:_songURL];
         recording = YES;
-        [bStartOrStop setTitle:@"STOP" forState:UIControlStateNormal];
+        [bStartOrStop setTitle:@"Cancel" forState:UIControlStateNormal];
         bStartOrStop.backgroundColor = [UIColor redColor];
         
         
@@ -137,18 +139,40 @@
         
     } else {
         //stop recording
-        recording = NO;
-        [bStartOrStop setTitle:@"START" forState:UIControlStateNormal];
-        bStartOrStop.backgroundColor = [UIColor blueColor];
-        bStartOrStop.tintColor = [UIColor whiteColor];
-    
-        [self.movieFileOutput stopRecording];
-        //        [self performSegueWithIdentifier:@"goToPlayVC" sender:sender];
+        [self stopRecording];
         
         
     }
 }
 
+- (void) stopRecording
+{
+    //ui change
+    recording = NO;
+    [bStartOrStop setTitle:@"START" forState:UIControlStateNormal];
+    bStartOrStop.backgroundColor = [UIColor blueColor];
+    bStartOrStop.tintColor = [UIColor whiteColor];
+    [timer invalidate];
+    timer = nil;
+    [audioProgress setProgress:0.0 animated:NO];
+    
+    //stop movie recording session
+    [self.movieFileOutput stopRecording];
+    
+    //stop playing audio
+    if (_player.isPlaying) {
+        [_player stop];
+    }
+}
+
+#pragma audio player delegate
+- (void) audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag
+{
+    NSLog(@"audio player did finish playing");
+    [timer invalidate];
+    timer = nil;
+    [self stopRecording];
+}
 
 
 #pragma mark cameara delegate
@@ -163,7 +187,7 @@
     NSLog(@"did finish recording, error is %@",[error description]);
 //    [self performSegueWithIdentifier:@"goToPlay" sender:nil];
 
-    [self mergeAndSave];
+//    [self mergeAndSave];
 }
 
 - (void) playAudioWithURL: (NSURL *)filePath
@@ -174,14 +198,24 @@
     }
     
     AVAudioPlayer *tmpPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:filePath error:nil];
+    tmpPlayer.delegate = self;
     _player = tmpPlayer;
     
     
     //play audio
     tmpPlayer = nil;
     [_player prepareToPlay];
+    [audioProgress setProgress:0.0];
+    timer = [NSTimer scheduledTimerWithTimeInterval:1.0/10 target:self selector:@selector(updateProgress) userInfo:nil repeats:YES];
     [_player play];
     
+}
+
+- (void) updateProgress
+{
+    float progress = _player.currentTime/_player.duration;
+    NSLog(@"progress is %f",progress);
+    [audioProgress setProgress:progress animated:NO];
 }
 
 - (void) mergeAndSave

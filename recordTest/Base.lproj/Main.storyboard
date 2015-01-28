@@ -20,10 +20,20 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PQp-pd-crR" userLabel="AudioPreviewView">
                                 <rect key="frame" x="0.0" y="44" width="600" height="90"/>
+                                <subviews>
+                                    <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="2.7755575615628914e-17" translatesAutoresizingMaskIntoConstraints="NO" id="DYe-aJ-YST">
+                                        <rect key="frame" x="30" y="44" width="540" height="2"/>
+                                        <color key="progressTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="trackTintColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    </progressView>
+                                </subviews>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="DYe-aJ-YST" secondAttribute="trailing" constant="30" id="7pl-fE-2EL"/>
                                     <constraint firstAttribute="height" constant="62" id="BMd-02-XsZ"/>
                                     <constraint firstAttribute="width" secondItem="PQp-pd-crR" secondAttribute="height" multiplier="300:31" id="Dxm-n2-OFZ"/>
+                                    <constraint firstAttribute="centerY" secondItem="DYe-aJ-YST" secondAttribute="centerY" id="HQI-H5-iR1"/>
+                                    <constraint firstItem="DYe-aJ-YST" firstAttribute="leading" secondItem="PQp-pd-crR" secondAttribute="leading" constant="30" id="QGq-bW-vcv"/>
                                     <constraint firstAttribute="width" secondItem="PQp-pd-crR" secondAttribute="height" multiplier="10:1.5" id="wDU-iG-32K"/>
                                 </constraints>
                                 <variation key="default">
@@ -34,7 +44,7 @@
                                 </variation>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="REp-Vc-KiV">
-                                <rect key="frame" x="46" y="493.5" width="508" height="69.5"/>
+                                <rect key="frame" x="46" y="493" width="508" height="69.5"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="47" id="9TI-gR-ciB"/>
@@ -79,6 +89,7 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="audioProgress" destination="DYe-aJ-YST" id="Zl8-tc-jJI"/>
                         <outlet property="bStartOrStop" destination="REp-Vc-KiV" id="faR-ta-q3s"/>
                         <outlet property="vPlayAudio" destination="PQp-pd-crR" id="Xsb-a9-xNJ"/>
                         <segue destination="AAa-O6-DTO" kind="show" identifier="goToPlay" id="13x-lq-Jmi"/>
