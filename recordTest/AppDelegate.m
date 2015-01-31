@@ -9,6 +9,8 @@
 #import "AppDelegate.h"
 #import <BmobSDK/Bmob.h>
 #import <Realm.h>
+#import <ShareSDK/ShareSDK.h>
+#import "WXApi.h"
 
 #import "FirstViewController.h"
 
@@ -22,8 +24,15 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
+    //bmob
     NSLog(@"bomb app key is %@",kBombAppkey);
     [Bmob registerWithAppKey:kBombAppkey];
+    
+    
+    //sharesdk
+    [ShareSDK connectWeChatWithAppId:kWechatAppKey wechatCls:[WXApi class]];
+    
+    
     BOOL firstLaunch = NO;
     
     if (firstLaunch) {

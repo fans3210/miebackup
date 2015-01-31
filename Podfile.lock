@@ -20,22 +20,25 @@ PODS:
   - AFNetworking/UIKit (2.5.0):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
-  - BmobSDK (1.4.12)
-  - Realm (0.90.2):
-    - Realm/Headers (= 0.90.2)
-  - Realm/Headers (0.90.2)
+  - BmobSDK (1.5.1)
+  - Realm (0.90.4):
+    - Realm/Headers (= 0.90.4)
+  - Realm/Headers (0.90.4)
+  - SVProgressHUD (1.1.2)
   - SWRevealViewController (2.3.0)
 
 DEPENDENCIES:
   - AFNetworking (~> 2.4)
   - BmobSDK
   - Realm
+  - SVProgressHUD
   - SWRevealViewController
 
 SPEC CHECKSUMS:
   AFNetworking: 0f54cb5d16ce38c1b76948faffb8d5fb705021c7
-  BmobSDK: e91ff5b4468e6b6528406816636352fc49ad6c11
-  Realm: e5e2a23e34e1f8c00a1484c130a9d00c1394a2af
+  BmobSDK: b6011e3e7ec03bb9a66aba3a0b08cb4e3eb84254
+  Realm: 43ec5595f51849fabccd2213cfad90bc4ff9a3c0
+  SVProgressHUD: da7a49e789af645d9279ffbca62318945a832438
   SWRevealViewController: f6d80638b8e12323e87ac79562345403a799cb77
 
 COCOAPODS: 0.35.0

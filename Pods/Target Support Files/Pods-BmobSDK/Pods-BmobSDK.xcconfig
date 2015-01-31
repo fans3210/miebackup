@@ -1,2 +1,2 @@
 PODS_BMOBSDK_FRAMEWORK_SEARCH_PATHS = "$(PODS_ROOT)/BmobSDK"
-PODS_BMOBSDK_OTHER_LDFLAGS = -framework "BmobSDK" -framework "CFNetwork" -framework "CoreGraphics" -framework "CoreLocation" -framework "CoreTelephony" -framework "MobileCoreServices" -framework "Security" -framework "SystemConfiguration"
+PODS_BMOBSDK_OTHER_LDFLAGS = -framework "AVFoundation" -framework "BmobSDK" -framework "CFNetwork" -framework "CoreGraphics" -framework "CoreLocation" -framework "CoreTelephony" -framework "MediaPlayer" -framework "MobileCoreServices" -framework "Security" -framework "SystemConfiguration"

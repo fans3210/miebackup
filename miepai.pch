@@ -14,11 +14,20 @@
 
 
 /*
- * Bmob
+ * app keys
  */
 #define kBombAppkey         @"ac64963bb06cfce8ccfd327753b772af"
+#define kWechatAppKey       @"769dea3dec00528f02eaadee009ba2d1"
+
+
 //#define kAudioFileUrl       @"audioFileUrl"
+#define kAudio              @"Audio"
+#define kCategory           @"Category"
+
 #define kAudioFile          @"audioFile"
+#define kAudioFIles         @"audioFiles"
 #define kAudioTitle         @"audioTitle"
+
+#define kCategoryName       @"name"
 
 #endif
