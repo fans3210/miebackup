@@ -46,7 +46,7 @@
     session = [[AVCaptureSession alloc] init];
     [session beginConfiguration];
 
-    [session setSessionPreset:AVCaptureSessionPreset352x288];
+    [session setSessionPreset:AVCaptureSessionPresetMedium];
     
     //    AVCaptureDevice *inputDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
     
@@ -260,17 +260,41 @@
 //    CGAffineTransform Scale = CGAffineTransformMakeScale(0.8f,0.8f);
         CGRect screen = [[UIScreen mainScreen] bounds];
 /* transforms */
-    CGAffineTransform Scale = CGAffineTransformMakeScale(1.0f,1.0f);
+    
+    CGAffineTransform Scale;
+    if (IS_IPHONE_5) {
+        //config for 5s
+        NSLog(@"device is iphone 5 or 5s");
+        Scale = CGAffineTransformMakeScale(1.0f,1.0f);
+    } else if (IS_IPHONE_6) {
+        //config for 6
+        NSLog(@"device is iphone 6");
+        Scale = CGAffineTransformMakeScale((375.0/320.0),(375.0/320.0));
+    } else if (IS_IPHONE_6PLUS) {
+        //config for 6 plus
+        NSLog(@"device is a iphone 6 plus");
+    }
+    
+
+    
+
     
     CGAffineTransform rotationTransform1 = CGAffineTransformMakeRotation(M_PI_2);
     NSLog(@"screen frame %f, %f",screen.size.width, screen.size.height);
     
+    CGAffineTransform translateToCenter;
+    
+    if (IS_IPHONE_5) {
+        translateToCenter = CGAffineTransformMakeTranslation( -(self.view.frame.size.height - videoAssetTrack.naturalSize.width),-screen.size.width);// this config is for 5s, for 6, need another config after testing
+    } else if(IS_IPHONE_6) {
+        translateToCenter = CGAffineTransformMakeTranslation( -(screen.size.height - videoAssetTrack.naturalSize.width)+(667-568),
+                                                                               -screen.size.width);// this config is for 6, , need another config after testing
+    } else if (IS_IPHONE_6PLUS) {
+        
+    }
 
     
-//    CGAffineTransform translateToCenter = CGAffineTransformMakeTranslation( -(self.view.frame.size.height - videoAssetTrack.naturalSize.width),-self.view.frame.size.width + 0);// this config is for 5s, for 6, need another config after testing
-    
-    CGAffineTransform translateToCenter = CGAffineTransformMakeTranslation( -(screen.size.height - videoAssetTrack.naturalSize.width -100),
-    -screen.size.width + 0);// this config is for 5s, for 6, need another config after testing
+
     
     CGAffineTransform finalTransform = CGAffineTransformConcat(Scale, CGAffineTransformConcat(translateToCenter,rotationTransform1));
     [layerInstruction setTransform:finalTransform atTime:kCMTimeZero];
@@ -281,11 +305,11 @@
     
     //watermark
     CATextLayer *titleLayer = [CATextLayer layer];
-    titleLayer.string = @"@咩拍";
+    titleLayer.string = kWatermark;
     //?? titleLayer.shadowOpacity = 0.5;
     titleLayer.alignmentMode = kCAAlignmentRight;
-    titleLayer.foregroundColor = (__bridge CGColorRef)([UIColor blackColor]);
-    titleLayer.frame = CGRectMake(0, 0, screen.size.width, screen.size.width/5);
+    titleLayer.foregroundColor = (__bridge CGColorRef)([UIColor whiteColor]);
+    titleLayer.frame = CGRectMake(0, 0, screen.size.width/5*4.8, screen.size.width/5);
     
     CALayer *parentLayer = [CALayer layer];
     CALayer *videoLayer = [CALayer layer];
@@ -345,7 +369,7 @@
     }
     
     //avasset export session
-    AVAssetExportSession *exportSession = [[AVAssetExportSession alloc] initWithAsset:mixComposition presetName:AVAssetExportPreset640x480];
+    AVAssetExportSession *exportSession = [[AVAssetExportSession alloc] initWithAsset:mixComposition presetName:AVAssetExportPresetMediumQuality];
 
     exportSession.outputFileType = AVFileTypeQuickTimeMovie;
     
@@ -394,7 +418,7 @@
 {
     PlayViewController *playerVC = [segue destinationViewController];
 //    playerVC.movieURL = finalOutputFileURL;//final url
-    playerVC.movieURL = movieOutputURL;//tmp url
+    playerVC.movieURL = finalOutputFileURL;//tmp url
 }
 
 /*
