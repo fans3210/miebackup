@@ -2,15 +2,14 @@
 //  Audio.h
 //  recordTest
 //
-//  Created by YAO DONG LI on 24/1/15.
+//  Created by YAO DONG LI on 2/2/15.
 //  Copyright (c) 2015 ThreeStones. All rights reserved.
 //
 
-#import "RLMObject.h"
+#import "MBase.h"
 
-@interface Audio : RLMObject
+@interface Audio : MBase
 
-@property NSString *name;
-@property NSString *url;
+@property (nonatomic, strong) NSURL *fileUrl;
 
 @end

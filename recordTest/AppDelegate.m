@@ -11,6 +11,7 @@
 #import <Realm.h>
 #import <ShareSDK/ShareSDK.h>
 #import "WXApi.h"
+#import <AVOSCloud/AVOSCloud.h>
 
 #import "FirstViewController.h"
 
@@ -24,10 +25,12 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
-    //bmob
-    NSLog(@"bomb app key is %@",kBombAppkey);
-    [Bmob registerWithAppKey:kBombAppkey];
+//    //bmob
+//    NSLog(@"bomb app key is %@",kBombAppkey);
+//    [Bmob registerWithAppKey:kBombAppkey];
     
+    //lean cloud
+    [AVOSCloud setApplicationId:kLeanCloudAppId clientKey:kLeanCloudClientKey];
     
     //sharesdk
     [ShareSDK connectWeChatWithAppId:kWechatAppKey wechatCls:[WXApi class]];

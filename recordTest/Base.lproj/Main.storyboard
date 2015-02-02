@@ -150,11 +150,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="556"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="xvb-vb-w2v">
-                                <rect key="frame" x="290" y="290" width="20" height="20"/>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="xvb-vb-w2v">
+                                <rect key="frame" x="290" y="268" width="20" height="20"/>
                             </activityIndicatorView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="59" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="ZXc-Cv-jIp">
-                                <rect key="frame" x="0.0" y="50" width="600" height="600"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="59" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="ZXc-Cv-jIp">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="CategoryCell" textLabel="O9X-4g-IcK" rowHeight="59" style="IBUITableViewCellStyleDefault" id="BmV-Cb-QYI">
@@ -178,21 +178,23 @@
                                     <outlet property="delegate" destination="yNP-Wi-OMy" id="miA-ss-8D8"/>
                                 </connections>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bop-3C-Z3H">
-                                <rect key="frame" x="16" y="0.0" width="46" height="30"/>
-                                <state key="normal" title="Button">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="test:" destination="yNP-Wi-OMy" eventType="touchUpInside" id="1EI-NQ-nE3"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="bottomMargin" secondItem="ZXc-Cv-jIp" secondAttribute="bottom" constant="-44" id="8zR-r8-4h2"/>
+                            <constraint firstItem="ZXc-Cv-jIp" firstAttribute="leading" secondItem="g3n-ce-g5E" secondAttribute="leading" id="G6y-rk-Eey"/>
+                            <constraint firstItem="ZXc-Cv-jIp" firstAttribute="top" secondItem="gCJ-la-xMu" secondAttribute="bottom" id="HUf-Yc-O47"/>
+                            <constraint firstItem="ZXc-Cv-jIp" firstAttribute="leading" secondItem="g3n-ce-g5E" secondAttribute="leadingMargin" constant="-16" id="LSZ-VB-2ZP"/>
                             <constraint firstAttribute="centerX" secondItem="xvb-vb-w2v" secondAttribute="centerX" id="igx-Rq-DRf"/>
+                            <constraint firstItem="ZXc-Cv-jIp" firstAttribute="centerX" secondItem="xvb-vb-w2v" secondAttribute="centerX" id="lI0-fX-Qw7"/>
                             <constraint firstAttribute="centerY" secondItem="xvb-vb-w2v" secondAttribute="centerY" id="qbs-NC-SKH"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="ZXc-Cv-jIp" secondAttribute="trailing" constant="-16" id="tHc-AG-dBs"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="G6y-rk-Eey"/>
+                            </mask>
+                        </variation>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" title="Category" id="0tM-ia-8Bz"/>
@@ -221,7 +223,7 @@
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="bZG-6t-lxA">
                                 <rect key="frame" x="290" y="268" width="20" height="20"/>
                             </activityIndicatorView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="45" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="N6N-eK-bvi">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="45" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="N6N-eK-bvi">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="556"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -247,13 +249,16 @@
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ND0-UE-G2Z">
-                                                    <rect key="frame" x="268" y="0.0" width="98" height="45"/>
+                                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ND0-UE-G2Z">
+                                                    <rect key="frame" x="560" y="0.0" width="32" height="30"/>
                                                     <state key="normal" title="GO !">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                 </button>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailingMargin" secondItem="ND0-UE-G2Z" secondAttribute="trailing" id="gOf-dp-Gs7"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="bPlay" destination="ND0-UE-G2Z" id="e89-e5-H4f"/>
@@ -270,7 +275,11 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="N6N-eK-bvi" firstAttribute="leading" secondItem="apW-nG-iH7" secondAttribute="leadingMargin" constant="-16" id="6gp-dQ-Kb0"/>
+                            <constraint firstItem="vOi-oC-JCd" firstAttribute="top" secondItem="N6N-eK-bvi" secondAttribute="bottom" id="HUV-gV-eLV"/>
+                            <constraint firstItem="N6N-eK-bvi" firstAttribute="top" secondItem="Oif-SH-Ne3" secondAttribute="bottom" id="bu8-ld-Che"/>
                             <constraint firstAttribute="centerY" secondItem="bZG-6t-lxA" secondAttribute="centerY" id="fpQ-5c-Q60"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="N6N-eK-bvi" secondAttribute="trailing" constant="-16" id="jkj-VA-Q73"/>
                             <constraint firstAttribute="centerX" secondItem="bZG-6t-lxA" secondAttribute="centerX" id="m8J-ND-LX8"/>
                         </constraints>
                     </view>

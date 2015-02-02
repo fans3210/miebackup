@@ -9,6 +9,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Pods-AVOSCloud.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-BmobSDK.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -37,32 +42,37 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>12B6AA60A59B54ED9FF8F7DD</key>
+		<key>2F72AE8433F0685D1CC712E9</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>21D13147EE75BE15601824A8</key>
+		<key>545097E4C2869BE97B8ACA5E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>5C3767B4AB491F901FD2CF7E</key>
+		<key>84DD03DC58DF9E377DFCF766</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>622CEB39F8BE1952DF903C41</key>
+		<key>89A3DA2CFDD1C94A28B12FF5</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>668951030E012BF30C276905</key>
+		<key>9B1B84D4A0064E98258681FB</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>7F3F1A619DC6B697D1AD9F08</key>
+		<key>C1F9DD5741A0DCAD8365FB05</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D15C15204579F854CEC72339</key>
 		<dict>
 			<key>primary</key>
 			<true/>

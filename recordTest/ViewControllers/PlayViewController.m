@@ -9,6 +9,7 @@
 #import "PlayViewController.h"
 #import <ShareSDK/ShareSDK.h>
 
+
 @interface PlayViewController (){
 //    MPMoviePlayerController *moviePlayer;
 //    MPMoviePlayerViewController *player;
@@ -23,7 +24,6 @@
     // Do any additional setup after loading the view.
     self.title = @"Playing Screen";
     NSLog(@"in play VC already, url is %@",_movieURL.path);
-    
     //play video
     if (_movieURL) {
         _moviePlayer = [[MPMoviePlayerController alloc] initWithContentURL:_movieURL];

@@ -24,6 +24,10 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 
+## AVOSCloud
+
+© Copyright 2013 AVOS Systems, Inc. See https://cn.avoscloud.com/terms.html
+
 ## BmobSDK
 
                     GNU GENERAL PUBLIC LICENSE

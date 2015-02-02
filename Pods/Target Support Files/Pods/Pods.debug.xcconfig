@@ -1,10 +1,10 @@
 CLANG_CXX_LANGUAGE_STANDARD = compiler-default
-FRAMEWORK_SEARCH_PATHS = "$(PODS_ROOT)/BmobSDK"
+FRAMEWORK_SEARCH_PATHS = "$(PODS_ROOT)/AVOSCloud/iOS/release-v2.6.10" "$(PODS_ROOT)/BmobSDK"
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
-HEADER_SEARCH_PATHS = "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/AFNetworking" "${PODS_ROOT}/Headers/Public/BmobSDK" "${PODS_ROOT}/Headers/Public/Realm" "${PODS_ROOT}/Headers/Public/Realm/Realm" "${PODS_ROOT}/Headers/Public/SVProgressHUD" "${PODS_ROOT}/Headers/Public/SWRevealViewController"
+HEADER_SEARCH_PATHS = "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/AFNetworking" "${PODS_ROOT}/Headers/Public/AVOSCloud" "${PODS_ROOT}/Headers/Public/BmobSDK" "${PODS_ROOT}/Headers/Public/Realm" "${PODS_ROOT}/Headers/Public/Realm/Realm" "${PODS_ROOT}/Headers/Public/SVProgressHUD" "${PODS_ROOT}/Headers/Public/SWRevealViewController"
 LIBRARY_SEARCH_PATHS = "$(PODS_ROOT)/Realm/core"
-OTHER_CFLAGS = $(inherited) -isystem "${PODS_ROOT}/Headers/Public" -isystem "${PODS_ROOT}/Headers/Public/AFNetworking" -isystem "${PODS_ROOT}/Headers/Public/BmobSDK" -isystem "${PODS_ROOT}/Headers/Public/Realm" -isystem "${PODS_ROOT}/Headers/Public/Realm/Realm" -isystem "${PODS_ROOT}/Headers/Public/SVProgressHUD" -isystem "${PODS_ROOT}/Headers/Public/SWRevealViewController"
+OTHER_CFLAGS = $(inherited) -isystem "${PODS_ROOT}/Headers/Public" -isystem "${PODS_ROOT}/Headers/Public/AFNetworking" -isystem "${PODS_ROOT}/Headers/Public/AVOSCloud" -isystem "${PODS_ROOT}/Headers/Public/BmobSDK" -isystem "${PODS_ROOT}/Headers/Public/Realm" -isystem "${PODS_ROOT}/Headers/Public/Realm/Realm" -isystem "${PODS_ROOT}/Headers/Public/SVProgressHUD" -isystem "${PODS_ROOT}/Headers/Public/SWRevealViewController"
 OTHER_CPLUSPLUSFLAGS = -std=c++1y $(inherited) -std=c++1y $(inherited)
-OTHER_LDFLAGS = -ObjC -l"Pods-AFNetworking" -l"Pods-BmobSDK" -l"Pods-Realm" -l"Pods-SVProgressHUD" -l"Pods-SWRevealViewController" -l"c++" -l"tightdb-ios" -framework "AVFoundation" -framework "BmobSDK" -framework "CFNetwork" -framework "CoreGraphics" -framework "CoreLocation" -framework "CoreTelephony" -framework "MediaPlayer" -framework "MobileCoreServices" -framework "QuartzCore" -framework "Security" -framework "SystemConfiguration"
+OTHER_LDFLAGS = -ObjC -l"Pods-AFNetworking" -l"Pods-AVOSCloud" -l"Pods-BmobSDK" -l"Pods-Realm" -l"Pods-SVProgressHUD" -l"Pods-SWRevealViewController" -l"c++" -l"icucore" -l"tightdb-ios" -framework "AVFoundation" -framework "AVOSCloud" -framework "BmobSDK" -framework "CFNetwork" -framework "CoreGraphics" -framework "CoreLocation" -framework "CoreTelephony" -framework "MediaPlayer" -framework "MobileCoreServices" -framework "QuartzCore" -framework "Security" -framework "SystemConfiguration"
 OTHER_LIBTOOLFLAGS = $(OTHER_LDFLAGS)
 PODS_ROOT = ${SRCROOT}/Pods

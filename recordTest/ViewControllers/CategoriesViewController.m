@@ -7,8 +7,8 @@
 //
 
 #import "CategoriesViewController.h"
-#import <BmobSDK/Bmob.h>
 #import "AudiosViewController.h"
+#import <AVOSCloud/AVOSCloud.h>
 
 @interface CategoriesViewController () {
     NSMutableArray *cellModelsCat;
@@ -56,11 +56,27 @@
 
 - (void) loadAllCategories
 {
-    BmobQuery *queryCategories = [BmobQuery queryWithClassName:kCategory];
-    [queryCategories findObjectsInBackgroundWithBlock:^(NSArray *array, NSError *error) {
-        cellModelsCat = [NSMutableArray arrayWithArray:array];
-        [tvCat reloadData];
-        tvCat.hidden = NO;
+//    BmobQuery *queryCategories = [BmobQuery queryWithClassName:kCategory];
+//    [queryCategories findObjectsInBackgroundWithBlock:^(NSArray *array, NSError *error) {
+//        cellModelsCat = [NSMutableArray arrayWithArray:array];
+//        [tvCat reloadData];
+//        tvCat.hidden = NO;
+//    }];
+    
+    AVQuery *queryCategories = [AVQuery queryWithClassName:kCategory];
+    queryCategories.cachePolicy = kPFCachePolicyCacheElseNetwork;
+    
+    //设置缓存有效期
+    queryCategories.maxCacheAge = 24*60*60;
+    
+    [queryCategories findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (error) {
+            NSLog(@"error in find cateogries, error is %@",error);
+        } else {
+            cellModelsCat = [NSMutableArray arrayWithArray:objects];
+            [tvCat reloadData];
+            tvCat.hidden = NO;
+        }
     }];
 }
 
@@ -81,30 +97,30 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CategoryCell" forIndexPath:indexPath];
-    BmobObject *bmobCat = cellModelsCat[indexPath.row];
+    AVObject *avoCat = cellModelsCat[indexPath.row];
     UILabel *lbTitle = (UILabel *)[cell viewWithTag:2];
-    lbTitle.text = (NSString *)[bmobCat objectForKey:kCategoryName];
+    lbTitle.text = (NSString *)[avoCat objectForKey:kCategoryName];
     
     return cell;
 }
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    BmobObject *bmobCat = cellModelsCat[indexPath.row];
-    BmobQuery *audioQuery = [BmobQuery queryWithClassName:kAudio];
-    [audioQuery whereObjectKey:kAudioFIles relatedTo:bmobCat];
-
-    [audioQuery findObjectsInBackgroundWithBlock:^(NSArray *array, NSError *error) {
-        NSLog(@"error is %@",error);
-//        for (BmobObject *obj in array) {
-//            NSLog(@"get obj is %@",[obj objectForKey:kAudioTitle]);
+//    BmobObject *bmobCat = cellModelsCat[indexPath.row];
+//    BmobQuery *audioQuery = [BmobQuery queryWithClassName:kAudio];
+//    [audioQuery whereObjectKey:kAudioFIles relatedTo:bmobCat];
+//
+//    [audioQuery findObjectsInBackgroundWithBlock:^(NSArray *array, NSError *error) {
+//        NSLog(@"error is %@",error);
+////        for (BmobObject *obj in array) {
+////            NSLog(@"get obj is %@",[obj objectForKey:kAudioTitle]);
+////        }
+//        if (array.count > 0) {
+//            cellModelsAud = [NSMutableArray arrayWithArray:array];
+//            [self performSegueWithIdentifier:@"goToAudios" sender:tableView];
 //        }
-        if (array.count > 0) {
-            cellModelsAud = [NSMutableArray arrayWithArray:array];
-            [self performSegueWithIdentifier:@"goToAudios" sender:tableView];
-        }
-
-    }];
+//
+//    }];
 }
 
 

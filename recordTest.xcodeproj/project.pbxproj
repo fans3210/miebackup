@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		384E06871A7380DB0008AFF8 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 384E06861A7380DB0008AFF8 /* libc++.dylib */; };
-		384E068E1A738C990008AFF8 /* Audio.m in Sources */ = {isa = PBXBuildFile; fileRef = 384E068D1A738C990008AFF8 /* Audio.m */; };
 		3852B8111A7A841100C7C7C5 /* funny.png in Resources */ = {isa = PBXBuildFile; fileRef = 3852B8101A7A841100C7C7C5 /* funny.png */; };
 		3852B8FD1A7BDA5900C7C7C5 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3852B8FC1A7BDA5900C7C7C5 /* BaseViewController.m */; };
 		3852B9081A7BDAA600C7C7C5 /* AudiosViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3852B8FF1A7BDAA600C7C7C5 /* AudiosViewController.m */; };
@@ -55,6 +54,9 @@
 		3852B9EE1A7CF5C600C7C7C5 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3852B9ED1A7CF5C600C7C7C5 /* Social.framework */; };
 		3852B9F01A7CF5CB00C7C7C5 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3852B9EF1A7CF5CB00C7C7C5 /* Accounts.framework */; };
 		3852B9F21A7CF5D400C7C7C5 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3852B9F11A7CF5D400C7C7C5 /* MessageUI.framework */; };
+		3852BA021A7F6FB400C7C7C5 /* MBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 3852BA011A7F6FB400C7C7C5 /* MBase.m */; };
+		3852BA081A7F72C500C7C7C5 /* AudioCat.m in Sources */ = {isa = PBXBuildFile; fileRef = 3852BA071A7F72C500C7C7C5 /* AudioCat.m */; };
+		3852BA0B1A7F74B400C7C7C5 /* Audio.m in Sources */ = {isa = PBXBuildFile; fileRef = 3852BA0A1A7F74B400C7C7C5 /* Audio.m */; };
 		385E16BB1A73F41200D61DD8 /* AudioFileCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 385E16BA1A73F41200D61DD8 /* AudioFileCell.m */; };
 		38A80A5B1A73A72100FAA28B /* WanwanStyleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 38A80A5A1A73A72100FAA28B /* WanwanStyleCell.m */; };
 		38E7A25C1A6A27A40079B975 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E7A25B1A6A27A40079B975 /* main.m */; };
@@ -84,8 +86,6 @@
 
 /* Begin PBXFileReference section */
 		384E06861A7380DB0008AFF8 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
-		384E068C1A738C990008AFF8 /* Audio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Audio.h; sourceTree = "<group>"; };
-		384E068D1A738C990008AFF8 /* Audio.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Audio.m; sourceTree = "<group>"; };
 		3852B8101A7A841100C7C7C5 /* funny.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = funny.png; sourceTree = "<group>"; };
 		3852B8FB1A7BDA5900C7C7C5 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
 		3852B8FC1A7BDA5900C7C7C5 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
@@ -145,6 +145,12 @@
 		3852B9ED1A7CF5C600C7C7C5 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		3852B9EF1A7CF5CB00C7C7C5 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		3852B9F11A7CF5D400C7C7C5 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		3852BA001A7F6FB400C7C7C5 /* MBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBase.h; sourceTree = "<group>"; };
+		3852BA011A7F6FB400C7C7C5 /* MBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBase.m; sourceTree = "<group>"; };
+		3852BA061A7F72C500C7C7C5 /* AudioCat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioCat.h; sourceTree = "<group>"; };
+		3852BA071A7F72C500C7C7C5 /* AudioCat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioCat.m; sourceTree = "<group>"; };
+		3852BA091A7F74B400C7C7C5 /* Audio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Audio.h; sourceTree = "<group>"; };
+		3852BA0A1A7F74B400C7C7C5 /* Audio.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Audio.m; sourceTree = "<group>"; };
 		385E16B91A73F41200D61DD8 /* AudioFileCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioFileCell.h; sourceTree = "<group>"; };
 		385E16BA1A73F41200D61DD8 /* AudioFileCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioFileCell.m; sourceTree = "<group>"; };
 		38A80A591A73A72100FAA28B /* WanwanStyleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WanwanStyleCell.h; sourceTree = "<group>"; };
@@ -236,8 +242,12 @@
 		384E06881A7384720008AFF8 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				384E068C1A738C990008AFF8 /* Audio.h */,
-				384E068D1A738C990008AFF8 /* Audio.m */,
+				3852BA061A7F72C500C7C7C5 /* AudioCat.h */,
+				3852BA071A7F72C500C7C7C5 /* AudioCat.m */,
+				3852BA091A7F74B400C7C7C5 /* Audio.h */,
+				3852BA0A1A7F74B400C7C7C5 /* Audio.m */,
+				3852BA001A7F6FB400C7C7C5 /* MBase.h */,
+				3852BA011A7F6FB400C7C7C5 /* MBase.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -413,14 +423,14 @@
 		38E7A2581A6A27A40079B975 /* recordTest */ = {
 			isa = PBXGroup;
 			children = (
-				3852B9A81A7CF51D00C7C7C5 /* Libs */,
-				3852B8FA1A7BD9EB00C7C7C5 /* ViewControllers */,
 				38E7A25D1A6A27A40079B975 /* AppDelegate.h */,
 				38E7A25E1A6A27A40079B975 /* AppDelegate.m */,
 				38E7A2661A6A27A40079B975 /* Main.storyboard */,
 				38E7A2691A6A27A40079B975 /* Images.xcassets */,
 				38E7A26B1A6A27A40079B975 /* LaunchScreen.xib */,
 				38E7A2601A6A27A40079B975 /* recordTest.xcdatamodeld */,
+				3852B9A81A7CF51D00C7C7C5 /* Libs */,
+				3852B8FA1A7BD9EB00C7C7C5 /* ViewControllers */,
 				38A80A581A73A6F500FAA28B /* Cells */,
 				384E06881A7384720008AFF8 /* Models */,
 				38E7A2591A6A27A40079B975 /* Supporting Files */,
@@ -650,8 +660,10 @@
 				3852B9081A7BDAA600C7C7C5 /* AudiosViewController.m in Sources */,
 				38E7A2621A6A27A40079B975 /* recordTest.xcdatamodeld in Sources */,
 				38E7A25F1A6A27A40079B975 /* AppDelegate.m in Sources */,
+				3852BA081A7F72C500C7C7C5 /* AudioCat.m in Sources */,
+				3852BA0B1A7F74B400C7C7C5 /* Audio.m in Sources */,
 				3852B90B1A7BDAA600C7C7C5 /* PlayViewController.m in Sources */,
-				384E068E1A738C990008AFF8 /* Audio.m in Sources */,
+				3852BA021A7F6FB400C7C7C5 /* MBase.m in Sources */,
 				38A80A5B1A73A72100FAA28B /* WanwanStyleCell.m in Sources */,
 				3852B90A1A7BDAA600C7C7C5 /* FirstViewController.m in Sources */,
 				385E16BB1A73F41200D61DD8 /* AudioFileCell.m in Sources */,
