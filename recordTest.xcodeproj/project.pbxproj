@@ -57,6 +57,7 @@
 		3852BA021A7F6FB400C7C7C5 /* MBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 3852BA011A7F6FB400C7C7C5 /* MBase.m */; };
 		3852BA081A7F72C500C7C7C5 /* AudioCat.m in Sources */ = {isa = PBXBuildFile; fileRef = 3852BA071A7F72C500C7C7C5 /* AudioCat.m */; };
 		3852BA0B1A7F74B400C7C7C5 /* Audio.m in Sources */ = {isa = PBXBuildFile; fileRef = 3852BA0A1A7F74B400C7C7C5 /* Audio.m */; };
+		3852BA0E1A7F940900C7C7C5 /* QuoteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3852BA0D1A7F940900C7C7C5 /* QuoteViewController.m */; };
 		385E16BB1A73F41200D61DD8 /* AudioFileCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 385E16BA1A73F41200D61DD8 /* AudioFileCell.m */; };
 		38A80A5B1A73A72100FAA28B /* WanwanStyleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 38A80A5A1A73A72100FAA28B /* WanwanStyleCell.m */; };
 		38E7A25C1A6A27A40079B975 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E7A25B1A6A27A40079B975 /* main.m */; };
@@ -151,6 +152,8 @@
 		3852BA071A7F72C500C7C7C5 /* AudioCat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioCat.m; sourceTree = "<group>"; };
 		3852BA091A7F74B400C7C7C5 /* Audio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Audio.h; sourceTree = "<group>"; };
 		3852BA0A1A7F74B400C7C7C5 /* Audio.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Audio.m; sourceTree = "<group>"; };
+		3852BA0C1A7F940900C7C7C5 /* QuoteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuoteViewController.h; sourceTree = "<group>"; };
+		3852BA0D1A7F940900C7C7C5 /* QuoteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuoteViewController.m; sourceTree = "<group>"; };
 		385E16B91A73F41200D61DD8 /* AudioFileCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioFileCell.h; sourceTree = "<group>"; };
 		385E16BA1A73F41200D61DD8 /* AudioFileCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioFileCell.m; sourceTree = "<group>"; };
 		38A80A591A73A72100FAA28B /* WanwanStyleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WanwanStyleCell.h; sourceTree = "<group>"; };
@@ -162,7 +165,7 @@
 		38E7A25E1A6A27A40079B975 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		38E7A2611A6A27A40079B975 /* recordTest.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = recordTest.xcdatamodel; sourceTree = "<group>"; };
 		38E7A2671A6A27A40079B975 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		38E7A2691A6A27A40079B975 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		38E7A2691A6A27A40079B975 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = recordTest/Images.xcassets; sourceTree = "<group>"; };
 		38E7A26C1A6A27A40079B975 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		38E7A2721A6A27A50079B975 /* recordTestTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = recordTestTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		38E7A2771A6A27A50079B975 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -263,10 +266,10 @@
 		3852B8FA1A7BD9EB00C7C7C5 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				3852B9021A7BDAA600C7C7C5 /* FirstViewController.h */,
-				3852B9031A7BDAA600C7C7C5 /* FirstViewController.m */,
 				3852B8FB1A7BDA5900C7C7C5 /* BaseViewController.h */,
 				3852B8FC1A7BDA5900C7C7C5 /* BaseViewController.m */,
+				3852B9021A7BDAA600C7C7C5 /* FirstViewController.h */,
+				3852B9031A7BDAA600C7C7C5 /* FirstViewController.m */,
 				3852B9001A7BDAA600C7C7C5 /* CategoriesViewController.h */,
 				3852B9011A7BDAA600C7C7C5 /* CategoriesViewController.m */,
 				3852B8FE1A7BDAA600C7C7C5 /* AudiosViewController.h */,
@@ -275,6 +278,8 @@
 				3852B9071A7BDAA600C7C7C5 /* RecordAndPlayViewController.m */,
 				3852B9041A7BDAA600C7C7C5 /* PlayViewController.h */,
 				3852B9051A7BDAA600C7C7C5 /* PlayViewController.m */,
+				3852BA0C1A7F940900C7C7C5 /* QuoteViewController.h */,
+				3852BA0D1A7F940900C7C7C5 /* QuoteViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -404,6 +409,9 @@
 				38E7A4D21A737A900079B975 /* miepai.pch */,
 				38E7A4CC1A7379910079B975 /* Podfile */,
 				38E7A2581A6A27A40079B975 /* recordTest */,
+				38E7A2601A6A27A40079B975 /* recordTest.xcdatamodeld */,
+				38E7A2691A6A27A40079B975 /* Images.xcassets */,
+				38E7A26B1A6A27A40079B975 /* LaunchScreen.xib */,
 				38E7A2751A6A27A50079B975 /* recordTestTests */,
 				38E7A2571A6A27A40079B975 /* Products */,
 				720746A6FD6DE8AD024CF9DD /* Pods */,
@@ -426,9 +434,6 @@
 				38E7A25D1A6A27A40079B975 /* AppDelegate.h */,
 				38E7A25E1A6A27A40079B975 /* AppDelegate.m */,
 				38E7A2661A6A27A40079B975 /* Main.storyboard */,
-				38E7A2691A6A27A40079B975 /* Images.xcassets */,
-				38E7A26B1A6A27A40079B975 /* LaunchScreen.xib */,
-				38E7A2601A6A27A40079B975 /* recordTest.xcdatamodeld */,
 				3852B9A81A7CF51D00C7C7C5 /* Libs */,
 				3852B8FA1A7BD9EB00C7C7C5 /* ViewControllers */,
 				38A80A581A73A6F500FAA28B /* Cells */,
@@ -667,6 +672,7 @@
 				38A80A5B1A73A72100FAA28B /* WanwanStyleCell.m in Sources */,
 				3852B90A1A7BDAA600C7C7C5 /* FirstViewController.m in Sources */,
 				385E16BB1A73F41200D61DD8 /* AudioFileCell.m in Sources */,
+				3852BA0E1A7F940900C7C7C5 /* QuoteViewController.m in Sources */,
 				3852B8FD1A7BDA5900C7C7C5 /* BaseViewController.m in Sources */,
 				3852B9091A7BDAA600C7C7C5 /* CategoriesViewController.m in Sources */,
 				3852B90C1A7BDAA600C7C7C5 /* RecordAndPlayViewController.m in Sources */,
@@ -716,6 +722,7 @@
 				38E7A26C1A6A27A40079B975 /* Base */,
 			);
 			name = LaunchScreen.xib;
+			path = recordTest;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -952,7 +959,8 @@
 				38E7A2611A6A27A40079B975 /* recordTest.xcdatamodel */,
 			);
 			currentVersion = 38E7A2611A6A27A40079B975 /* recordTest.xcdatamodel */;
-			path = recordTest.xcdatamodeld;
+			name = recordTest.xcdatamodeld;
+			path = recordTest/recordTest.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

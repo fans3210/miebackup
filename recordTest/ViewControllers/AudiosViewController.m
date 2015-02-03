@@ -96,7 +96,7 @@
     AudioFileCell *cell = (AudioFileCell *)[tableView cellForRowAtIndexPath:indexPath];
     BmobObject *bObj = cellModels[indexPath.row];
     NSString *songName = [bObj objectForKey:kAudioTitle];
-    BmobFile *songFile = [bObj objectForKey:kAudioFile];
+    BmobFile *songFile = [bObj objectForKey:kAudioFileMp3];
     NSString *songURL = songFile.url;
     
     
@@ -151,7 +151,7 @@
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentDirectoryPath = [paths objectAtIndex:0];
     BmobObject *bObj = cellModels[sender.tag];
-    BmobFile *songFile = [bObj objectForKey:kAudioFile];
+    BmobFile *songFile = [bObj objectForKey:kAudioFileMp3];
     NSString *songURL = songFile.url;
     NSString *fileNameToBeChecked = [songURL lastPathComponent];
 

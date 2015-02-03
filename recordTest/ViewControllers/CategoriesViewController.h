@@ -6,8 +6,8 @@
 //  Copyright (c) 2015 ThreeStones. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "BaseViewController.h"
 
-@interface CategoriesViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
+@interface CategoriesViewController : BaseViewController<UITableViewDataSource,UITableViewDelegate>
 
 @end

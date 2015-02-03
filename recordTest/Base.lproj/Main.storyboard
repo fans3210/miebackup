@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="mB8-wG-eOb">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="zxP-Uf-WYK">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--Recording Screen-->
@@ -197,9 +198,17 @@
                         </variation>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
-                    <navigationItem key="navigationItem" title="Category" id="0tM-ia-8Bz"/>
+                    <navigationItem key="navigationItem" title="Category" id="0tM-ia-8Bz">
+                        <barButtonItem key="leftBarButtonItem" title="哈" id="aDu-Bm-lqH">
+                            <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="testReveal:" destination="yNP-Wi-OMy" id="yud-xH-5YH"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="indicator" destination="xvb-vb-w2v" id="Zkg-Em-Pa7"/>
+                        <outlet property="revealButtonItem" destination="aDu-Bm-lqH" id="dVh-UN-1t4"/>
                         <outlet property="tvCat" destination="ZXc-Cv-jIp" id="KZ0-I1-qx1"/>
                         <segue destination="QCS-QV-JPu" kind="show" identifier="goToAudios" id="b3q-o4-zil"/>
                     </connections>
@@ -396,7 +405,67 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="S0G-5q-BOT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1557" y="-255"/>
+            <point key="canvasLocation" x="-1929" y="-885"/>
+        </scene>
+        <!--Quote View Controller-->
+        <scene sceneID="Q20-QX-TL1">
+            <objects>
+                <viewController id="li1-7u-G92" customClass="QuoteViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="3Hg-Tw-8ty"/>
+                        <viewControllerLayoutGuide type="bottom" id="jpL-WO-IM1"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="J0h-Pu-WXZ">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="45l-A8-Ono">
+                                <rect key="frame" x="36" y="169" width="528" height="362"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="45l-A8-Ono" secondAttribute="height" multiplier="19:13" id="dZZ-Xn-63Y"/>
+                                </constraints>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="今日小贴士" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PPJ-Rx-3Fe">
+                                <rect key="frame" x="36" y="140" width="521" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="oY9-Gv-diY"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="oY9-Gv-diY"/>
+                                    </mask>
+                                </variation>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.34671443860000001" green="0.56381446560000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="centerY" secondItem="45l-A8-Ono" secondAttribute="centerY" id="2YK-vI-Fmz"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="45l-A8-Ono" secondAttribute="trailing" constant="15" id="PM6-PX-QNV"/>
+                            <constraint firstItem="PPJ-Rx-3Fe" firstAttribute="top" secondItem="3Hg-Tw-8ty" secondAttribute="bottom" multiplier="0.3" id="THP-L3-36w"/>
+                            <constraint firstAttribute="centerY" secondItem="45l-A8-Ono" secondAttribute="centerY" constant="-50" id="Vql-Xk-Pea"/>
+                            <constraint firstAttribute="centerX" secondItem="45l-A8-Ono" secondAttribute="centerX" id="gfS-y1-3Ib"/>
+                            <constraint firstAttribute="height" secondItem="PPJ-Rx-3Fe" secondAttribute="height" id="kRp-cW-glK"/>
+                            <constraint firstItem="45l-A8-Ono" firstAttribute="leading" secondItem="J0h-Pu-WXZ" secondAttribute="leadingMargin" constant="15" id="phX-ga-74M"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="THP-L3-36w"/>
+                                <exclude reference="kRp-cW-glK"/>
+                                <exclude reference="2YK-vI-Fmz"/>
+                            </mask>
+                        </variation>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Har-Sy-Hfu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1733" y="-153"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="zdz-LZ-9KP">
@@ -418,6 +487,28 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="A8I-Ko-7eK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1611" y="526"/>
+        </scene>
+        <!--Reveal View Controller-->
+        <scene sceneID="VYw-Ak-HIZ">
+            <objects>
+                <viewController id="zxP-Uf-WYK" customClass="SWRevealViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="KtE-DQ-kEy"/>
+                        <viewControllerLayoutGuide type="bottom" id="DT1-fA-JdV"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="6Nf-eC-gov">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <segue destination="li1-7u-G92" kind="custom" identifier="sw_rear" customClass="SWRevealViewControllerSegueSetController" id="8Kk-3A-a49"/>
+                        <segue destination="mB8-wG-eOb" kind="custom" identifier="sw_front" customClass="SWRevealViewControllerSegueSetController" id="jBI-jL-cJV"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BCS-9l-WZe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2417" y="538"/>
         </scene>
     </scenes>
 </document>

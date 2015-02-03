@@ -6,8 +6,8 @@
 //  Copyright (c) 2015 ThreeStones. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "BaseViewController.h"
 
-@interface AudiosViewController : UIViewController<UITableViewDataSource, UITableViewDelegate>
+@interface AudiosViewController : BaseViewController<UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, strong) NSMutableArray *Audios;
 @end

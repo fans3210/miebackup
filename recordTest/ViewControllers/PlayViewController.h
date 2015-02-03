@@ -6,10 +6,10 @@
 //  Copyright (c) 2015 ThreeStones. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "BaseViewController.h"
 #import <MediaPlayer/MediaPlayer.h>
 
-@interface PlayViewController : UIViewController
+@interface PlayViewController : BaseViewController
 
 @property (nonatomic, strong) NSURL *movieURL;
 @property (nonatomic, strong) MPMoviePlayerController *moviePlayer;

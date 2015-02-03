@@ -6,12 +6,12 @@
 //  Copyright (c) 2015 ThreeStones. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "BaseViewController.h"
 
 #import <Foundation/Foundation.h>
 #import <CoreMedia/CoreMedia.h>
 #import <AVFoundation/AVFoundation.h>
-@interface RecordAndPlayViewController : UIViewController<AVCaptureFileOutputRecordingDelegate, AVAudioPlayerDelegate>
+@interface RecordAndPlayViewController : BaseViewController<AVCaptureFileOutputRecordingDelegate, AVAudioPlayerDelegate>
 
 @property (nonatomic, strong) NSURL *songURL;
 @property (nonatomic, strong) AVCaptureMovieFileOutput *movieFileOutput;

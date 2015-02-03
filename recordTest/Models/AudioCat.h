@@ -11,6 +11,6 @@
 
 @interface AudioCat : MBase
 
-@property (nonatomic, strong) NSArray *audios;
+//@property (nonatomic, strong) NSArray *audios;
 
 @end

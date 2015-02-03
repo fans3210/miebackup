@@ -32,6 +32,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+
+    
+    
     //get front camera capture device
     
     
@@ -262,18 +265,26 @@
 /* transforms */
     
     CGAffineTransform Scale;
-    if (IS_IPHONE_5) {
-        //config for 5s
-        NSLog(@"device is iphone 5 or 5s");
-        Scale = CGAffineTransformMakeScale(1.0f,1.0f);
-    } else if (IS_IPHONE_6) {
-        //config for 6
-        NSLog(@"device is iphone 6");
-        Scale = CGAffineTransformMakeScale((375.0/320.0),(375.0/320.0));
-    } else if (IS_IPHONE_6PLUS) {
-        //config for 6 plus
-        NSLog(@"device is a iphone 6 plus");
-    }
+//    if (IS_IPHONE_5) {
+//        //config for 5s
+//        NSLog(@"device is iphone 5 or 5s");
+//        Scale = CGAffineTransformMakeScale(1.0f,1.0f);
+//    } else if (IS_IPHONE_6) {
+//        //config for 6
+//        NSLog(@"device is iphone 6");
+//        Scale = CGAffineTransformMakeScale((375.0/320.0),(375.0/320.0));
+//    } else if (IS_IPHONE_6_PLUS) {
+//        //config for 6 plus
+//        NSLog(@"device is a iphone 6 plus");
+//        Scale = CGAffineTransformMakeScale((414.0/320.0),(414.0/320.0));
+//    } else
+    
+//    if (IS_IPHONE_6PLUS_ZOOM) {
+//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"错误" message:@"功能不可用.请关闭iphone6 plus的放大模式然后重启app" delegate:nil cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
+//        [alert show];
+//    } else {
+        Scale = CGAffineTransformMakeScale((screen.size.width/320.0),(screen.size.width/320.0));
+//    }
     
 
     
@@ -284,18 +295,20 @@
     
     CGAffineTransform translateToCenter;
     
-    if (IS_IPHONE_5) {
-        translateToCenter = CGAffineTransformMakeTranslation( -(self.view.frame.size.height - videoAssetTrack.naturalSize.width),-screen.size.width);// this config is for 5s, for 6, need another config after testing
-    } else if(IS_IPHONE_6) {
-        translateToCenter = CGAffineTransformMakeTranslation( -(screen.size.height - videoAssetTrack.naturalSize.width)+(667-568),
-                                                                               -screen.size.width);// this config is for 6, , need another config after testing
-    } else if (IS_IPHONE_6PLUS) {
-        
-    }
+//    if (IS_IPHONE_5) {
+//        translateToCenter = CGAffineTransformMakeTranslation( -(self.view.frame.size.height - videoAssetTrack.naturalSize.width),-screen.size.width);// this config is for 5s, for 6, need another config after testing
+//    } else if(IS_IPHONE_6) {
+//        translateToCenter = CGAffineTransformMakeTranslation( -(screen.size.height - videoAssetTrack.naturalSize.width)+(667-568),
+//                                                                               -screen.size.width);// this config is for 6, , need another config after testing
+//    } else if (IS_IPHONE_6_PLUS) {
+//        NSLog(@"config for iphone 6 plus!!");
+//        translateToCenter = CGAffineTransformMakeTranslation( -(screen.size.height - videoAssetTrack.naturalSize.width)+(736-568),
+//                                                             -screen.size.width);
+//    }
+    translateToCenter = CGAffineTransformMakeTranslation( -(screen.size.height - videoAssetTrack.naturalSize.width)+(screen.size.height-568),
+                                                         -screen.size.width);
 
-    
 
-    
     CGAffineTransform finalTransform = CGAffineTransformConcat(Scale, CGAffineTransformConcat(translateToCenter,rotationTransform1));
     [layerInstruction setTransform:finalTransform atTime:kCMTimeZero];
 //    [layerInstruction setTransform: videoAssetTrack.preferredTransform atTime:kCMTimeZero];
