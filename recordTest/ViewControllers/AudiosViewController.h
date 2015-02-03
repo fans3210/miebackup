@@ -7,7 +7,8 @@
 //
 
 #import "BaseViewController.h"
+#import "AudioCat.h"
 
 @interface AudiosViewController : BaseViewController<UITableViewDataSource, UITableViewDelegate>
-@property (nonatomic, strong) NSMutableArray *Audios;
+@property (nonatomic, strong) AudioCat *audioCat;
 @end

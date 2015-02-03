@@ -14,9 +14,12 @@
 @interface CategoriesViewController () {
     NSMutableArray *cellModelsCat;
     NSMutableArray *cellModelsAud;
+    AudioCat *chosenCat;
+    
     __weak IBOutlet UITableView *tvCat;
     __weak IBOutlet UIActivityIndicatorView *indicator;
     __weak IBOutlet UIBarButtonItem *revealButtonItem;
+    
 }
 
 @end
@@ -133,21 +136,22 @@
 //
 //    }];
     
-    AVObject *avCat = cellModelsCat[indexPath.row];
-    AVQuery *audiosQuery = [AVQuery queryWithClassName:kAudio];
-    audiosQuery.cachePolicy = kPFCachePolicyCacheElseNetwork;
-    audiosQuery.maxCacheAge = 24*60*60;
-    [audiosQuery whereKey:kFromCategory equalTo:avCat];
-    [audiosQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        if (error) {
-            NSLog(@"error!!");
-        } else {
-            if (objects.count > 0) {
-                cellModelsAud = [NSMutableArray arrayWithArray:objects];
+    chosenCat = cellModelsCat[indexPath.row];
+//    AVQuery *audiosQuery = [AVQuery queryWithClassName:kAudio];
+//    audiosQuery.cachePolicy = kPFCachePolicyCacheElseNetwork;
+//    audiosQuery.maxCacheAge = 24*60*60;
+//    [audiosQuery whereKey:kFromCategory equalTo:avCat];
+//    [audiosQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+//        if (error) {
+//            NSLog(@"error!!");
+//        } else {
+//            if (objects.count > 0) {
+//                cellModelsAud = [NSMutableArray arrayWithArray:objects];
+//                
                 [self performSegueWithIdentifier:@"goToAudios" sender:tableView];
-            }
-        }
-    }];
+//            }
+//        }
+//    }];
     
 }
 
@@ -155,7 +159,7 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     AudiosViewController *audiosVC = [segue destinationViewController];
-    audiosVC.Audios = cellModelsAud;
+    audiosVC.audioCat = chosenCat;
 }
 
 

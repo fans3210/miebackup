@@ -284,6 +284,7 @@
 //        [alert show];
 //    } else {
         Scale = CGAffineTransformMakeScale((screen.size.width/320.0),(screen.size.width/320.0));
+
 //    }
     
 

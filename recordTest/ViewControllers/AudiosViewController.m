@@ -35,27 +35,27 @@
     NSLog(@"in audio VC");
     tvAudios.hidden = YES;
     [indicator startAnimating];
-//    cellModels = [NSMutableArray array];
-//    
-////    //config preview player
-////    _player = [[AVAudioPlayer alloc] init];
-//    
-//    BmobQuery *bQuery = [BmobQuery queryWithClassName:@"Audio"];
-//    
-//    [bQuery findObjectsInBackgroundWithBlock:^(NSArray *array, NSError *error) {
-//        for (BmobObject *obj in array) {
-//            NSLog(@"get obj title is %@",[obj objectForKey:kAudioTitle]);
-//            NSLog(@"get obj url is %@",[[obj objectForKey:kAudioFile] url]);
-//            [cellModels addObject:obj];
-//        }
-//        [tvAudios reloadData];
-//        tvAudios.hidden = NO;
-//    }];
-    cellModels = [NSMutableArray arrayWithArray:_Audios];
-    [tvAudios reloadData];
-    tvAudios.hidden = NO;
-    
-    //    cellModels = @[@"title 1", @"title 2", @"title 3"];
+    [self loadAudios];
+}
+
+- (void) loadAudios
+{
+    cellModels = [NSMutableArray array];
+    AVQuery *audiosQuery = [AVQuery queryWithClassName:kAudio];
+    audiosQuery.cachePolicy = kPFCachePolicyCacheElseNetwork;
+    audiosQuery.maxCacheAge = 24*60*60;
+    [audiosQuery whereKey:kFromCategory equalTo:_audioCat];
+    [audiosQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (error) {
+            NSLog(@"error!!");
+        } else {
+            if (objects.count > 0) {
+                cellModels = [NSMutableArray arrayWithArray:objects];
+                [tvAudios reloadData];
+                tvAudios.hidden = NO;
+            }
+        }
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
