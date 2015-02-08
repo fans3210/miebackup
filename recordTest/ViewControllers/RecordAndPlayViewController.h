@@ -7,13 +7,13 @@
 //
 
 #import "BaseViewController.h"
-
+#import "Audio.h"
 #import <Foundation/Foundation.h>
 #import <CoreMedia/CoreMedia.h>
-#import <AVFoundation/AVFoundation.h>
-@interface RecordAndPlayViewController : BaseViewController<AVCaptureFileOutputRecordingDelegate, AVAudioPlayerDelegate>
+@interface RecordAndPlayViewController : BaseViewController<AVCaptureFileOutputRecordingDelegate>
 
-@property (nonatomic, strong) NSURL *songURL;
+@property (nonatomic, strong) NSURL *songLocalURL;
+@property (nonatomic, strong) Audio *mAudio;
 @property (nonatomic, strong) AVCaptureMovieFileOutput *movieFileOutput;
 
 @end

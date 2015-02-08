@@ -8,7 +8,7 @@
 
 #import <AVOSCloud/AVOSCloud.h>
 
-@interface MBase : AVObject
+@interface MBase : NSObject
 
 @property (nonatomic, strong) NSString *name;
 

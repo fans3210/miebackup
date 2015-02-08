@@ -10,4 +10,17 @@
 
 @implementation Audio
 
+- (instancetype) initWithAudioAVObject: (AVObject *)avObj
+{
+    if (self == [super init]) {
+        self.title = [avObj objectForKey:kAudioTitle];
+        AVFile *songFile = [avObj objectForKey:kAudioFileMp3];
+        NSString *songURL = songFile.url;
+        self.songUrl = [NSURL URLWithString:songURL];
+
+    }
+    
+    return self;
+}
+
 @end

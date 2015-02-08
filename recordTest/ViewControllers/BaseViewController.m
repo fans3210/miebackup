@@ -16,7 +16,16 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+}
+
+- (void) viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    //stop playing audio
+    if ([self.player isPlaying]) {
+        [self.player stop];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -24,14 +33,34 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
+- (void) playAudioWithURL: (NSURL *)filePath
+{
+    NSLog(@"basevc player playing");
+    if (_player.isPlaying) {
+        [_player stop];
+        return;
+    }
+    
+    AVAudioPlayer *tmpPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:filePath error:nil];
+    tmpPlayer.delegate = self;
+    _player = tmpPlayer;
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    
+    //play audio
+    tmpPlayer = nil;
+    [_player prepareToPlay];
+    [_player play];
+    
 }
-*/
+
+
+
+
+#pragma audio player delegate
+- (void) audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag
+{
+    NSLog(@"basevc delegate audio player did finish playing, successfully %d",flag);
+
+}
 
 @end

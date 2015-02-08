@@ -64,16 +64,9 @@
                                     <action selector="recordOrStop:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="NT7-pe-HfO"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wo8-Hg-Lcz">
-                                <rect key="frame" x="224" y="399" width="122" height="78"/>
-                                <color key="backgroundColor" red="1" green="0.88024635039999999" blue="0.74615077549999997" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="Button">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="testing:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="UOC-SL-QtX"/>
-                                </connections>
-                            </button>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="wU9-UT-8RW">
+                                <rect key="frame" x="290" y="448" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -85,7 +78,9 @@
                             <constraint firstItem="PQp-pd-crR" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="owL-Ep-DuC"/>
                             <constraint firstItem="REp-Vc-KiV" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="30" id="rre-0n-8Ah"/>
                             <constraint firstItem="REp-Vc-KiV" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="30" id="suM-xp-BwM"/>
+                            <constraint firstItem="REp-Vc-KiV" firstAttribute="top" secondItem="wU9-UT-8RW" secondAttribute="bottom" constant="25" id="wEh-jB-Fqm"/>
                             <constraint firstAttribute="centerX" secondItem="REp-Vc-KiV" secondAttribute="centerX" id="xtH-0n-CTh"/>
+                            <constraint firstAttribute="centerX" secondItem="wU9-UT-8RW" secondAttribute="centerX" id="yJt-aT-mCZ"/>
                             <constraint firstItem="PQp-pd-crR" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="yq7-5q-LpU"/>
                         </constraints>
                         <variation key="default">
@@ -242,36 +237,22 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KQ1-be-i6v" id="efY-M8-30b">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="qp4-sm-v7o">
-                                                    <rect key="frame" x="7" y="13" width="20" height="20"/>
-                                                </activityIndicatorView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eZn-vn-RME">
-                                                    <rect key="frame" x="49" y="1" width="245" height="45"/>
-                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
-                                                    <color key="textColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="点击 预览" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sCn-Qj-jZW">
-                                                    <rect key="frame" x="8" y="0.0" width="33" height="40"/>
-                                                    <color key="backgroundColor" red="0.34671443860000001" green="0.56381446560000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="12"/>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ND0-UE-G2Z">
-                                                    <rect key="frame" x="560" y="0.0" width="32" height="30"/>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ND0-UE-G2Z">
+                                                    <rect key="frame" x="35" y="9" width="32" height="30"/>
                                                     <state key="normal" title="GO !">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                 </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eZn-vn-RME">
+                                                    <rect key="frame" x="75" y="1" width="467" height="45"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
+                                                    <color key="textColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="trailingMargin" secondItem="ND0-UE-G2Z" secondAttribute="trailing" id="gOf-dp-Gs7"/>
-                                            </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="bPlay" destination="ND0-UE-G2Z" id="e89-e5-H4f"/>
-                                            <outlet property="indicator" destination="qp4-sm-v7o" id="kXl-aq-Lnw"/>
                                             <outlet property="lbTitle" destination="eZn-vn-RME" id="z8M-Hp-NJJ"/>
                                         </connections>
                                     </tableViewCell>

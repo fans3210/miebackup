@@ -32,7 +32,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-
+    
+    [self prepareForAudioFiles];
     
     
     //get front camera capture device
@@ -110,6 +111,50 @@
 
 }
 
+- (void) viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    //stop recording
+    if (recording) {
+        [self stopRecording];
+    }
+}
+
+
+
+- (void) prepareForAudioFiles
+{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentDirectoryPath = [paths objectAtIndex:0];
+    
+    NSString *songLocalPath = [_songLocalURL absoluteString];
+    NSString *fileNameToBeChecked = [songLocalPath lastPathComponent];
+    NSString *filePathToBeChecked = [documentDirectoryPath stringByAppendingPathComponent:fileNameToBeChecked];
+    if (![[NSFileManager defaultManager] fileExistsAtPath:filePathToBeChecked]) {
+        bStartOrStop.hidden = YES;
+        
+        
+        //download song
+        NSLog(@"download from audio file %@",[_mAudio.songUrl absoluteString]);
+        NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+        AFURLSessionManager *sessionManager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+        NSURLRequest *request = [NSURLRequest requestWithURL:_mAudio.songUrl];
+        NSURLSessionDownloadTask *downloadTask = [sessionManager downloadTaskWithRequest:request progress:nil destination:^NSURL *(NSURL *targetPath, NSURLResponse *response) {
+            
+            NSURL *destinationURL = [NSURL fileURLWithPath:[documentDirectoryPath stringByAppendingPathComponent:[response suggestedFilename]]];
+            return destinationURL;
+            
+        } completionHandler:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
+            NSLog(@"file downloaded to %@",filePath);
+            //        [player url] = filePath;
+            NSLog(@"error is %@",error.description);
+            bStartOrStop.hidden = NO;
+        }];
+        [downloadTask resume];
+    }
+    
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -117,7 +162,7 @@
 - (IBAction)recordOrStop:(id)sender {
     if(!recording) {
         //start recording
-        [self playAudioWithURL:_songURL];
+        [self playAudioWithURL:_songLocalURL];
         recording = YES;
         [bStartOrStop setTitle:@"Cancel" forState:UIControlStateNormal];
         bStartOrStop.backgroundColor = [UIColor redColor];
@@ -163,13 +208,32 @@
     [self.movieFileOutput stopRecording];
     
     //stop playing audio
-    if (_player.isPlaying) {
-        [_player stop];
+    if ([self.player isPlaying]) {
+        [self.player stop];
     }
 }
-- (IBAction)testing:(id)sender {
-    [self performSegueWithIdentifier:@"goToPlay" sender:sender];
+
+- (void) playAudioWithURL: (NSURL *)filePath
+{
+    NSLog(@"basevc player playing");
+    if (self.player.isPlaying) {
+        [self.player stop];
+        return;
+    }
+    
+    AVAudioPlayer *tmpPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:filePath error:nil];
+    tmpPlayer.delegate = self;
+    self.player = tmpPlayer;
+    
+    
+    //play audio
+    tmpPlayer = nil;
+    [self.player prepareToPlay];
+    timer = [NSTimer scheduledTimerWithTimeInterval:1.0/10 target:self selector:@selector(updateProgress) userInfo:nil repeats:YES];
+    [self.player play];
+    
 }
+
 
 #pragma audio player delegate
 - (void) audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag
@@ -192,34 +256,15 @@
 {
     NSLog(@"did finish recording, error is %@",[error description]);
 //    [self performSegueWithIdentifier:@"goToPlay" sender:nil];
-
+    
     [self mergeAndSave];
 }
 
-- (void) playAudioWithURL: (NSURL *)filePath
-{
-    if (_player.isPlaying) {
-        [_player stop];
-        return;
-    }
-    
-    AVAudioPlayer *tmpPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:filePath error:nil];
-    tmpPlayer.delegate = self;
-    _player = tmpPlayer;
-    
-    
-    //play audio
-    tmpPlayer = nil;
-    [_player prepareToPlay];
-    [audioProgress setProgress:0.0];
-    timer = [NSTimer scheduledTimerWithTimeInterval:1.0/10 target:self selector:@selector(updateProgress) userInfo:nil repeats:YES];
-    [_player play];
-    
-}
+
 
 - (void) updateProgress
 {
-    float progress = _player.currentTime/_player.duration;
+    float progress = self.player.currentTime/self.player.duration;
     NSLog(@"progress is %f",progress);
     [audioProgress setProgress:progress animated:NO];
 }
@@ -231,7 +276,7 @@
 //    mixComposition.naturalSize = CGSizeMake(300, 300);
 
     //calculate time range, should be same as audio one
-    NSURL *audioURL = _songURL;
+    NSURL *audioURL = _songLocalURL;
     AVURLAsset *audioAsset = [[AVURLAsset alloc] initWithURL:audioURL options:nil];
     CMTimeRange common_timeRange = CMTimeRangeMake(kCMTimeZero, audioAsset.duration);
     

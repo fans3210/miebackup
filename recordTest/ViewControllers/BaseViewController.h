@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <AFNetworking.h>
+#import <AVFoundation/AVFoundation.h>
 
-@interface BaseViewController : UIViewController
+@interface BaseViewController : UIViewController<AVAudioPlayerDelegate>
+@property (nonatomic, strong) AVAudioPlayer *player;
 
+- (void) playAudioWithURL: (NSURL *)filePath;
 @end

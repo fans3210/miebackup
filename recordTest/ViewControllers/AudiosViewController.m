@@ -8,22 +8,18 @@
 
 #import "AudiosViewController.h"
 #import "RecordAndPlayViewController.h"
-#import <BmobSDK/Bmob.h>
-#import <AFNetworking.h>
-
 #import "AudioFileCell.h"
-#import <AVFoundation/AVFoundation.h>
-
-
+#import "Audio.h"
 
 @interface AudiosViewController () {
     NSMutableArray *cellModels;
     __weak IBOutlet UITableView *tvAudios;
     __weak IBOutlet UIActivityIndicatorView *indicator;
     NSURL *chosenAudioLocalUrl;
+    Audio *chosenAudio;//if next vc not able to play, download using this audio
     
 }
-@property (nonatomic, strong) AVAudioPlayer *player;
+
 @end
 
 
@@ -50,7 +46,14 @@
             NSLog(@"error!!");
         } else {
             if (objects.count > 0) {
-                cellModels = [NSMutableArray arrayWithArray:objects];
+                cellModels = [NSMutableArray array];
+
+                for (int i=0; i<objects.count; i++) {
+                    AVObject *avObj = (AVObject *)[objects objectAtIndex:i];
+                    Audio *mAudio = [[Audio alloc] initWithAudioAVObject:avObj];
+                    [cellModels addObject:mAudio];
+                    NSLog(@"audio state is %d",mAudio.audioState);
+                }
                 [tvAudios reloadData];
                 tvAudios.hidden = NO;
             }
@@ -75,9 +78,9 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     AudioFileCell *cell = [tableView dequeueReusableCellWithIdentifier:@"AudioFileCell" forIndexPath:indexPath];
-    BmobObject *bObj = cellModels[indexPath.row];
-    
-    cell.lbTitle.text = [bObj objectForKey:kAudioTitle];
+//    AVObject *avObj = cellModels[indexPath.row];
+    Audio *mAudio = cellModels[indexPath.row];
+    cell.lbTitle.text = mAudio.title;
     cell.bPlay.tag = indexPath.row;
     [cell.bPlay addTarget:self action:@selector(goPressed:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -94,10 +97,10 @@
 {
 
     AudioFileCell *cell = (AudioFileCell *)[tableView cellForRowAtIndexPath:indexPath];
-    BmobObject *bObj = cellModels[indexPath.row];
-    NSString *songName = [bObj objectForKey:kAudioTitle];
-    BmobFile *songFile = [bObj objectForKey:kAudioFileMp3];
-    NSString *songURL = songFile.url;
+//    AVObject *avObj = cellModels[indexPath.row];
+    Audio *mAudio = cellModels[indexPath.row];
+    NSString *songName = mAudio.title;
+    NSURL *songURL = mAudio.songUrl;
     
     
     //check whether file exists
@@ -108,22 +111,23 @@
     NSString *filePathToBeChecked = [documentDirectoryPath stringByAppendingPathComponent:fileNameToBeChecked];
     
     chosenAudioLocalUrl = [NSURL fileURLWithPath:[documentDirectoryPath stringByAppendingPathComponent:fileNameToBeChecked]];
+    chosenAudio = mAudio;
     
     if ([[NSFileManager defaultManager] fileExistsAtPath:filePathToBeChecked]) {
         NSLog(@"file: %@ exists already", filePathToBeChecked);
         NSURL *filePath = [NSURL URLWithString:filePathToBeChecked];
-        [self playAudioWithURL:filePath forCell:cell];
+        [self playAudioWithURL:filePath];
     } else {
         //file not exists, need to download
         //download audio file mp3
 
-        cell.indicator.hidden = NO;
+//        cell.indicator.hidden = NO;
         [tableView reloadData];
         NSLog(@"download file %@ with link:%@", songName, songURL);
         
         NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
         AFURLSessionManager *sessionManager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
-        NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:songURL]];
+        NSURLRequest *request = [NSURLRequest requestWithURL:songURL];
         NSURLSessionDownloadTask *downloadTask = [sessionManager downloadTaskWithRequest:request progress:nil destination:^NSURL *(NSURL *targetPath, NSURLResponse *response) {
             
             NSURL *destinationURL = [NSURL fileURLWithPath:[documentDirectoryPath stringByAppendingPathComponent:[response suggestedFilename]]];
@@ -135,9 +139,9 @@
             NSLog(@"error is %@",error.description);
 
             
-            cell.indicator.hidden = YES;
+//            cell.indicator.hidden = YES;
             [tableView reloadData];
-            [self playAudioWithURL:filePath forCell:cell];
+            [self playAudioWithURL:filePath];
         }];
         [downloadTask resume];
     }
@@ -150,38 +154,32 @@
     NSLog(@"go pressed at %li",(long)sender.tag);
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentDirectoryPath = [paths objectAtIndex:0];
-    BmobObject *bObj = cellModels[sender.tag];
-    BmobFile *songFile = [bObj objectForKey:kAudioFileMp3];
-    NSString *songURL = songFile.url;
+//    AVObject *avObj = cellModels[sender.tag];
+//    AVFile *songFile = [avObj objectForKey:kAudioFileMp3];
+//    NSString *songURL = songFile.url;
+    Audio *mAudio = cellModels[sender.tag];
+    NSString *songURL = [mAudio.songUrl absoluteString];
     NSString *fileNameToBeChecked = [songURL lastPathComponent];
 
-        chosenAudioLocalUrl = [NSURL fileURLWithPath:[documentDirectoryPath stringByAppendingPathComponent:fileNameToBeChecked]];
+    chosenAudioLocalUrl = [NSURL fileURLWithPath:[documentDirectoryPath stringByAppendingPathComponent:fileNameToBeChecked]];
+    chosenAudio = mAudio;
+    
     [self performSegueWithIdentifier:@"goToRecord" sender:sender];
 }
 
-- (void) playAudioWithURL: (NSURL *)filePath forCell: (AudioFileCell *)cell
-{
-    if (_player.isPlaying) {
-        [_player stop];
-        return;
-    }
-    
-    AVAudioPlayer *tmpPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:filePath error:nil];
-    _player = tmpPlayer;
-    
 
-    //play audio
-    tmpPlayer = nil;
-    [_player prepareToPlay];
-    [_player play];
-
-}
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+    //stop player
+    if ([self.player isPlaying]) {
+        [self.player stop];
+    }
+    
     self.navigationItem.title = @"";
     RecordAndPlayViewController *recordVC = [segue destinationViewController];
-    recordVC.songURL = chosenAudioLocalUrl;
+    recordVC.songLocalURL = chosenAudioLocalUrl;
+    recordVC.mAudio = chosenAudio;
 }
 
 
