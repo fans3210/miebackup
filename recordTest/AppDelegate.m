@@ -46,7 +46,7 @@
         [ud setBool:NO forKey:@"firstLaunch"];
     }
     
-//    BOOL firstLaunch = YES;
+//    BOOL firstLaunch = YES;//for testing
     BOOL firstLaunch = [ud boolForKey:@"firstLaunch"];
     if (firstLaunch) {
         self.window = [[UIWindow alloc] initWithFrame:UIScreen.mainScreen.bounds];

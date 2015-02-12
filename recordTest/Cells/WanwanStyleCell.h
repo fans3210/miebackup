@@ -10,5 +10,6 @@
 
 @interface WanwanStyleCell : UICollectionViewCell
 @property (weak, nonatomic) IBOutlet UILabel *lbTxt;
+@property (weak, nonatomic) IBOutlet UILabel *lbSlideRight;
 
 @end

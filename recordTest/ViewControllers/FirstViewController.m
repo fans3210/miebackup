@@ -40,7 +40,15 @@
                    @"那是我逝去的青春。。。",
                    @"我要放声歌唱。。"];
     
+    //set mie button boarder and style
+    bMie.layer.borderWidth = 1.0;
+    bMie.layer.borderColor = [UIColor whiteColor].CGColor;
     
+    if (IS_IPHONE_6 || IS_IPHONE_6_PLUS) {
+        bMie.layer.cornerRadius = bMie.frame.size.height/3.5;
+    } else {
+        bMie.layer.cornerRadius = bMie.frame.size.height/4.5;
+    }
 
 }
 
@@ -71,7 +79,7 @@
             bMie.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0.001, 0.001);
             bMie.alpha = 1;
             scrollView.userInteractionEnabled = NO;
-            [UIView animateWithDuration:0.3/1.5 animations:^{
+            [UIView animateWithDuration:0.3/1.5 delay:1.5 options:UIViewAnimationOptionTransitionNone animations:^{
                 bMie.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1.1, 1.1);
                 bMie.userInteractionEnabled = NO;
             } completion:^(BOOL finished) {
@@ -127,6 +135,17 @@
         if (indexPath.row != 2) {
             //if not last page
             collectionView.userInteractionEnabled = YES;
+//            cell.lbSlideRight.hidden = NO;
+            //move lbslide position to left most first, out side screen
+            CGRect frame = cell.lbSlideRight.frame;
+            frame.origin.x -= [UIScreen mainScreen].bounds.size.width;
+            cell.lbSlideRight.frame = frame;
+            [UIView animateWithDuration:0.3 animations:^{
+                cell.lbSlideRight.hidden = NO;
+                CGRect frame = cell.lbSlideRight.frame;
+                frame.origin.x += [UIScreen mainScreen].bounds.size.width;
+                cell.lbSlideRight.frame = frame;
+            }];
         }
 
     }];

@@ -10,4 +10,9 @@
 
 @implementation WanwanStyleCell
 
+- (void) prepareForReuse
+{
+    self.lbSlideRight.hidden = YES;
+}
+
 @end
