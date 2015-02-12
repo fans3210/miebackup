@@ -8,9 +8,11 @@
 
 #import "FirstViewController.h"
 #import "WanwanStyleCell.h"
+#import <SWRevealViewController/SWRevealViewController.h>
 
 @interface FirstViewController () {
     NSArray *cellModels;
+    NSTimeInterval duration;//animation duration
     __weak IBOutlet UIButton *bMie;
     __weak IBOutlet UICollectionView *cvWanwan;
 
@@ -32,9 +34,13 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     NSLog(@"in first launch vc");
+    duration = 1.5;
+    
     cellModels = @[@"我想起那天夕阳下的奔跑。。。",
                    @"那是我逝去的青春。。。",
                    @"我要放声歌唱。。"];
+    
+    
 
 }
 
@@ -60,7 +66,25 @@
     int page = (scrollView.contentOffset.x - pageWidth/2)/pageWidth + 1;
     NSLog(@"fpage = %d", page);
     if (page == 2) {
-        bMie.alpha = 1;
+//        bMie.alpha = 1;
+            //pop up the button
+            bMie.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0.001, 0.001);
+            bMie.alpha = 1;
+            scrollView.userInteractionEnabled = NO;
+            [UIView animateWithDuration:0.3/1.5 animations:^{
+                bMie.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1.1, 1.1);
+                bMie.userInteractionEnabled = NO;
+            } completion:^(BOOL finished) {
+                [UIView animateWithDuration:0.3/2 animations:^{
+                    bMie.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0.9 , 0.9);
+
+                } completion:^(BOOL finished) {
+                    [UIView animateWithDuration:0.3/2 animations:^{
+                        bMie.transform = CGAffineTransformIdentity;
+                        bMie.userInteractionEnabled = YES;
+                    }];
+                }];
+            }];
     } else {
         bMie.alpha = 0;
     }
@@ -68,6 +92,15 @@
 
 }
 
+- (IBAction)miePressed:(UIButton *)sender {
+    NSLog(@"miemie");
+    UIStoryboard *storyboard = [self storyboard];
+    SWRevealViewController *mainRVC = [storyboard instantiateViewControllerWithIdentifier:@"mainReveal"];
+    mainRVC.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+    [self presentViewController:mainRVC animated:YES completion:^{
+        NSLog(@"go to main vc already");
+    }];
+}
 
 #pragma cv delegate methods
 
@@ -85,6 +118,18 @@
 {
     WanwanStyleCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"wanwanStyleCell" forIndexPath:indexPath];
     cell.lbTxt.text = cellModels[indexPath.row];
+    cell.lbTxt.alpha = 0;
+    [UIView animateWithDuration:duration animations:^{
+        cell.lbTxt.alpha = 1;
+        collectionView.userInteractionEnabled = NO;
+    } completion:^(BOOL finished) {
+        NSLog(@"animation complete");
+        if (indexPath.row != 2) {
+            //if not last page
+            collectionView.userInteractionEnabled = YES;
+        }
+
+    }];
     
 
     return cell;

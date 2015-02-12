@@ -22,6 +22,7 @@ PODS:
     - AFNetworking/NSURLSession
   - AVOSCloud (2.6.10)
   - BmobSDK (1.5.1)
+  - NewRelicAgent (4.186)
   - Realm (0.90.4):
     - Realm/Headers (= 0.90.4)
   - Realm/Headers (0.90.4)
@@ -32,6 +33,7 @@ DEPENDENCIES:
   - AFNetworking (~> 2.4)
   - AVOSCloud
   - BmobSDK
+  - NewRelicAgent
   - Realm
   - SVProgressHUD
   - SWRevealViewController
@@ -40,6 +42,7 @@ SPEC CHECKSUMS:
   AFNetworking: 0f54cb5d16ce38c1b76948faffb8d5fb705021c7
   AVOSCloud: f6bda519d035a21ceacab049184aa5cdb9e1177f
   BmobSDK: b6011e3e7ec03bb9a66aba3a0b08cb4e3eb84254
+  NewRelicAgent: 3ad10d9fe34dc0bffa1f2a1d50793d607b62823a
   Realm: 43ec5595f51849fabccd2213cfad90bc4ff9a3c0
   SVProgressHUD: da7a49e789af645d9279ffbca62318945a832438
   SWRevealViewController: f6d80638b8e12323e87ac79562345403a799cb77

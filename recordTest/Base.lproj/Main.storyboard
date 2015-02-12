@@ -149,19 +149,19 @@
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="xvb-vb-w2v">
                                 <rect key="frame" x="290" y="268" width="20" height="20"/>
                             </activityIndicatorView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="59" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="ZXc-Cv-jIp">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="50" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="ZXc-Cv-jIp">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="556"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="CategoryCell" textLabel="O9X-4g-IcK" rowHeight="59" style="IBUITableViewCellStyleDefault" id="BmV-Cb-QYI">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="CategoryCell" textLabel="fhS-X4-39I" style="IBUITableViewCellStyleDefault" id="BmV-Cb-QYI">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="BmV-Cb-QYI" id="cmo-th-D3a">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" tag="2" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="O9X-4g-IcK">
+                                                <label opaque="NO" multipleTouchEnabled="YES" tag="2" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fhS-X4-39I">
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -177,7 +177,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="bottomMargin" secondItem="ZXc-Cv-jIp" secondAttribute="bottom" constant="-44" id="8zR-r8-4h2"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="ZXc-Cv-jIp" secondAttribute="bottom" id="8zR-r8-4h2"/>
                             <constraint firstItem="ZXc-Cv-jIp" firstAttribute="leading" secondItem="g3n-ce-g5E" secondAttribute="leading" id="G6y-rk-Eey"/>
                             <constraint firstItem="ZXc-Cv-jIp" firstAttribute="top" secondItem="gCJ-la-xMu" secondAttribute="bottom" id="HUf-Yc-O47"/>
                             <constraint firstItem="ZXc-Cv-jIp" firstAttribute="leading" secondItem="g3n-ce-g5E" secondAttribute="leadingMargin" constant="-16" id="LSZ-VB-2ZP"/>
@@ -366,6 +366,9 @@
                                         <exclude reference="Hmw-40-MeJ"/>
                                     </mask>
                                 </variation>
+                                <connections>
+                                    <action selector="miePressed:" destination="CWR-9c-ti6" eventType="touchUpInside" id="WOc-hM-FEX"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -472,7 +475,7 @@
         <!--Reveal View Controller-->
         <scene sceneID="VYw-Ak-HIZ">
             <objects>
-                <viewController id="zxP-Uf-WYK" customClass="SWRevealViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="mainReveal" id="zxP-Uf-WYK" customClass="SWRevealViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="KtE-DQ-kEy"/>
                         <viewControllerLayoutGuide type="bottom" id="DT1-fA-JdV"/>

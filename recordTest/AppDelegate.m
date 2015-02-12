@@ -25,9 +25,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
-//    //bmob
-//    NSLog(@"bomb app key is %@",kBombAppkey);
-//    [Bmob registerWithAppKey:kBombAppkey];
+    //newrelic
+//    [NewRelicAgent startWithApplicationToken:@"AA92a066f5b84ec9780ee08db1e65e9bb95b8ae988"];
     
     //lean cloud
     [AVOSCloud setApplicationId:kLeanCloudAppId clientKey:kLeanCloudClientKey];
@@ -35,15 +34,29 @@
     //sharesdk
     [ShareSDK connectWeChatWithAppId:kWechatAppKey wechatCls:[WXApi class]];
     
+    //check first launch
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     
-    BOOL firstLaunch = NO;
+//    BOOL firstLaunch = [ud valueForKey:@"firstLaunch"];
     
+    if (![ud boolForKey:@"everLaunched"]) {
+        [ud setBool:YES forKey:@"everLaunched"];
+        [ud setBool:YES forKey:@"firstLaunch"];
+    } else {
+        [ud setBool:NO forKey:@"firstLaunch"];
+    }
+    
+//    BOOL firstLaunch = YES;
+    BOOL firstLaunch = [ud boolForKey:@"firstLaunch"];
     if (firstLaunch) {
         self.window = [[UIWindow alloc] initWithFrame:UIScreen.mainScreen.bounds];
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         FirstViewController *firstVC = [storyboard instantiateViewControllerWithIdentifier:@"FirstViewController"];
         self.window.rootViewController = firstVC;
         [self.window makeKeyAndVisible];
+        
+        //set userdefaults
+        [ud setBool:NO forKey:@"firstLaunch"];
     }
 
 

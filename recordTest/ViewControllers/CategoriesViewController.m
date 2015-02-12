@@ -102,11 +102,12 @@
 #pragma mark - Table view data source
 
 
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 
     return cellModelsCat.count;
 }
+
+//- (CGFloat) tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -120,38 +121,11 @@
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    BmobObject *bmobCat = cellModelsCat[indexPath.row];
-//    BmobQuery *audioQuery = [BmobQuery queryWithClassName:kAudio];
-//    [audioQuery whereObjectKey:kAudioFIles relatedTo:bmobCat];
-//
-//    [audioQuery findObjectsInBackgroundWithBlock:^(NSArray *array, NSError *error) {
-//        NSLog(@"error is %@",error);
-////        for (BmobObject *obj in array) {
-////            NSLog(@"get obj is %@",[obj objectForKey:kAudioTitle]);
-////        }
-//        if (array.count > 0) {
-//            cellModelsAud = [NSMutableArray arrayWithArray:array];
-//            [self performSegueWithIdentifier:@"goToAudios" sender:tableView];
-//        }
-//
-//    }];
+
     
     chosenCat = cellModelsCat[indexPath.row];
-//    AVQuery *audiosQuery = [AVQuery queryWithClassName:kAudio];
-//    audiosQuery.cachePolicy = kPFCachePolicyCacheElseNetwork;
-//    audiosQuery.maxCacheAge = 24*60*60;
-//    [audiosQuery whereKey:kFromCategory equalTo:avCat];
-//    [audiosQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-//        if (error) {
-//            NSLog(@"error!!");
-//        } else {
-//            if (objects.count > 0) {
-//                cellModelsAud = [NSMutableArray arrayWithArray:objects];
-//                
-                [self performSegueWithIdentifier:@"goToAudios" sender:tableView];
-//            }
-//        }
-//    }];
+    [self performSegueWithIdentifier:@"goToAudios" sender:tableView];
+
     
 }
 
