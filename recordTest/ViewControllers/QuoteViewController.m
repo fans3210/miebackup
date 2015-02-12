@@ -7,8 +7,14 @@
 //
 
 #import "QuoteViewController.h"
+#import <AVOSCloud/AVOSCloud.h>
+#import <SWRevealViewController.h>
 
-@interface QuoteViewController ()
+@interface QuoteViewController () {
+    
+    __weak IBOutlet UITextView *tvQuote;
+    NSString *todaysQuote;
+}
 
 @end
 
@@ -17,6 +23,31 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    NSLog(@"quote vc, view did load");
+    tvQuote.layer.borderWidth = 1.0;
+    tvQuote.layer.borderColor = [UIColor whiteColor].CGColor;
+    tvQuote.layer.cornerRadius = 20;
+    AVQuery *queryQuote = [AVQuery queryWithClassName:kTodaysQuote];
+    queryQuote.cachePolicy = kPFCachePolicyCacheElseNetwork;
+    [queryQuote findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (error) {
+            NSLog(@"error in find quote, error is %@",error);
+            tvQuote.text = @"速度成就男人 ——雍正";
+        } else {
+            NSMutableArray *quotes = [NSMutableArray arrayWithArray:objects];
+            if (quotes && quotes.count > 0) {
+                AVObject *avQuote = [quotes firstObject];
+                todaysQuote = [avQuote objectForKey:kQuote];
+                tvQuote.text = todaysQuote;
+            } else {
+                tvQuote.text = @"速度成就男人 ——雍正";
+            }
+        }
+    }];
+}
+
+- (IBAction)backToMainPressed:(id)sender {
+        [self.revealViewController setFrontViewPosition:FrontViewPositionLeft animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

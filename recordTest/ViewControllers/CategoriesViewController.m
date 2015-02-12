@@ -59,7 +59,7 @@
 
 - (IBAction)testReveal:(id)sender
 {
-    
+    //open left cv
     [self.revealViewController setFrontViewPosition:FrontViewPositionRightMost animated:YES];
 }
 

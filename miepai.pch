@@ -42,11 +42,14 @@
 //#define kAudioFileUrl       @"audioFileUrl"
 #define kAudio              @"Audio"
 #define kCategory           @"Category"
+#define kTodaysQuote        @"TodaysQuote"
+
 #define kFromCategory       @"FromCategory"
 
 #define kAudioFileMp3       @"FileMp3"
 #define kAudioTitle         @"Title"
 
 #define kCategoryName       @"categoryTitle"
+#define kQuote              @"Quote"
 
 #endif

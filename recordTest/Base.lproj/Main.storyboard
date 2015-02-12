@@ -410,23 +410,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="45l-A8-Ono">
-                                <rect key="frame" x="36" y="169" width="528" height="362"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="45l-A8-Ono" secondAttribute="height" multiplier="19:13" id="dZZ-Xn-63Y"/>
-                                </constraints>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="今日小贴士" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PPJ-Rx-3Fe">
-                                <rect key="frame" x="36" y="140" width="521" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="每日一咩：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PPJ-Rx-3Fe">
+                                <rect key="frame" x="36" y="97" width="179" height="20.5"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="oY9-Gv-diY"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="default">
                                     <mask key="constraints">
@@ -434,13 +424,38 @@
                                     </mask>
                                 </variation>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s3R-7t-lRP">
+                                <rect key="frame" x="253" y="522" width="72" height="30"/>
+                                <state key="normal" title="回到首页">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="backToMainPressed:" destination="li1-7u-G92" eventType="touchUpInside" id="ORH-1X-fwu"/>
+                                </connections>
+                            </button>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="45l-A8-Ono">
+                                <rect key="frame" x="31" y="125" width="538" height="368"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="45l-A8-Ono" secondAttribute="height" multiplier="19:13" id="dZZ-Xn-63Y"/>
+                                </constraints>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
-                        <color key="backgroundColor" red="0.34671443860000001" green="0.56381446560000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="centerY" secondItem="45l-A8-Ono" secondAttribute="centerY" id="2YK-vI-Fmz"/>
+                            <constraint firstItem="PPJ-Rx-3Fe" firstAttribute="leading" secondItem="J0h-Pu-WXZ" secondAttribute="leadingMargin" constant="20" id="5jk-Sb-dkj"/>
+                            <constraint firstAttribute="centerX" secondItem="s3R-7t-lRP" secondAttribute="centerX" id="FAz-xw-C4Y"/>
+                            <constraint firstAttribute="centerY" secondItem="s3R-7t-lRP" secondAttribute="centerY" id="Jhv-Tp-WvV"/>
+                            <constraint firstItem="s3R-7t-lRP" firstAttribute="top" secondItem="45l-A8-Ono" secondAttribute="bottom" constant="29" id="Lq7-zo-bXA"/>
                             <constraint firstAttribute="trailingMargin" secondItem="45l-A8-Ono" secondAttribute="trailing" constant="15" id="PM6-PX-QNV"/>
+                            <constraint firstItem="45l-A8-Ono" firstAttribute="top" secondItem="PPJ-Rx-3Fe" secondAttribute="bottom" constant="8" id="Pxh-hg-N91"/>
                             <constraint firstItem="PPJ-Rx-3Fe" firstAttribute="top" secondItem="3Hg-Tw-8ty" secondAttribute="bottom" multiplier="0.3" id="THP-L3-36w"/>
-                            <constraint firstAttribute="centerY" secondItem="45l-A8-Ono" secondAttribute="centerY" constant="-50" id="Vql-Xk-Pea"/>
+                            <constraint firstAttribute="centerY" secondItem="s3R-7t-lRP" secondAttribute="centerY" id="VRJ-bD-dlp"/>
+                            <constraint firstAttribute="centerY" secondItem="45l-A8-Ono" secondAttribute="centerY" constant="-10" id="Vql-Xk-Pea"/>
                             <constraint firstAttribute="centerX" secondItem="45l-A8-Ono" secondAttribute="centerX" id="gfS-y1-3Ib"/>
                             <constraint firstAttribute="height" secondItem="PPJ-Rx-3Fe" secondAttribute="height" id="kRp-cW-glK"/>
                             <constraint firstItem="45l-A8-Ono" firstAttribute="leading" secondItem="J0h-Pu-WXZ" secondAttribute="leadingMargin" constant="15" id="phX-ga-74M"/>
@@ -450,9 +465,14 @@
                                 <exclude reference="THP-L3-36w"/>
                                 <exclude reference="kRp-cW-glK"/>
                                 <exclude reference="2YK-vI-Fmz"/>
+                                <exclude reference="Jhv-Tp-WvV"/>
+                                <exclude reference="VRJ-bD-dlp"/>
                             </mask>
                         </variation>
                     </view>
+                    <connections>
+                        <outlet property="tvQuote" destination="45l-A8-Ono" id="8av-xe-B9o"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Har-Sy-Hfu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
