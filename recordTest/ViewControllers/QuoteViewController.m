@@ -27,20 +27,25 @@
     tvQuote.layer.borderWidth = 1.0;
     tvQuote.layer.borderColor = [UIColor whiteColor].CGColor;
     tvQuote.layer.cornerRadius = 20;
+//    [self loadQuote];
+    tvQuote.text = todaysQuote;
+}
+
+- (void) loadQuote
+{
     AVQuery *queryQuote = [AVQuery queryWithClassName:kTodaysQuote];
-    queryQuote.cachePolicy = kPFCachePolicyCacheElseNetwork;
+    //    queryQuote.cachePolicy = kPFCachePolicyCacheElseNetwork;
     [queryQuote findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (error) {
             NSLog(@"error in find quote, error is %@",error);
-            tvQuote.text = @"速度成就男人 ——雍正";
+            tvQuote.text = kDefaultQuote;
         } else {
             NSMutableArray *quotes = [NSMutableArray arrayWithArray:objects];
             if (quotes && quotes.count > 0) {
                 AVObject *avQuote = [quotes firstObject];
                 todaysQuote = [avQuote objectForKey:kQuote];
-                tvQuote.text = todaysQuote;
             } else {
-                tvQuote.text = @"速度成就男人 ——雍正";
+                todaysQuote = kDefaultQuote;
             }
         }
     }];

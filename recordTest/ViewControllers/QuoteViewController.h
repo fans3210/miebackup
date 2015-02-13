@@ -10,6 +10,6 @@
 
 @interface QuoteViewController : BaseViewController
 
-
+- (void) loadQuote;
 
 @end

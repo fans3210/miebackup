@@ -8,6 +8,7 @@
 
 #import "CategoriesViewController.h"
 #import "AudiosViewController.h"
+#import "QuoteViewController.h"
 #import <AVOSCloud/AVOSCloud.h>
 #import <SWRevealViewController.h>
 
@@ -29,21 +30,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setUpUI];
-    [self loadAllCategories];
-
-//    //sample find audio from a category
-//    BmobObject *testBmobCategory = [BmobObject objectWithoutDatatWithClassName:@"Category" objectId:@"KSyA555n"];
-//    BmobQuery *bQuery = [BmobQuery queryWithClassName:@"Audio"];
-//    [bQuery whereObjectKey:@"audioFiles" relatedTo:testBmobCategory];
-//    
-//    [bQuery findObjectsInBackgroundWithBlock:^(NSArray *array, NSError *error) {
-//        NSLog(@"error is %@",error);
-//        NSLog(@"array is %@",array);
-//        for (BmobObject *obj in array) {
-//            NSLog(@"get obj is %@",[obj objectForKey:kAudioTitle]);
-//        }
-////        [self.tableView reloadData];
-//    }];
+    [self loadAllCategoriesAndQuote];
 }
 
 - (void) setUpUI
@@ -65,10 +52,10 @@
 
 - (IBAction)test:(id)sender {
     NSLog(@"tst button");
-    [self loadAllCategories];
+    [self loadAllCategoriesAndQuote];
 }
 
-- (void) loadAllCategories
+- (void) loadAllCategoriesAndQuote
 {
 //    BmobQuery *queryCategories = [BmobQuery queryWithClassName:kCategory];
 //    [queryCategories findObjectsInBackgroundWithBlock:^(NSArray *array, NSError *error) {
@@ -92,6 +79,10 @@
             tvCat.hidden = NO;
         }
     }];
+    
+    QuoteViewController *qvc = (QuoteViewController *)self.revealViewController.rearViewController;
+//    QuoteViewController *qvc = [self.storyboard instantiateViewControllerWithIdentifier:@"QuoteVC"];
+    [qvc loadQuote];
 }
 
 - (void)didReceiveMemoryWarning {

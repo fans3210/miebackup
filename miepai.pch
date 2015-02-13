@@ -51,5 +51,6 @@
 
 #define kCategoryName       @"categoryTitle"
 #define kQuote              @"Quote"
+#define kDefaultQuote       @"欢迎使用咩拍！"
 
 #endif
