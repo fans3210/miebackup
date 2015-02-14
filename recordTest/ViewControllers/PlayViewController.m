@@ -34,7 +34,9 @@
 //        moviePlayer.shouldAutoplay = YES;
 //        [moviePlayer setFullscreen:YES animated:YES];
 
-        [_moviePlayer.view setFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height/2)];
+        NSLog(@"navigation bar y is %f, height is %f",self.navigationController.navigationBar.frame.origin.y,self.navigationController.navigationBar.frame.size.height);
+        
+        [_moviePlayer.view setFrame:CGRectMake(0, self.navigationController.navigationBar.frame.origin.y+self.navigationController.navigationBar.frame.size.height, self.view.frame.size.width, self.view.frame.size.width)];
         [self.view addSubview:_moviePlayer.view];
         [self.view bringSubviewToFront:_moviePlayer.view];
                 [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(moviePlayBackDidFinish) name:MPMoviePlayerPlaybackDidFinishNotification object:_moviePlayer];
@@ -51,17 +53,36 @@
 //    [_moviePlayer play];
     
     //tst share
+//    id<ISSCAttachment> video = [ShareSDK imageWithUrl:[_movieURL absoluteString]];
+    NSLog(@"video url absolute string is %@",[_movieURL absoluteString]);
+    id<ISSContent> publishContent = [ShareSDK content:@"咩拍"
+                                       defaultContent:@"咩拍"
+                                                image:nil
+                                                title:@"欢迎使用咩拍"
+                                                  url:[_movieURL absoluteString]
+                                          description:@"这是一条测试信息"
+                                            mediaType:SSPublishContentMediaTypeImage];
+    
+    
+//    [publishContent addWeixinSessionUnitWithType:[NSNumber numberWithInt:4] content:nil title:nil url:[_movieURL absoluteString] image:nil musicFileUrl:[_movieURL absoluteString] extInfo:nil fileData:[NSData dataWithContentsOfFile:[_movieURL absoluteString]] emoticonData:nil];
+    
     id<ISSContainer> container = [ShareSDK container];
     [container setIPadContainerWithView:sender arrowDirect:UIPopoverArrowDirectionUp];
     
+    
+    
     [ShareSDK showShareActionSheet:container
                          shareList:nil
-                           content:nil
+                           content:publishContent
                      statusBarTips:YES
                        authOptions:nil
                       shareOptions:nil
                             result:^(ShareType type, SSResponseState state, id<ISSPlatformShareInfo> statusInfo, id<ICMErrorInfo> error, BOOL end) {
-                                NSLog(@"haha");
+                                if (state == SSResponseStateSuccess) {
+                                    NSLog(@"share succeed");
+                                } else if (state == SSResponseStateFail) {
+                                    NSLog(@"share failed error is %@",error.description);
+                                }
                             }];
 }
 

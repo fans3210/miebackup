@@ -33,10 +33,14 @@
  * app keys
  */
 #define kBombAppkey         @"ac64963bb06cfce8ccfd327753b772af"
-#define kWechatAppKey       @"769dea3dec00528f02eaadee009ba2d1"
+
 
 #define kLeanCloudAppId     @"k8nk40p9qg4dqsez3bkr0l3dvajc966zalp7lf6boit861pm"
 #define kLeanCloudClientKey @"fgrtsrd596al73gjae3q0vrf17112pv03ohihmal7m7ledz9"
+
+//sharesdk
+#define kWechatAppId        @"wx3eeb26f5fdedefb0"
+#define kWechatAppKey       @"769dea3dec00528f02eaadee009ba2d1"
 
 
 //#define kAudioFileUrl       @"audioFileUrl"

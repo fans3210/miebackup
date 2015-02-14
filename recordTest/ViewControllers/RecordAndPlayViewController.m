@@ -14,6 +14,7 @@
 @interface RecordAndPlayViewController ()
 {
     BOOL recording;
+    BOOL isCancelledByUser;
     AVCaptureDevice *frontCamera;
     
     NSURL *movieOutputURL;//after record
@@ -162,6 +163,7 @@
 - (IBAction)recordOrStop:(id)sender {
     if(!recording) {
         //start recording
+        isCancelledByUser = NO;
         [self playAudioWithURL:_songLocalURL];
         recording = YES;
         [bStartOrStop setTitle:@"Cancel" forState:UIControlStateNormal];
@@ -187,6 +189,7 @@
         
     } else {
         //stop recording
+        isCancelledByUser = YES;
         [self stopRecording];
         
         
@@ -256,8 +259,10 @@
 {
     NSLog(@"did finish recording, error is %@",[error description]);
 //    [self performSegueWithIdentifier:@"goToPlay" sender:nil];
+    if (!isCancelledByUser) {
+        [self mergeAndSave];
+    }
     
-    [self mergeAndSave];
 }
 
 
@@ -265,7 +270,7 @@
 - (void) updateProgress
 {
     float progress = self.player.currentTime/self.player.duration;
-    NSLog(@"progress is %f",progress);
+//    NSLog(@"progress is %f",progress);
     [audioProgress setProgress:progress animated:NO];
 }
 
@@ -427,6 +432,7 @@
         [[NSFileManager defaultManager] removeItemAtPath:finalOutputPath error:nil];
     }
     
+    
     //avasset export session
     AVAssetExportSession *exportSession = [[AVAssetExportSession alloc] initWithAsset:mixComposition presetName:AVAssetExportPresetMediumQuality];
 
@@ -439,11 +445,16 @@
     exportSession.shouldOptimizeForNetworkUse = YES;
 
     exportSession.videoComposition = videoCompositionInst; //add video composition to exporter
+    
+    bStartOrStop.alpha = 0.5;
+    bStartOrStop.userInteractionEnabled = NO;
     [exportSession exportAsynchronouslyWithCompletionHandler:^{
         NSLog(@"export final composited file complete no matter succeed or failed");
         NSLog(@"Export Status %ld %@", exportSession.status, exportSession.error);
 //        [self performSegueWithIdentifier:@"goToPlay" sender:nil];
         dispatch_async(dispatch_get_main_queue(), ^{
+            bStartOrStop.alpha = 1;
+            bStartOrStop.userInteractionEnabled = YES;
             [self exportDidFinish:exportSession];
         });
     }];
@@ -452,23 +463,24 @@
 - (void) exportDidFinish: (AVAssetExportSession *)exportSession
 {
     if (exportSession.status == AVAssetExportSessionStatusCompleted) {
-        NSURL *sessionURL = exportSession.outputURL;
-        ALAssetsLibrary *lib = [[ALAssetsLibrary alloc] init];
-        if ([lib videoAtPathIsCompatibleWithSavedPhotosAlbum:sessionURL]) {
-            [lib writeVideoAtPathToSavedPhotosAlbum:sessionURL completionBlock:^(NSURL *assetURL, NSError *error) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    if (error) {
-                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"error" message:@"video saving failed" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
-                        [alert show];
-                    } else {
-//                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"finished" message:@"video saved" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+        [self performSegueWithIdentifier:@"goToPlay" sender:nil];
+//        NSURL *sessionURL = exportSession.outputURL;
+//        ALAssetsLibrary *lib = [[ALAssetsLibrary alloc] init];
+//        if ([lib videoAtPathIsCompatibleWithSavedPhotosAlbum:sessionURL]) {
+//            [lib writeVideoAtPathToSavedPhotosAlbum:sessionURL completionBlock:^(NSURL *assetURL, NSError *error) {
+//                dispatch_async(dispatch_get_main_queue(), ^{
+//                    if (error) {
+//                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"error" message:@"video saving failed" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
 //                        [alert show];
-                        NSLog(@"finsihed video saved");
-                        [self performSegueWithIdentifier:@"goToPlay" sender:nil];
-                    }
-                });
-            }];
-        }
+//                    } else {
+////                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"finished" message:@"video saved" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+////                        [alert show];
+//                        NSLog(@"finsihed video saved");
+//                        [self performSegueWithIdentifier:@"goToPlay" sender:nil];
+//                    }
+//                });
+//            }];
+//        }
         
     }
 }
