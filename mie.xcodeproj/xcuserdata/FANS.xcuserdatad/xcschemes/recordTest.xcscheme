@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "38E7A2551A6A27A40079B975"
-               BuildableName = "recordTest.app"
-               BlueprintName = "recordTest"
-               ReferencedContainer = "container:recordTest.xcodeproj">
+               BuildableName = "mie.app"
+               BlueprintName = "mie"
+               ReferencedContainer = "container:mie.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -29,9 +29,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "38E7A2711A6A27A50079B975"
-               BuildableName = "recordTestTests.xctest"
-               BlueprintName = "recordTestTests"
-               ReferencedContainer = "container:recordTest.xcodeproj">
+               BuildableName = "mieTests.xctest"
+               BlueprintName = "mieTests"
+               ReferencedContainer = "container:mie.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -47,9 +47,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "38E7A2711A6A27A50079B975"
-               BuildableName = "recordTestTests.xctest"
-               BlueprintName = "recordTestTests"
-               ReferencedContainer = "container:recordTest.xcodeproj">
+               BuildableName = "mieTests.xctest"
+               BlueprintName = "mieTests"
+               ReferencedContainer = "container:mie.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -57,9 +57,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "38E7A2551A6A27A40079B975"
-            BuildableName = "recordTest.app"
-            BlueprintName = "recordTest"
-            ReferencedContainer = "container:recordTest.xcodeproj">
+            BuildableName = "mie.app"
+            BlueprintName = "mie"
+            ReferencedContainer = "container:mie.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -76,9 +76,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "38E7A2551A6A27A40079B975"
-            BuildableName = "recordTest.app"
-            BlueprintName = "recordTest"
-            ReferencedContainer = "container:recordTest.xcodeproj">
+            BuildableName = "mie.app"
+            BlueprintName = "mie"
+            ReferencedContainer = "container:mie.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -94,9 +94,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "38E7A2551A6A27A40079B975"
-            BuildableName = "recordTest.app"
-            BlueprintName = "recordTest"
-            ReferencedContainer = "container:recordTest.xcodeproj">
+            BuildableName = "mie.app"
+            BlueprintName = "mie"
+            ReferencedContainer = "container:mie.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

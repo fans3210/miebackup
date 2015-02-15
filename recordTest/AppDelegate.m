@@ -52,9 +52,10 @@
     if (![ud boolForKey:@"everLaunched"]) {
         [ud setBool:YES forKey:@"everLaunched"];
         [ud setBool:YES forKey:@"firstLaunch"];
-    } else {
-        [ud setBool:NO forKey:@"firstLaunch"];
     }
+//    else {
+//        [ud setBool:NO forKey:@"firstLaunch"];
+//    }
     
 //    BOOL firstLaunch = YES;//for testing
     BOOL firstLaunch = [ud boolForKey:@"firstLaunch"];
@@ -66,7 +67,7 @@
         [self.window makeKeyAndVisible];
         
         //set userdefaults
-        [ud setBool:NO forKey:@"firstLaunch"];
+//        [ud setBool:NO forKey:@"firstLaunch"];
     }
     
     return YES;
