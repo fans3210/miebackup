@@ -23,6 +23,10 @@
     __weak IBOutlet UIButton *bStartOrStop;
     __weak IBOutlet UIView *vPlayAudio;
     __weak IBOutlet UIProgressView *audioProgress;
+    __weak IBOutlet UIActivityIndicatorView *indicator;
+    __weak IBOutlet UILabel *lbRecordStatus;
+    __weak IBOutlet UIView *vInfo;
+
     NSTimer *timer;
 }
 @property (nonatomic, strong) AVAudioPlayer *player;
@@ -110,6 +114,12 @@
     [session commitConfiguration];
     [session startRunning];
 
+}
+
+- (void) viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    vInfo.hidden = YES;
 }
 
 - (void) viewWillDisappear:(BOOL)animated
@@ -448,6 +458,14 @@
     
     bStartOrStop.alpha = 0.5;
     bStartOrStop.userInteractionEnabled = NO;
+    vInfo.hidden = NO;
+    [indicator startAnimating];
+    [UIView animateWithDuration:0.5 delay:0 options:(UIViewAnimationOptionRepeat | UIViewAnimationOptionCurveEaseInOut)animations:^{
+        lbRecordStatus.alpha = 0;
+    } completion:^(BOOL finished) {
+        NSLog(@"haha");
+    }];
+    
     [exportSession exportAsynchronouslyWithCompletionHandler:^{
         NSLog(@"export final composited file complete no matter succeed or failed");
         NSLog(@"Export Status %ld %@", exportSession.status, exportSession.error);

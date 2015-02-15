@@ -96,7 +96,7 @@
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
 
-    AudioFileCell *cell = (AudioFileCell *)[tableView cellForRowAtIndexPath:indexPath];
+//    AudioFileCell *cell = (AudioFileCell *)[tableView cellForRowAtIndexPath:indexPath];
 //    AVObject *avObj = cellModels[indexPath.row];
     Audio *mAudio = cellModels[indexPath.row];
     NSString *songName = mAudio.title;

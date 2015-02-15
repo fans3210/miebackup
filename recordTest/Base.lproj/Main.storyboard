@@ -20,7 +20,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="REp-Vc-KiV">
-                                <rect key="frame" x="46" y="493" width="508" height="69.5"/>
+                                <rect key="frame" x="46" y="492" width="508" height="69.5"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="47" id="9TI-gR-ciB"/>
@@ -39,9 +39,6 @@
                                     <action selector="recordOrStop:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="NT7-pe-HfO"/>
                                 </connections>
                             </button>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="wU9-UT-8RW">
-                                <rect key="frame" x="290" y="448" width="20" height="20"/>
-                            </activityIndicatorView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PQp-pd-crR" userLabel="AudioPreviewView">
                                 <rect key="frame" x="0.0" y="44" width="600" height="90"/>
                                 <subviews>
@@ -67,20 +64,50 @@
                                     </mask>
                                 </variation>
                             </view>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eOa-96-qyo" userLabel="RecordInfoView">
+                                <rect key="frame" x="214" y="428" width="172.5" height="60.5"/>
+                                <subviews>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="wU9-UT-8RW">
+                                        <rect key="frame" x="20" y="20.5" width="20" height="20"/>
+                                    </activityIndicatorView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Processing..." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KoP-zr-lCa">
+                                        <rect key="frame" x="53" y="20" width="99.5" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="centerY" secondItem="KoP-zr-lCa" secondAttribute="centerY" id="1ak-TT-4xB"/>
+                                    <constraint firstAttribute="trailing" secondItem="KoP-zr-lCa" secondAttribute="trailing" constant="20" id="2rS-x4-9Su"/>
+                                    <constraint firstAttribute="centerY" secondItem="wU9-UT-8RW" secondAttribute="centerY" constant="-0.25" id="QL8-EK-uSF"/>
+                                    <constraint firstAttribute="centerX" secondItem="KoP-zr-lCa" secondAttribute="centerX" constant="-16.5" id="Y1D-VK-BNu"/>
+                                    <constraint firstAttribute="width" constant="172.5" id="fL8-Uj-Dbu"/>
+                                    <constraint firstAttribute="width" secondItem="eOa-96-qyo" secondAttribute="height" multiplier="43:15" id="hOW-0h-02G"/>
+                                    <constraint firstItem="wU9-UT-8RW" firstAttribute="leading" secondItem="eOa-96-qyo" secondAttribute="leading" constant="20" id="jKi-6o-sTz"/>
+                                    <constraint firstAttribute="centerX" secondItem="wU9-UT-8RW" secondAttribute="centerX" constant="56.25" id="x0f-HB-FFa"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="x0f-HB-FFa"/>
+                                        <exclude reference="Y1D-VK-BNu"/>
+                                    </mask>
+                                </variation>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="REp-Vc-KiV" secondAttribute="trailing" constant="30" id="7Mq-NX-XGw"/>
                             <constraint firstItem="REp-Vc-KiV" firstAttribute="centerX" secondItem="PQp-pd-crR" secondAttribute="centerX" id="CIA-mW-hNl"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="REp-Vc-KiV" secondAttribute="bottom" constant="37" id="DMU-0C-huR"/>
+                            <constraint firstAttribute="centerX" secondItem="eOa-96-qyo" secondAttribute="centerX" id="RsG-Cp-eCk"/>
                             <constraint firstAttribute="bottom" secondItem="PQp-pd-crR" secondAttribute="bottom" constant="496" id="kb3-zb-Z4L"/>
                             <constraint firstItem="PQp-pd-crR" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" id="md9-TH-k8Y"/>
                             <constraint firstItem="PQp-pd-crR" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="owL-Ep-DuC"/>
                             <constraint firstItem="REp-Vc-KiV" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="30" id="rre-0n-8Ah"/>
                             <constraint firstItem="REp-Vc-KiV" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="30" id="suM-xp-BwM"/>
-                            <constraint firstItem="REp-Vc-KiV" firstAttribute="top" secondItem="wU9-UT-8RW" secondAttribute="bottom" constant="25" id="wEh-jB-Fqm"/>
+                            <constraint firstItem="REp-Vc-KiV" firstAttribute="top" secondItem="eOa-96-qyo" secondAttribute="bottom" constant="3.5" id="tnW-Aa-4Mc"/>
                             <constraint firstAttribute="centerX" secondItem="REp-Vc-KiV" secondAttribute="centerX" id="xtH-0n-CTh"/>
-                            <constraint firstAttribute="centerX" secondItem="wU9-UT-8RW" secondAttribute="centerX" id="yJt-aT-mCZ"/>
                             <constraint firstItem="PQp-pd-crR" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="yq7-5q-LpU"/>
                         </constraints>
                         <variation key="default">
@@ -97,6 +124,9 @@
                     <connections>
                         <outlet property="audioProgress" destination="DYe-aJ-YST" id="Zl8-tc-jJI"/>
                         <outlet property="bStartOrStop" destination="REp-Vc-KiV" id="faR-ta-q3s"/>
+                        <outlet property="indicator" destination="wU9-UT-8RW" id="zwJ-vP-2lT"/>
+                        <outlet property="lbRecordStatus" destination="KoP-zr-lCa" id="2jU-oc-heV"/>
+                        <outlet property="vInfo" destination="eOa-96-qyo" id="aLL-nG-p7r"/>
                         <outlet property="vPlayAudio" destination="PQp-pd-crR" id="Xsb-a9-xNJ"/>
                         <segue destination="AAa-O6-DTO" kind="show" identifier="goToPlay" id="13x-lq-Jmi"/>
                     </connections>
@@ -333,6 +363,9 @@
                                                 </label>
                                                 <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="←   滑动屏幕" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q4W-qb-JO2">
                                                     <rect key="frame" x="455" y="320" width="117.5" height="20.5"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="117.5" id="1mn-aF-PPg"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" name="STHeitiSC-Light" family="Heiti SC" pointSize="17"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
