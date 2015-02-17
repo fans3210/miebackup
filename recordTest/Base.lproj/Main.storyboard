@@ -176,12 +176,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="556"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="xvb-vb-w2v">
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="xvb-vb-w2v">
                                 <rect key="frame" x="290" y="268" width="20" height="20"/>
                             </activityIndicatorView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="ZXc-Cv-jIp">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="556"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="CategoryCell" textLabel="fhS-X4-39I" style="IBUITableViewCellStyleDefault" id="BmV-Cb-QYI">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
@@ -267,19 +266,33 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KQ1-be-i6v" id="efY-M8-30b">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ND0-UE-G2Z">
-                                                    <rect key="frame" x="35" y="9" width="32" height="30"/>
-                                                    <state key="normal" title="GO !">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ND0-UE-G2Z">
+                                                    <rect key="frame" x="0.0" y="8" width="57" height="28.5"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="ND0-UE-G2Z" secondAttribute="height" multiplier="2:1" id="Ggd-qM-Nqf"/>
+                                                        <constraint firstAttribute="width" secondItem="ND0-UE-G2Z" secondAttribute="height" multiplier="2:1" id="wJl-k7-c6T"/>
+                                                    </constraints>
+                                                    <state key="normal" backgroundImage="play.png">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
+                                                    <variation key="default">
+                                                        <mask key="constraints">
+                                                            <exclude reference="wJl-k7-c6T"/>
+                                                        </mask>
+                                                    </variation>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eZn-vn-RME">
-                                                    <rect key="frame" x="75" y="1" width="467" height="45"/>
+                                                    <rect key="frame" x="63" y="0.0" width="467" height="45"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
                                                     <color key="textColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottomMargin" secondItem="ND0-UE-G2Z" secondAttribute="bottom" id="BOw-ET-qbU"/>
+                                                <constraint firstItem="ND0-UE-G2Z" firstAttribute="top" secondItem="efY-M8-30b" secondAttribute="topMargin" id="Hy1-bm-T5R"/>
+                                                <constraint firstItem="ND0-UE-G2Z" firstAttribute="leading" secondItem="efY-M8-30b" secondAttribute="leadingMargin" constant="-8" id="lec-cp-Zju"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="bPlay" destination="ND0-UE-G2Z" id="e89-e5-H4f"/>
@@ -571,4 +584,8 @@
             <point key="canvasLocation" x="-2417" y="538"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="play.png" width="158" height="79"/>
+    </resources>
+    <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
 </document>

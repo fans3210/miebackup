@@ -143,13 +143,16 @@
     NSString *filePathToBeChecked = [documentDirectoryPath stringByAppendingPathComponent:fileNameToBeChecked];
     if (![[NSFileManager defaultManager] fileExistsAtPath:filePathToBeChecked]) {
         bStartOrStop.hidden = YES;
-        
+        [self showRecordStatusWithText:@"Downloading..."];
         
         //download song
         NSLog(@"download from audio file %@",[_mAudio.songUrl absoluteString]);
         NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
         AFURLSessionManager *sessionManager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
         NSURLRequest *request = [NSURLRequest requestWithURL:_mAudio.songUrl];
+        
+        
+        
         NSURLSessionDownloadTask *downloadTask = [sessionManager downloadTaskWithRequest:request progress:nil destination:^NSURL *(NSURL *targetPath, NSURLResponse *response) {
             
             NSURL *destinationURL = [NSURL fileURLWithPath:[documentDirectoryPath stringByAppendingPathComponent:[response suggestedFilename]]];
@@ -160,6 +163,7 @@
             //        [player url] = filePath;
             NSLog(@"error is %@",error.description);
             bStartOrStop.hidden = NO;
+            vInfo.hidden = YES;
         }];
         [downloadTask resume];
     }
@@ -458,17 +462,11 @@
     
     bStartOrStop.alpha = 0.5;
     bStartOrStop.userInteractionEnabled = NO;
-    vInfo.hidden = NO;
-    [indicator startAnimating];
-    [UIView animateWithDuration:0.5 delay:0 options:(UIViewAnimationOptionRepeat | UIViewAnimationOptionCurveEaseInOut)animations:^{
-        lbRecordStatus.alpha = 0;
-    } completion:^(BOOL finished) {
-        NSLog(@"haha");
-    }];
+    [self showRecordStatusWithText:@"Progressing..."];
     
     [exportSession exportAsynchronouslyWithCompletionHandler:^{
         NSLog(@"export final composited file complete no matter succeed or failed");
-        NSLog(@"Export Status %ld %@", exportSession.status, exportSession.error);
+        NSLog(@"Export Status %ld %@", (long)exportSession.status, exportSession.error);
 //        [self performSegueWithIdentifier:@"goToPlay" sender:nil];
         dispatch_async(dispatch_get_main_queue(), ^{
             bStartOrStop.alpha = 1;
@@ -501,6 +499,18 @@
 //        }
         
     }
+}
+
+- (void) showRecordStatusWithText: (NSString *)text
+{
+    lbRecordStatus.text = text;
+    vInfo.hidden = NO;
+    [indicator startAnimating];
+    [UIView animateWithDuration:0.5 delay:0 options:(UIViewAnimationOptionRepeat | UIViewAnimationOptionCurveEaseInOut)animations:^{
+        lbRecordStatus.alpha = 0;
+    } completion:^(BOOL finished) {
+        NSLog(@"haha");
+    }];
 }
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender

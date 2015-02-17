@@ -127,30 +127,7 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     WanwanStyleCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"wanwanStyleCell" forIndexPath:indexPath];
-//    cell.lbTxt.text = cellModels[indexPath.row];
-//    cell.lbTxt.alpha = 0;
-//    [UIView animateWithDuration:duration animations:^{
-//        cell.lbTxt.alpha = 1;
-//        collectionView.userInteractionEnabled = NO;
-//    } completion:^(BOOL finished) {
-//        NSLog(@"animation complete");
-//        if (indexPath.row != 2) {
-//            //if not last page
-//            collectionView.userInteractionEnabled = YES;
-////            cell.lbSlideRight.hidden = NO;
-//            //move lbslide position to left most first, out side screen
-//            CGRect frame = cell.lbSlideRight.frame;
-//            frame.origin.x -= [UIScreen mainScreen].bounds.size.width;
-//            cell.lbSlideRight.frame = frame;
-//            [UIView animateWithDuration:0.3 animations:^{
-//                cell.lbSlideRight.hidden = NO;
-//                CGRect frame = cell.lbSlideRight.frame;
-//                frame.origin.x += [UIScreen mainScreen].bounds.size.width;
-//                cell.lbSlideRight.frame = frame;
-//            }];
-//        }
-//
-//    }];
+
     [cell.image setImage:[UIImage imageNamed:[NSString stringWithFormat:@"firstlaunch%ld",(long)indexPath.row+1]]];
         cell.image.alpha = 0;
         [UIView animateWithDuration:duration animations:^{

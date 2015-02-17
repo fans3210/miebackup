@@ -10,6 +10,9 @@
 		38105D111A90F2C500284860 /* firstlaunch1.png in Resources */ = {isa = PBXBuildFile; fileRef = 38105D0E1A90F2C500284860 /* firstlaunch1.png */; };
 		38105D121A90F2C500284860 /* firstlaunch2.png in Resources */ = {isa = PBXBuildFile; fileRef = 38105D0F1A90F2C500284860 /* firstlaunch2.png */; };
 		38105D131A90F2C500284860 /* firstlaunch3.png in Resources */ = {isa = PBXBuildFile; fileRef = 38105D101A90F2C500284860 /* firstlaunch3.png */; };
+		38105D231A93037900284860 /* pause.png in Resources */ = {isa = PBXBuildFile; fileRef = 38105D201A93037900284860 /* pause.png */; };
+		38105D241A93037900284860 /* play.png in Resources */ = {isa = PBXBuildFile; fileRef = 38105D211A93037900284860 /* play.png */; };
+		38105D251A93037900284860 /* stop.png in Resources */ = {isa = PBXBuildFile; fileRef = 38105D221A93037900284860 /* stop.png */; };
 		384E06871A7380DB0008AFF8 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 384E06861A7380DB0008AFF8 /* libc++.dylib */; };
 		3852B8111A7A841100C7C7C5 /* funny.png in Resources */ = {isa = PBXBuildFile; fileRef = 3852B8101A7A841100C7C7C5 /* funny.png */; };
 		3852B8FD1A7BDA5900C7C7C5 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3852B8FC1A7BDA5900C7C7C5 /* BaseViewController.m */; };
@@ -92,6 +95,9 @@
 		38105D0E1A90F2C500284860 /* firstlaunch1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = firstlaunch1.png; sourceTree = "<group>"; };
 		38105D0F1A90F2C500284860 /* firstlaunch2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = firstlaunch2.png; sourceTree = "<group>"; };
 		38105D101A90F2C500284860 /* firstlaunch3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = firstlaunch3.png; sourceTree = "<group>"; };
+		38105D201A93037900284860 /* pause.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pause.png; sourceTree = "<group>"; };
+		38105D211A93037900284860 /* play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play.png; sourceTree = "<group>"; };
+		38105D221A93037900284860 /* stop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stop.png; sourceTree = "<group>"; };
 		384E06861A7380DB0008AFF8 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		3852B8101A7A841100C7C7C5 /* funny.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = funny.png; sourceTree = "<group>"; };
 		3852B8FB1A7BDA5900C7C7C5 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
@@ -264,6 +270,9 @@
 		3852B80F1A7A83FC00C7C7C5 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				38105D201A93037900284860 /* pause.png */,
+				38105D211A93037900284860 /* play.png */,
+				38105D221A93037900284860 /* stop.png */,
 				38105D0E1A90F2C500284860 /* firstlaunch1.png */,
 				38105D0F1A90F2C500284860 /* firstlaunch2.png */,
 				38105D101A90F2C500284860 /* firstlaunch3.png */,
@@ -540,6 +549,7 @@
 				38E7A2531A6A27A40079B975 /* Frameworks */,
 				38E7A2541A6A27A40079B975 /* Resources */,
 				CEAE12B7DBF1C31E4555EE0A /* Copy Pods Resources */,
+				38105D261A93178900284860 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -612,6 +622,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3852B9E01A7CF53D00C7C7C5 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
+				38105D251A93037900284860 /* stop.png in Resources */,
 				3852B9DC1A7CF53D00C7C7C5 /* ShareSDKLocalizable.strings in Resources */,
 				38E7A4CD1A7379910079B975 /* Podfile in Resources */,
 				38E7A2681A6A27A40079B975 /* Main.storyboard in Resources */,
@@ -621,6 +632,8 @@
 				3852B9E21A7CF53E00C7C7C5 /* WeiboSDK.bundle in Resources */,
 				3852B8111A7A841100C7C7C5 /* funny.png in Resources */,
 				38105D121A90F2C500284860 /* firstlaunch2.png in Resources */,
+				38105D231A93037900284860 /* pause.png in Resources */,
+				38105D241A93037900284860 /* play.png in Resources */,
 				3852B9DD1A7CF53D00C7C7C5 /* Resource.bundle in Resources */,
 				3852B9E61A7CF53E00C7C7C5 /* ShareSDKFlatShareViewUI.bundle in Resources */,
 				38E7A26A1A6A27A40079B975 /* Images.xcassets in Resources */,
@@ -637,6 +650,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		38105D261A93178900284860 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "SCRIPT=`/usr/bin/find \"${SRCROOT}\" -name newrelic_postbuild.sh | head -n 1`\n\n/bin/sh \"${SCRIPT}\" \"AA92a066f5b84ec9780ee08db1e65e9bb95b8ae988\"";
+		};
 		BC9582C4B550C062033C7716 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;

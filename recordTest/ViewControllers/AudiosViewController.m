@@ -82,7 +82,7 @@
     Audio *mAudio = cellModels[indexPath.row];
     cell.lbTitle.text = mAudio.title;
     cell.bPlay.tag = indexPath.row;
-    [cell.bPlay addTarget:self action:@selector(goPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [cell.bPlay addTarget:self action:@selector(playPressed:) forControlEvents:UIControlEventTouchUpInside];
     
     return cell;
 }
@@ -95,10 +95,26 @@
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-
-//    AudioFileCell *cell = (AudioFileCell *)[tableView cellForRowAtIndexPath:indexPath];
-//    AVObject *avObj = cellModels[indexPath.row];
+    
+    NSLog(@"go pressed at %li",(long)indexPath.row);
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentDirectoryPath = [paths objectAtIndex:0];
     Audio *mAudio = cellModels[indexPath.row];
+    NSString *songURL = [mAudio.songUrl absoluteString];
+    NSString *fileNameToBeChecked = [songURL lastPathComponent];
+    
+    chosenAudioLocalUrl = [NSURL fileURLWithPath:[documentDirectoryPath stringByAppendingPathComponent:fileNameToBeChecked]];
+    chosenAudio = mAudio;
+    
+    [self performSegueWithIdentifier:@"goToRecord" sender:nil];
+
+}
+
+
+- (void) playPressed: (UIButton *)sender
+{
+    
+    Audio *mAudio = cellModels[sender.tag];
     NSString *songName = mAudio.title;
     NSURL *songURL = mAudio.songUrl;
     
@@ -118,11 +134,7 @@
         NSURL *filePath = [NSURL URLWithString:filePathToBeChecked];
         [self playAudioWithURL:filePath];
     } else {
-        //file not exists, need to download
-        //download audio file mp3
 
-//        cell.indicator.hidden = NO;
-        [tableView reloadData];
         NSLog(@"download file %@ with link:%@", songName, songURL);
         
         NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
@@ -138,33 +150,10 @@
             //        [player url] = filePath;
             NSLog(@"error is %@",error.description);
 
-            
-//            cell.indicator.hidden = YES;
-            [tableView reloadData];
             [self playAudioWithURL:filePath];
         }];
         [downloadTask resume];
     }
-}
-
-
-- (void) goPressed: (UIButton *)sender
-{
-    
-    NSLog(@"go pressed at %li",(long)sender.tag);
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentDirectoryPath = [paths objectAtIndex:0];
-//    AVObject *avObj = cellModels[sender.tag];
-//    AVFile *songFile = [avObj objectForKey:kAudioFileMp3];
-//    NSString *songURL = songFile.url;
-    Audio *mAudio = cellModels[sender.tag];
-    NSString *songURL = [mAudio.songUrl absoluteString];
-    NSString *fileNameToBeChecked = [songURL lastPathComponent];
-
-    chosenAudioLocalUrl = [NSURL fileURLWithPath:[documentDirectoryPath stringByAppendingPathComponent:fileNameToBeChecked]];
-    chosenAudio = mAudio;
-    
-    [self performSegueWithIdentifier:@"goToRecord" sender:sender];
 }
 
 

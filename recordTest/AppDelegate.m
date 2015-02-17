@@ -7,7 +7,6 @@
 //
 
 #import "AppDelegate.h"
-#import <BmobSDK/Bmob.h>
 #import <Realm.h>
 #import <ShareSDK/ShareSDK.h>
 #import "WXApi.h"
@@ -35,7 +34,7 @@
     // Override point for customization after application launch.
     
     //newrelic
-//    [NewRelicAgent startWithApplicationToken:@"AA92a066f5b84ec9780ee08db1e65e9bb95b8ae988"];
+    [NewRelicAgent startWithApplicationToken:@"AA92a066f5b84ec9780ee08db1e65e9bb95b8ae988"];
     
     //lean cloud
     [AVOSCloud setApplicationId:kLeanCloudAppId clientKey:kLeanCloudClientKey];

@@ -124,6 +124,7 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     AudiosViewController *audiosVC = [segue destinationViewController];
+    self.navigationItem.title = @"";
     audiosVC.audioCat = chosenCat;
 }
 

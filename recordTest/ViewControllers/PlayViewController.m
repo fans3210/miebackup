@@ -22,7 +22,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.title = @"Playing Screen";
+//    self.title = @"Playing Screen";
     NSLog(@"in play VC already, url is %@",_movieURL.path);
     //play video
     if (_movieURL) {
