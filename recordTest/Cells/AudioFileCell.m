@@ -20,5 +20,19 @@
     // Configure the view for the selected state
 }
 
+- (void)setStateForAudioState: (AudioState)state
+{
+    _bPlay.hidden = NO;
+    
+    if (state == PLAYING) {
+        [_bPlay setBackgroundImage:[UIImage imageNamed:@"stop"] forState:UIControlStateNormal];
+    } else if (state == DOWNLOADING) {
+        _bPlay.hidden = YES;
+        [_downloadingIndicator startAnimating];
+    } else {
+        [_bPlay setBackgroundImage:[UIImage imageNamed:@"play"] forState:UIControlStateNormal];
+    }
+}
+
 
 @end

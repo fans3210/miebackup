@@ -38,7 +38,13 @@
     NSLog(@"basevc player playing");
     if (_player.isPlaying) {
         [_player stop];
-        return;
+        
+        NSLog(@"player playing file is %@",[_player.url.absoluteString lastPathComponent]);
+        NSLog(@"to be played file  is %@",[filePath lastPathComponent]);
+        
+        if ([[_player.url.absoluteString lastPathComponent] isEqualToString:[filePath.absoluteString lastPathComponent]]) {
+            return;
+        }
     }
     
     AVAudioPlayer *tmpPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:filePath error:nil];

@@ -301,6 +301,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="bPlay" destination="ND0-UE-G2Z" id="e89-e5-H4f"/>
+                                            <outlet property="downloadingIndicator" destination="H1F-91-LSB" id="HZa-5x-Ifj"/>
                                             <outlet property="lbTitle" destination="eZn-vn-RME" id="z8M-Hp-NJJ"/>
                                         </connections>
                                     </tableViewCell>

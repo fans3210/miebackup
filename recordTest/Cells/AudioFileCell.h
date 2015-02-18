@@ -7,10 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Audio.h"
 
 @interface AudioFileCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *lbTitle;
 @property (weak, nonatomic) IBOutlet UIButton *bPlay;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *downloadingIndicator;
 
+- (void)setStateForAudioState: (AudioState)state;
 
 @end

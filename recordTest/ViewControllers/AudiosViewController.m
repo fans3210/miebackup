@@ -24,6 +24,12 @@
 
 @implementation AudiosViewController
 
+#pragma lazy
+- (void) setAudioState: (AudioState)state
+{
+    NSLog(@"set audio state to %d",state);
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -80,7 +86,7 @@
     Audio *mAudio = cellModels[indexPath.row];
     cell.lbTitle.text = mAudio.title;
     cell.bPlay.tag = indexPath.row;
-    [cell.bPlay addTarget:self action:@selector(playPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [cell.bPlay addTarget:self action:@selector(playPressed:forEvent:) forControlEvents:UIControlEventTouchUpInside];
     
     return cell;
 }
@@ -109,10 +115,16 @@
 }
 
 
-- (void) playPressed: (UIButton *)sender
+- (void) playPressed: (UIButton *)sender forEvent: (UIEvent *)event
 {
+//    [sender setBackgroundImage:[UIImage imageNamed:@"pause"] forState:UIControlStateNormal];
     
-    [sender setBackgroundImage:[UIImage imageNamed:@"pause"] forState:UIControlStateNormal];
+    //get index path for event
+    UITouch *touch = [[event allTouches] anyObject];
+    CGPoint point = [touch locationInView:tvAudios];
+    NSIndexPath *indexPath = [tvAudios indexPathForRowAtPoint:point];
+    NSLog(@"play button pressed func, index path is %ld",(long)indexPath.row);
+    AudioFileCell *cell = (AudioFileCell *)[tvAudios cellForRowAtIndexPath:indexPath];
     
     Audio *mAudio = cellModels[sender.tag];
     NSString *songName = mAudio.title;
@@ -132,10 +144,16 @@
     if ([[NSFileManager defaultManager] fileExistsAtPath:filePathToBeChecked]) {
         NSLog(@"file: %@ exists already", filePathToBeChecked);
         NSURL *filePath = [NSURL URLWithString:filePathToBeChecked];
+//        chosenAudio.audioState = READY;
+        //if have audio, then play
+        
         [self playAudioWithURL:filePath];
+        [cell setStateForAudioState:PLAYING];
     } else {
-
         NSLog(@"download file %@ with link:%@", songName, songURL);
+        //if no audio, then display downloading
+   
+        [cell setStateForAudioState:DOWNLOADING];
         
         NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
         AFURLSessionManager *sessionManager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
@@ -149,8 +167,9 @@
             NSLog(@"file downloaded to %@",filePath);
             //        [player url] = filePath;
             NSLog(@"error is %@",error.description);
-
+            
             [self playAudioWithURL:filePath];
+            [cell setStateForAudioState:PLAYING];
         }];
         [downloadTask resume];
     }
