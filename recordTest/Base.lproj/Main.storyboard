@@ -266,6 +266,9 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KQ1-be-i6v" id="efY-M8-30b">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
+                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="H1F-91-LSB">
+                                                    <rect key="frame" x="18" y="13" width="20" height="20"/>
+                                                </activityIndicatorView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ND0-UE-G2Z">
                                                     <rect key="frame" x="0.0" y="8" width="57" height="28.5"/>
                                                     <constraints>
@@ -289,8 +292,10 @@
                                                 </label>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstAttribute="centerY" secondItem="H1F-91-LSB" secondAttribute="centerY" id="6Tc-OC-cF1"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="ND0-UE-G2Z" secondAttribute="bottom" id="BOw-ET-qbU"/>
                                                 <constraint firstItem="ND0-UE-G2Z" firstAttribute="top" secondItem="efY-M8-30b" secondAttribute="topMargin" id="Hy1-bm-T5R"/>
+                                                <constraint firstItem="H1F-91-LSB" firstAttribute="leading" secondItem="efY-M8-30b" secondAttribute="leadingMargin" constant="10" id="MAe-Zp-Tgh"/>
                                                 <constraint firstItem="ND0-UE-G2Z" firstAttribute="leading" secondItem="efY-M8-30b" secondAttribute="leadingMargin" constant="-8" id="lec-cp-Zju"/>
                                             </constraints>
                                         </tableViewCellContentView>

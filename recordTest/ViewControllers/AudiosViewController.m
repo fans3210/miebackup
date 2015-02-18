@@ -17,7 +17,6 @@
     __weak IBOutlet UIActivityIndicatorView *indicator;
     NSURL *chosenAudioLocalUrl;
     Audio *chosenAudio;//if next vc not able to play, download using this audio
-    
 }
 
 @end
@@ -30,7 +29,6 @@
     // Do any additional setup after loading the view.
     NSLog(@"in audio VC");
     tvAudios.hidden = YES;
-    [indicator startAnimating];
     [self loadAudios];
 }
 
@@ -113,6 +111,8 @@
 
 - (void) playPressed: (UIButton *)sender
 {
+    
+    [sender setBackgroundImage:[UIImage imageNamed:@"pause"] forState:UIControlStateNormal];
     
     Audio *mAudio = cellModels[sender.tag];
     NSString *songName = mAudio.title;
