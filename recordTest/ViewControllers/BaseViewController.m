@@ -39,8 +39,8 @@
     if (_player.isPlaying) {
         [_player stop];
         
-        NSLog(@"player playing file is %@",[_player.url.absoluteString lastPathComponent]);
-        NSLog(@"to be played file  is %@",[filePath lastPathComponent]);
+//        NSLog(@"player playing file is %@",[_player.url.absoluteString lastPathComponent]);
+//        NSLog(@"to be played file  is %@",[filePath lastPathComponent]);
         
         if ([[_player.url.absoluteString lastPathComponent] isEqualToString:[filePath.absoluteString lastPathComponent]]) {
             return;

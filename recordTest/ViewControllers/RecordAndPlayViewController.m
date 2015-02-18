@@ -29,7 +29,7 @@
 
     NSTimer *timer;
 }
-@property (nonatomic, strong) AVAudioPlayer *player;
+
 @end
 
 @implementation RecordAndPlayViewController

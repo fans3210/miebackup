@@ -17,6 +17,7 @@
     __weak IBOutlet UIActivityIndicatorView *indicator;
     NSURL *chosenAudioLocalUrl;
     Audio *chosenAudio;//if next vc not able to play, download using this audio
+    AudioFileCell *currentPlayingCell;
 }
 
 @end
@@ -86,7 +87,14 @@
     Audio *mAudio = cellModels[indexPath.row];
     cell.lbTitle.text = mAudio.title;
     cell.bPlay.tag = indexPath.row;
-    [cell.bPlay addTarget:self action:@selector(playPressed:forEvent:) forControlEvents:UIControlEventTouchUpInside];
+//    if (cell.bPlay.isSelected) {
+//        [cell.bPlay addTarget:self action:@selector(stopPressed:forEvent:) forControlEvents:UIControlEventTouchUpInside];
+//    } else {
+        [cell.bPlay addTarget:self action:@selector(playPressed:forEvent:) forControlEvents:UIControlEventTouchUpInside];
+//    }
+
+
+
     
     return cell;
 }
@@ -119,12 +127,19 @@
 {
 //    [sender setBackgroundImage:[UIImage imageNamed:@"pause"] forState:UIControlStateNormal];
     
+//    sender.selected = YES;
+    
     //get index path for event
     UITouch *touch = [[event allTouches] anyObject];
     CGPoint point = [touch locationInView:tvAudios];
     NSIndexPath *indexPath = [tvAudios indexPathForRowAtPoint:point];
     NSLog(@"play button pressed func, index path is %ld",(long)indexPath.row);
     AudioFileCell *cell = (AudioFileCell *)[tvAudios cellForRowAtIndexPath:indexPath];
+    [cell setStateForAudioState:READY];
+    
+//    if(currentPlayingCell) {
+//        [currentPlayingCell setStateForAudioState:READY];
+//    }
     
     Audio *mAudio = cellModels[sender.tag];
     NSString *songName = mAudio.title;
@@ -148,7 +163,19 @@
         //if have audio, then play
         
         [self playAudioWithURL:filePath];
-        [cell setStateForAudioState:PLAYING];
+        //ui setting
+        [currentPlayingCell setStateForAudioState:READY];
+        if (self.player.isPlaying) {
+            [cell setStateForAudioState:PLAYING];
+        } else {
+            [cell setStateForAudioState:READY];
+        }
+        currentPlayingCell = cell;
+        
+        NSLog(@"player playing file is %@",[self.player.url.absoluteString lastPathComponent]);
+        NSLog(@"to be played file  is %@",[filePath lastPathComponent]);
+        
+        
     } else {
         NSLog(@"download file %@ with link:%@", songName, songURL);
         //if no audio, then display downloading
@@ -169,7 +196,14 @@
             NSLog(@"error is %@",error.description);
             
             [self playAudioWithURL:filePath];
-            [cell setStateForAudioState:PLAYING];
+            //ui setting
+            [currentPlayingCell setStateForAudioState:READY];
+            if (self.player.isPlaying) {
+                [cell setStateForAudioState:PLAYING];
+            } else {
+                [cell setStateForAudioState:READY];
+            }
+            currentPlayingCell = cell;
         }];
         [downloadTask resume];
     }
@@ -188,6 +222,14 @@
     RecordAndPlayViewController *recordVC = [segue destinationViewController];
     recordVC.songLocalURL = chosenAudioLocalUrl;
     recordVC.mAudio = chosenAudio;
+}
+
+
+#pragma audio player delegate
+- (void) audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag
+{
+    NSLog(@"audio vc delegate audio player did finish playing, successfully %d",flag);
+    [currentPlayingCell setStateForAudioState:READY];
 }
 
 
