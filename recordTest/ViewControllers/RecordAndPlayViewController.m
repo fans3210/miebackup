@@ -127,6 +127,7 @@
     [super viewWillDisappear:animated];
     //stop recording
     if (recording) {
+        isCancelledByUser = YES;
         [self stopRecording];
     }
 }

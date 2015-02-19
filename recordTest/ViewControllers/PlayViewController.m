@@ -48,6 +48,13 @@
     }
     
 }
+
+- (void) viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [_moviePlayer stop];
+}
+
 - (IBAction)playVideo:(id)sender {
     
 //    [_moviePlayer play];
