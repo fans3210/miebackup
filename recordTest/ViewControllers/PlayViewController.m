@@ -8,6 +8,7 @@
 
 #import "PlayViewController.h"
 #import <ShareSDK/ShareSDK.h>
+#import <AssetsLibrary/AssetsLibrary.h>
 
 
 @interface PlayViewController (){
@@ -53,6 +54,24 @@
 {
     [super viewWillDisappear:animated];
     [_moviePlayer stop];
+}
+- (IBAction)savePressed:(id)sender {
+    NSURL *sessionURL = _movieURL;
+    ALAssetsLibrary *lib = [[ALAssetsLibrary alloc] init];
+    if ([lib videoAtPathIsCompatibleWithSavedPhotosAlbum:sessionURL]) {
+        [lib writeVideoAtPathToSavedPhotosAlbum:sessionURL completionBlock:^(NSURL *assetURL, NSError *error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (error) {
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"error" message:@"video saving failed" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+                    [alert show];
+                } else {
+                            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"finished" message:@"video saved" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+                            [alert show];
+                    NSLog(@"finsihed video saved");
+                }
+            });
+        }];
+    }
 }
 
 - (IBAction)playVideo:(id)sender {

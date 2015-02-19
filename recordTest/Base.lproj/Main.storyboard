@@ -156,6 +156,15 @@
                                     <action selector="playVideo:" destination="AAa-O6-DTO" eventType="touchUpInside" id="3Q9-MD-Xfe"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wl5-p0-MkA">
+                                <rect key="frame" x="141" y="445" width="46" height="30"/>
+                                <state key="normal" title="save">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="savePressed:" destination="AAa-O6-DTO" eventType="touchUpInside" id="FkH-Ln-2Op"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
