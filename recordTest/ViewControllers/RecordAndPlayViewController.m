@@ -119,7 +119,7 @@
 - (void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    vInfo.hidden = YES;
+//    vInfo.hidden = YES;
 }
 
 - (void) viewWillDisappear:(BOOL)animated
@@ -144,7 +144,7 @@
     NSString *filePathToBeChecked = [documentDirectoryPath stringByAppendingPathComponent:fileNameToBeChecked];
     if (![[NSFileManager defaultManager] fileExistsAtPath:filePathToBeChecked]) {
         bStartOrStop.hidden = YES;
-        [self showRecordStatusWithText:@"Downloading..."];
+        [self showRecordStatusWithText:@"Downloading."];
         
         //download song
         NSLog(@"download from audio file %@",[_mAudio.songUrl absoluteString]);
@@ -463,7 +463,7 @@
     
     bStartOrStop.alpha = 0.5;
     bStartOrStop.userInteractionEnabled = NO;
-    [self showRecordStatusWithText:@"Progressing..."];
+    [self showRecordStatusWithText:@"Processing..."];
     
     [exportSession exportAsynchronouslyWithCompletionHandler:^{
         NSLog(@"export final composited file complete no matter succeed or failed");
@@ -519,6 +519,7 @@
     PlayViewController *playerVC = [segue destinationViewController];
 //    playerVC.movieURL = finalOutputFileURL;//final url
     playerVC.movieURL = finalOutputFileURL;//tmp url
+    vInfo.hidden = YES;
 }
 
 /*
