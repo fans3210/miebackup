@@ -122,6 +122,11 @@
 
 }
 
+//- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    AudioFileCell *audioCell = (AudioFileCell *)cell;
+//    [audioCell setStateForAudioState:READY];
+//}
 
 - (void) playPressed: (UIButton *)sender forEvent: (UIEvent *)event
 {
@@ -216,7 +221,9 @@
     //stop player
     if ([self.player isPlaying]) {
         [self.player stop];
+        [currentPlayingCell setStateForAudioState:READY];
     }
+    
     
     self.navigationItem.title = @"";
     RecordAndPlayViewController *recordVC = [segue destinationViewController];
