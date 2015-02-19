@@ -18,6 +18,7 @@
     NSURL *chosenAudioLocalUrl;
     Audio *chosenAudio;//if next vc not able to play, download using this audio
     AudioFileCell *currentPlayingCell;
+    NSURLSessionDownloadTask *downloadTask;
 }
 
 @end
@@ -190,7 +191,7 @@
         NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
         AFURLSessionManager *sessionManager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
         NSURLRequest *request = [NSURLRequest requestWithURL:songURL];
-        NSURLSessionDownloadTask *downloadTask = [sessionManager downloadTaskWithRequest:request progress:nil destination:^NSURL *(NSURL *targetPath, NSURLResponse *response) {
+        downloadTask = [sessionManager downloadTaskWithRequest:request progress:nil destination:^NSURL *(NSURL *targetPath, NSURLResponse *response) {
             
             NSURL *destinationURL = [NSURL fileURLWithPath:[documentDirectoryPath stringByAppendingPathComponent:[response suggestedFilename]]];
             return destinationURL;
@@ -229,6 +230,8 @@
     RecordAndPlayViewController *recordVC = [segue destinationViewController];
     recordVC.songLocalURL = chosenAudioLocalUrl;
     recordVC.mAudio = chosenAudio;
+    
+    [downloadTask cancel];
 }
 
 
