@@ -516,6 +516,7 @@
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+    self.navigationItem.title = @"";
     PlayViewController *playerVC = [segue destinationViewController];
 //    playerVC.movieURL = finalOutputFileURL;//final url
     playerVC.movieURL = finalOutputFileURL;//tmp url

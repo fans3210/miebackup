@@ -33,6 +33,12 @@
     [self loadAllCategoriesAndQuote];
 }
 
+- (void) viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.navigationItem.title = @"专辑";
+}
+
 - (void) setUpUI
 {
     //config revealvc
@@ -113,7 +119,6 @@
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
 
-    
     chosenCat = cellModelsCat[indexPath.row];
     [self performSegueWithIdentifier:@"goToAudios" sender:tableView];
 

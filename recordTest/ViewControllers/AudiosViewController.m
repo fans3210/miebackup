@@ -40,6 +40,12 @@
     [self loadAudios];
 }
 
+- (void) viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.navigationItem.title = [(AVObject *)self.audioCat objectForKey:kCategoryName];
+}
+
 - (void) loadAudios
 {
     cellModels = [NSMutableArray array];
