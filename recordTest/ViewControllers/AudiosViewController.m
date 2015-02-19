@@ -17,7 +17,8 @@
     __weak IBOutlet UIActivityIndicatorView *indicator;
     NSURL *chosenAudioLocalUrl;
     Audio *chosenAudio;//if next vc not able to play, download using this audio
-    AudioFileCell *currentPlayingCell;
+//    AudioFileCell *currentPlayingCell;
+    NSInteger currentPlayingAudioCellIndex; //check current playing audio's index
     NSURLSessionDownloadTask *downloadTask;
 }
 
@@ -44,6 +45,7 @@
 {
     [super viewWillAppear:animated];
     self.navigationItem.title = [(AVObject *)self.audioCat objectForKey:kCategoryName];
+    currentPlayingAudioCellIndex = -1;
 }
 
 - (void) loadAudios
@@ -94,23 +96,18 @@
     Audio *mAudio = cellModels[indexPath.row];
     cell.lbTitle.text = mAudio.title;
     cell.bPlay.tag = indexPath.row;
+    
+    
 //    if (cell.bPlay.isSelected) {
 //        [cell.bPlay addTarget:self action:@selector(stopPressed:forEvent:) forControlEvents:UIControlEventTouchUpInside];
 //    } else {
         [cell.bPlay addTarget:self action:@selector(playPressed:forEvent:) forControlEvents:UIControlEventTouchUpInside];
 //    }
 
-
-
-    
     return cell;
 }
-//{
-//            AudioFileCell *cell = (AudioFileCell *)[tableView cellForRowAtIndexPath:indexPath];
-//    NSLog(@"select index path %li",indexPath.row);
-//    NSLog(@"cell label is %@",cell.lbTitle.text);
-//
-//}
+
+
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -129,29 +126,32 @@
 
 }
 
-//- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    AudioFileCell *audioCell = (AudioFileCell *)cell;
-//    [audioCell setStateForAudioState:READY];
-//}
+- (void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.row == currentPlayingAudioCellIndex) {
+        //the audio is playing
+        [(AudioFileCell *)cell setStateForAudioState:PLAYING];
+    } else {
+        [(AudioFileCell *)cell setStateForAudioState:READY];
+    }
+}
 
 - (void) playPressed: (UIButton *)sender forEvent: (UIEvent *)event
 {
-//    [sender setBackgroundImage:[UIImage imageNamed:@"pause"] forState:UIControlStateNormal];
+//    //get index path for event
+//    UITouch *touch = [[event allTouches] anyObject];
+//    CGPoint point = [touch locationInView:tvAudios];
+//    NSIndexPath *indexPath = [tvAudios indexPathForRowAtPoint:point];
+//    NSLog(@"play button pressed func, index path is %ld",(long)indexPath.row);
+//    AudioFileCell *cell = (AudioFileCell *)[tvAudios cellForRowAtIndexPath:indexPath];
+//    //init cell for current event
+//    [cell setStateForAudioState:READY];
     
-//    sender.selected = YES;
+
     
-    //get index path for event
-    UITouch *touch = [[event allTouches] anyObject];
-    CGPoint point = [touch locationInView:tvAudios];
-    NSIndexPath *indexPath = [tvAudios indexPathForRowAtPoint:point];
-    NSLog(@"play button pressed func, index path is %ld",(long)indexPath.row);
-    AudioFileCell *cell = (AudioFileCell *)[tvAudios cellForRowAtIndexPath:indexPath];
-    [cell setStateForAudioState:READY];
-    
-//    if(currentPlayingCell) {
-//        [currentPlayingCell setStateForAudioState:READY];
-//    }
+//    //set to be played cell
+//    currentPlayingAudioCellIndex = sender.tag;
+//    AudioFileCell *currentToBePlayedCell = (AudioFileCell *)[tvAudios cellForRowAtIndexPath:[NSIndexPath indexPathForRow:currentPlayingAudioCellIndex inSection:0]];
     
     Audio *mAudio = cellModels[sender.tag];
     NSString *songName = mAudio.title;
@@ -169,30 +169,41 @@
     chosenAudio = mAudio;
     
     if ([[NSFileManager defaultManager] fileExistsAtPath:filePathToBeChecked]) {
+        //if file already exists
         NSLog(@"file: %@ exists already", filePathToBeChecked);
         NSURL *filePath = [NSURL URLWithString:filePathToBeChecked];
-//        chosenAudio.audioState = READY;
-        //if have audio, then play
+        //if have audio, then play, else stop
+        [self playAudioWithURL:filePath];//if have audio, then play, else stop
+        /**ui setting**/
         
-        [self playAudioWithURL:filePath];
-        //ui setting
-        [currentPlayingCell setStateForAudioState:READY];
-        if (self.player.isPlaying) {
-            [cell setStateForAudioState:PLAYING];
+        AudioFileCell *currentPlayingCell = (AudioFileCell *)[tvAudios cellForRowAtIndexPath:[NSIndexPath indexPathForRow:currentPlayingAudioCellIndex inSection:0]];
+        AudioFileCell *currentToBePlayedCell = (AudioFileCell *)[tvAudios cellForRowAtIndexPath:[NSIndexPath indexPathForRow:sender.tag inSection:0]];
+        //audio for current playing cell is stopped in other func,we config the ui to make it ready state
+        if(currentPlayingAudioCellIndex == sender.tag) {
+           //if the playing cell is the same as the cell to be played
+            [currentPlayingCell setStateForAudioState:READY];
+            //when stop the audio,
+            currentPlayingAudioCellIndex = -1;
         } else {
-            [cell setStateForAudioState:READY];
+            [currentPlayingCell setStateForAudioState:READY];
+            [currentToBePlayedCell setStateForAudioState:PLAYING];
+            currentPlayingAudioCellIndex = sender.tag;
         }
-        currentPlayingCell = cell;
+       
+
         
         NSLog(@"player playing file is %@",[self.player.url.absoluteString lastPathComponent]);
         NSLog(@"to be played file  is %@",[filePath lastPathComponent]);
         
         
     } else {
+        //if file not exist
         NSLog(@"download file %@ with link:%@", songName, songURL);
         //if no audio, then display downloading
-   
-        [cell setStateForAudioState:DOWNLOADING];
+        AudioFileCell *currentPlayingCell = (AudioFileCell *)[tvAudios cellForRowAtIndexPath:[NSIndexPath indexPathForRow:currentPlayingAudioCellIndex inSection:0]];
+        AudioFileCell *currentToBePlayedCell = (AudioFileCell *)[tvAudios cellForRowAtIndexPath:[NSIndexPath indexPathForRow:sender.tag inSection:0]];
+        [currentPlayingCell setStateForAudioState:READY];
+        [currentToBePlayedCell setStateForAudioState:DOWNLOADING];
         
         NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
         AFURLSessionManager *sessionManager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
@@ -204,18 +215,14 @@
             
         } completionHandler:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
             NSLog(@"file downloaded to %@",filePath);
-            //        [player url] = filePath;
             NSLog(@"error is %@",error.description);
             
             [self playAudioWithURL:filePath];
-            //ui setting
-            [currentPlayingCell setStateForAudioState:READY];
-            if (self.player.isPlaying) {
-                [cell setStateForAudioState:PLAYING];
-            } else {
-                [cell setStateForAudioState:READY];
-            }
-            currentPlayingCell = cell;
+            /**ui setting**/
+            [currentToBePlayedCell setStateForAudioState:PLAYING];
+            currentPlayingAudioCellIndex = sender.tag;
+            
+
         }];
         [downloadTask resume];
     }
@@ -228,7 +235,12 @@
     //stop player
     if ([self.player isPlaying]) {
         [self.player stop];
-        [currentPlayingCell setStateForAudioState:READY];
+        
+        if (currentPlayingAudioCellIndex != -1) {
+            AudioFileCell *currentPlayingCell = (AudioFileCell *)[tvAudios cellForRowAtIndexPath:[NSIndexPath indexPathForRow:currentPlayingAudioCellIndex inSection:0]];
+            [currentPlayingCell setStateForAudioState:READY];
+        }
+
     }
     
     
@@ -245,7 +257,14 @@
 - (void) audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag
 {
     NSLog(@"audio vc delegate audio player did finish playing, successfully %d",flag);
-    [currentPlayingCell setStateForAudioState:READY];
+    
+    if (currentPlayingAudioCellIndex != -1) {
+        AudioFileCell *currentPlayingCell = (AudioFileCell *)[tvAudios cellForRowAtIndexPath:[NSIndexPath indexPathForRow:currentPlayingAudioCellIndex inSection:0]];
+        [currentPlayingCell setStateForAudioState:READY];
+        currentPlayingAudioCellIndex = -1;//de-activate the tracking of current playing audio
+        NSLog(@"set current playing cell %@ to READY state",currentPlayingCell.lbTitle.text);
+    }
+
 }
 
 

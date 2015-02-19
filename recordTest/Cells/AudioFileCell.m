@@ -34,5 +34,11 @@
     }
 }
 
+- (void)prepareForReuse
+{
+    [super prepareForReuse];
+    [self setStateForAudioState:READY];
+}
+
 
 @end
