@@ -55,6 +55,7 @@
     audiosQuery.cachePolicy = kPFCachePolicyCacheElseNetwork;
     audiosQuery.maxCacheAge = 24*60*60;
     [audiosQuery whereKey:kFromCategory equalTo:_audioCat];
+    [audiosQuery orderByAscending:kAudioTitle];
     [audiosQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (error) {
             NSLog(@"error!!");
