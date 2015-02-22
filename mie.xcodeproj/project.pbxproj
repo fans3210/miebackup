@@ -78,6 +78,7 @@
 		38E7A2871A6A29800079B975 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38E7A2861A6A29800079B975 /* CoreGraphics.framework */; };
 		38E7A2891A6A29860079B975 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38E7A2881A6A29860079B975 /* UIKit.framework */; };
 		38E7A4CD1A7379910079B975 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 38E7A4CC1A7379910079B975 /* Podfile */; };
+		38F932DE1A9A319B00415FE1 /* mielogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 38F932DD1A9A319B00415FE1 /* mielogo.png */; };
 		72737AE1176FAB85C87D05C4 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D246512477A53FEB2E903937 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -191,6 +192,7 @@
 		38E7A4D01A737A230079B975 /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
 		38E7A4D21A737A900079B975 /* miepai.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = miepai.pch; sourceTree = "<group>"; };
 		38E7A4D31A737C0B0079B975 /* libPods-BmobSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-BmobSDK.a"; path = "Pods/build/Debug-iphoneos/libPods-BmobSDK.a"; sourceTree = "<group>"; };
+		38F932DD1A9A319B00415FE1 /* mielogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mielogo.png; sourceTree = "<group>"; };
 		A87B7D9C85128A02900D8A80 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		D246512477A53FEB2E903937 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2F5C32831406B274A084113 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
@@ -270,6 +272,7 @@
 		3852B80F1A7A83FC00C7C7C5 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				38F932DD1A9A319B00415FE1 /* mielogo.png */,
 				38105D201A93037900284860 /* pause.png */,
 				38105D211A93037900284860 /* play.png */,
 				38105D221A93037900284860 /* stop.png */,
@@ -632,6 +635,7 @@
 				3852B8111A7A841100C7C7C5 /* funny.png in Resources */,
 				38105D121A90F2C500284860 /* firstlaunch2.png in Resources */,
 				38105D231A93037900284860 /* pause.png in Resources */,
+				38F932DE1A9A319B00415FE1 /* mielogo.png in Resources */,
 				38105D241A93037900284860 /* play.png in Resources */,
 				3852B9DD1A7CF53D00C7C7C5 /* Resource.bundle in Resources */,
 				3852B9E61A7CF53E00C7C7C5 /* ShareSDKFlatShareViewUI.bundle in Resources */,
@@ -833,8 +837,8 @@
 			baseConfigurationReference = D2F5C32831406B274A084113 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: YAO DONG LI (GEXX9WPT4D)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: YAO DONG LI (GEXX9WPT4D)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: LIN PENG (ZBVHFNUVW3)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: LIN PENG (ZBVHFNUVW3)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Pods/BmobSDK",
@@ -865,7 +869,7 @@
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = mie;
-				PROVISIONING_PROFILE = "21a1ed7f-3119-46ef-afb0-d026c2986a64";
+				PROVISIONING_PROFILE = "095bbd05-ed72-47ed-a810-12bf086945a7";
 				VALID_ARCHS = "armv7 armv7s arm64";
 			};
 			name = Debug;
@@ -875,8 +879,8 @@
 			baseConfigurationReference = A87B7D9C85128A02900D8A80 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: YAO DONG LI (GEXX9WPT4D)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: YAO DONG LI (GEXX9WPT4D)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: LIN PENG (ZBVHFNUVW3)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: LIN PENG (ZBVHFNUVW3)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Pods/BmobSDK",
@@ -907,7 +911,7 @@
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = mie;
-				PROVISIONING_PROFILE = "21a1ed7f-3119-46ef-afb0-d026c2986a64";
+				PROVISIONING_PROFILE = "095bbd05-ed72-47ed-a810-12bf086945a7";
 				VALID_ARCHS = "armv7 armv7s arm64";
 			};
 			name = Release;

@@ -144,7 +144,7 @@
     NSString *filePathToBeChecked = [documentDirectoryPath stringByAppendingPathComponent:fileNameToBeChecked];
     if (![[NSFileManager defaultManager] fileExistsAtPath:filePathToBeChecked]) {
         bStartOrStop.hidden = YES;
-        [self showRecordStatusWithText:@"Downloading."];
+        [self showRecordStatusWithText:@"下载中."];
         
         //download song
         NSLog(@"download from audio file %@",[_mAudio.songUrl absoluteString]);
@@ -181,7 +181,7 @@
         isCancelledByUser = NO;
         [self playAudioWithURL:_songLocalURL];
         recording = YES;
-        [bStartOrStop setTitle:@"Cancel" forState:UIControlStateNormal];
+        [bStartOrStop setTitle:@"取消录制" forState:UIControlStateNormal];
         bStartOrStop.backgroundColor = [UIColor redColor];
         
         
@@ -215,7 +215,7 @@
 {
     //ui change
     recording = NO;
-    [bStartOrStop setTitle:@"START" forState:UIControlStateNormal];
+    [bStartOrStop setTitle:@"开始录制" forState:UIControlStateNormal];
     bStartOrStop.backgroundColor = [UIColor blueColor];
     bStartOrStop.tintColor = [UIColor whiteColor];
     [timer invalidate];
@@ -463,7 +463,7 @@
     
     bStartOrStop.alpha = 0.5;
     bStartOrStop.userInteractionEnabled = NO;
-    [self showRecordStatusWithText:@"Processing..."];
+    [self showRecordStatusWithText:@"视频生成中..."];
     
     [exportSession exportAsynchronouslyWithCompletionHandler:^{
         NSLog(@"export final composited file complete no matter succeed or failed");

@@ -14,6 +14,8 @@
 @interface PlayViewController (){
 //    MPMoviePlayerController *moviePlayer;
 //    MPMoviePlayerViewController *player;
+    
+    __weak IBOutlet UIButton *bSave;
 }
 
 @end
@@ -24,6 +26,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 //    self.title = @"Playing Screen";
+    bSave.layer.borderWidth = 1.0;
+    bSave.layer.borderColor = [UIColor blackColor].CGColor;
+    
+    
     NSLog(@"in play VC already, url is %@",_movieURL.path);
     //play video
     if (_movieURL) {
@@ -62,10 +68,10 @@
         [lib writeVideoAtPathToSavedPhotosAlbum:sessionURL completionBlock:^(NSURL *assetURL, NSError *error) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 if (error) {
-                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"error" message:@"video saving failed" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"错误" message:@"视频保存失败，请稍后再试" delegate:nil cancelButtonTitle:@"好" otherButtonTitles:nil, nil];
                     [alert show];
                 } else {
-                            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"finished" message:@"video saved" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+                            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"成功" message:@"视频已保存到您的本地图片应用" delegate:nil cancelButtonTitle:@"好" otherButtonTitles:nil, nil];
                             [alert show];
                     NSLog(@"finsihed video saved");
                 }

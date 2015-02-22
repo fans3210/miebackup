@@ -26,7 +26,7 @@
                                     <constraint firstAttribute="height" constant="47" id="9TI-gR-ciB"/>
                                     <constraint firstAttribute="width" secondItem="REp-Vc-KiV" secondAttribute="height" multiplier="474:65" id="iSQ-S2-Fyg"/>
                                 </constraints>
-                                <state key="normal" title="START">
+                                <state key="normal" title="开始录制">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -147,18 +147,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8OZ-yt-iql">
-                                <rect key="frame" x="291" y="445" width="46" height="30"/>
-                                <state key="normal" title="Button">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="playVideo:" destination="AAa-O6-DTO" eventType="touchUpInside" id="3Q9-MD-Xfe"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wl5-p0-MkA">
-                                <rect key="frame" x="141" y="445" width="46" height="30"/>
-                                <state key="normal" title="save">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wl5-p0-MkA">
+                                <rect key="frame" x="176" y="520" width="249" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="249" id="7rl-4e-Rgu"/>
+                                    <constraint firstAttribute="height" constant="30" id="ias-9j-rys"/>
+                                </constraints>
+                                <state key="normal" title="保存本地">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -167,7 +163,14 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="Wl5-p0-MkA" secondAttribute="centerX" id="8ap-co-f3r"/>
+                            <constraint firstItem="JFm-ee-e7M" firstAttribute="top" secondItem="Wl5-p0-MkA" secondAttribute="bottom" constant="50" id="BIL-q7-OsK"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="bSave" destination="Wl5-p0-MkA" id="yMF-O7-qN4"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BtU-qT-n7s" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -232,7 +235,7 @@
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" title="专辑" id="0tM-ia-8Bz">
-                        <barButtonItem key="leftBarButtonItem" title="哈" id="aDu-Bm-lqH">
+                        <barButtonItem key="leftBarButtonItem" title="咩" id="aDu-Bm-lqH">
                             <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="testReveal:" destination="yNP-Wi-OMy" id="yud-xH-5YH"/>
