@@ -837,8 +837,8 @@
 			baseConfigurationReference = D2F5C32831406B274A084113 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: LIN PENG (ZBVHFNUVW3)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: LIN PENG (ZBVHFNUVW3)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: LIN PENG (44QW4Y6SM9)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: LIN PENG (44QW4Y6SM9)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Pods/BmobSDK",
@@ -869,7 +869,7 @@
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = mie;
-				PROVISIONING_PROFILE = "095bbd05-ed72-47ed-a810-12bf086945a7";
+				PROVISIONING_PROFILE = "2e84a423-de8d-4714-a50f-ce1b058130ce";
 				VALID_ARCHS = "armv7 armv7s arm64";
 			};
 			name = Debug;
@@ -879,8 +879,8 @@
 			baseConfigurationReference = A87B7D9C85128A02900D8A80 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: LIN PENG (ZBVHFNUVW3)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: LIN PENG (ZBVHFNUVW3)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: LIN PENG (44QW4Y6SM9)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: LIN PENG (44QW4Y6SM9)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Pods/BmobSDK",
@@ -911,7 +911,7 @@
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = mie;
-				PROVISIONING_PROFILE = "095bbd05-ed72-47ed-a810-12bf086945a7";
+				PROVISIONING_PROFILE = "2e84a423-de8d-4714-a50f-ce1b058130ce";
 				VALID_ARCHS = "armv7 armv7s arm64";
 			};
 			name = Release;

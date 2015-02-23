@@ -119,6 +119,7 @@
 - (void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    self.navigationItem.title = _mAudio.title;
 //    vInfo.hidden = YES;
 }
 
