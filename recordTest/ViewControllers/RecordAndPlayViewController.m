@@ -57,7 +57,7 @@
 
     [session setSessionPreset:AVCaptureSessionPresetMedium];
     
-    //    AVCaptureDevice *inputDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+
     
     
     NSError *error = nil;
@@ -69,41 +69,58 @@
     }
     
     
+
+
+}
+
+- (void) viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+
     AVCaptureVideoPreviewLayer *previewLayer = [[AVCaptureVideoPreviewLayer alloc] initWithSession:session];
     [previewLayer setVideoGravity:AVLayerVideoGravityResizeAspectFill];
-
+    
     
     CALayer *rootLayer = self.view.layer;
     //    [rootLayer setMasksToBounds:YES];
-    [previewLayer setFrame:CGRectMake(0, vPlayAudio.frame.origin.y/2 + vPlayAudio.frame.size.height + 1, rootLayer.bounds.size.width, rootLayer.bounds.size.width)];
+    [previewLayer setFrame:CGRectMake(0, vPlayAudio.frame.origin.y + vPlayAudio.frame.size.height + 1, rootLayer.bounds.size.width, rootLayer.bounds.size.width)];
     //    [previewLayer setFrame:rootLayer.frame];
-
+    
     [rootLayer addSublayer:previewLayer];
     
     
-
+    //testing the size of the preview layer
+    NSLog(@"vplayaudio y is %f, height %f, width %f",vPlayAudio.frame.origin.y, vPlayAudio.bounds.size.height, vPlayAudio.bounds.size.width);
+    NSLog(@"screen width %f, height %f",[UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height);
+    
+    UIView *testViewAndWillBeDeletedLater = [[UIView alloc] initWithFrame:previewLayer.frame];
+    testViewAndWillBeDeletedLater.backgroundColor = [UIColor orangeColor];
+    [self.view addSubview:testViewAndWillBeDeletedLater];
+    [self.view bringSubviewToFront:testViewAndWillBeDeletedLater];
+    
+    
     _movieFileOutput = [[AVCaptureMovieFileOutput alloc] init];
     
     if ([session canAddOutput:_movieFileOutput]) {
         NSLog(@"add movie file output");
         [session addOutput:_movieFileOutput];
-
+        
     }
     
     AVCaptureConnection *videoConnection = nil;
     
-//    for ( AVCaptureConnection *connection in [_movieFileOutput connections] )
-//    {
-//        NSLog(@"%@", connection);
-//        for ( AVCaptureInputPort *port in [connection inputPorts] )
-//        {
-//            NSLog(@"%@", port);
-//            if ( [[port mediaType] isEqual:AVMediaTypeVideo] )
-//            {
-//                videoConnection = connection;
-//            }
-//        }
-//    }
+    //    for ( AVCaptureConnection *connection in [_movieFileOutput connections] )
+    //    {
+    //        NSLog(@"%@", connection);
+    //        for ( AVCaptureInputPort *port in [connection inputPorts] )
+    //        {
+    //            NSLog(@"%@", port);
+    //            if ( [[port mediaType] isEqual:AVMediaTypeVideo] )
+    //            {
+    //                videoConnection = connection;
+    //            }
+    //        }
+    //    }
     videoConnection = [_movieFileOutput connectionWithMediaType:AVMediaTypeVideo];
     
     if([videoConnection isVideoOrientationSupported]) // **Here it is, its always false**
@@ -113,7 +130,6 @@
     
     [session commitConfiguration];
     [session startRunning];
-
 }
 
 - (void) viewWillAppear:(BOOL)animated
