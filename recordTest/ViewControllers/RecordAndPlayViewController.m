@@ -76,6 +76,12 @@
 - (void) viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    
+//    if (IS_IPHONE_4) {
+//        CGRect f = vPlayAudio.frame;
+//        f.size.height = 0;
+//        vPlayAudio.frame = f;
+//    }
 
     AVCaptureVideoPreviewLayer *previewLayer = [[AVCaptureVideoPreviewLayer alloc] initWithSession:session];
     [previewLayer setVideoGravity:AVLayerVideoGravityResizeAspectFill];
@@ -83,20 +89,21 @@
     
     CALayer *rootLayer = self.view.layer;
     //    [rootLayer setMasksToBounds:YES];
+
     [previewLayer setFrame:CGRectMake(0, vPlayAudio.frame.origin.y + vPlayAudio.frame.size.height + 1, rootLayer.bounds.size.width, rootLayer.bounds.size.width)];
     //    [previewLayer setFrame:rootLayer.frame];
     
     [rootLayer addSublayer:previewLayer];
     
     
-    //testing the size of the preview layer
-    NSLog(@"vplayaudio y is %f, height %f, width %f",vPlayAudio.frame.origin.y, vPlayAudio.bounds.size.height, vPlayAudio.bounds.size.width);
-    NSLog(@"screen width %f, height %f",[UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height);
-    
-    UIView *testViewAndWillBeDeletedLater = [[UIView alloc] initWithFrame:previewLayer.frame];
-    testViewAndWillBeDeletedLater.backgroundColor = [UIColor orangeColor];
-    [self.view addSubview:testViewAndWillBeDeletedLater];
-    [self.view bringSubviewToFront:testViewAndWillBeDeletedLater];
+//    //testing the size of the preview layer
+//    NSLog(@"vplayaudio y is %f, height %f, width %f",vPlayAudio.frame.origin.y, vPlayAudio.bounds.size.height, vPlayAudio.bounds.size.width);
+//    NSLog(@"screen width %f, height %f",[UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height);
+//    
+//    UIView *testViewAndWillBeDeletedLater = [[UIView alloc] initWithFrame:previewLayer.frame];
+//    testViewAndWillBeDeletedLater.backgroundColor = [UIColor orangeColor];
+//    [self.view addSubview:testViewAndWillBeDeletedLater];
+//    [self.view bringSubviewToFront:testViewAndWillBeDeletedLater];
     
     
     _movieFileOutput = [[AVCaptureMovieFileOutput alloc] init];
@@ -347,24 +354,7 @@
 /* transforms */
     
     CGAffineTransform Scale;
-//    if (IS_IPHONE_5) {
-//        //config for 5s
-//        NSLog(@"device is iphone 5 or 5s");
-//        Scale = CGAffineTransformMakeScale(1.0f,1.0f);
-//    } else if (IS_IPHONE_6) {
-//        //config for 6
-//        NSLog(@"device is iphone 6");
-//        Scale = CGAffineTransformMakeScale((375.0/320.0),(375.0/320.0));
-//    } else if (IS_IPHONE_6_PLUS) {
-//        //config for 6 plus
-//        NSLog(@"device is a iphone 6 plus");
-//        Scale = CGAffineTransformMakeScale((414.0/320.0),(414.0/320.0));
-//    } else
-    
-//    if (IS_IPHONE_6PLUS_ZOOM) {
-//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"错误" message:@"功能不可用.请关闭iphone6 plus的放大模式然后重启app" delegate:nil cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
-//        [alert show];
-//    } else {
+
         Scale = CGAffineTransformMakeScale((screen.size.width/320.0),(screen.size.width/320.0));
 
 //    }
@@ -378,16 +368,7 @@
     
     CGAffineTransform translateToCenter;
     
-//    if (IS_IPHONE_5) {
-//        translateToCenter = CGAffineTransformMakeTranslation( -(self.view.frame.size.height - videoAssetTrack.naturalSize.width),-screen.size.width);// this config is for 5s, for 6, need another config after testing
-//    } else if(IS_IPHONE_6) {
-//        translateToCenter = CGAffineTransformMakeTranslation( -(screen.size.height - videoAssetTrack.naturalSize.width)+(667-568),
-//                                                                               -screen.size.width);// this config is for 6, , need another config after testing
-//    } else if (IS_IPHONE_6_PLUS) {
-//        NSLog(@"config for iphone 6 plus!!");
-//        translateToCenter = CGAffineTransformMakeTranslation( -(screen.size.height - videoAssetTrack.naturalSize.width)+(736-568),
-//                                                             -screen.size.width);
-//    }
+
     translateToCenter = CGAffineTransformMakeTranslation( -(screen.size.height - videoAssetTrack.naturalSize.width)+(screen.size.height-568),
                                                          -screen.size.width);
 
