@@ -77,66 +77,47 @@
 {
     [super viewDidAppear:animated];
     
-//    if (IS_IPHONE_4) {
-//        CGRect f = vPlayAudio.frame;
-//        f.size.height = 0;
-//        vPlayAudio.frame = f;
-//    }
-
-    AVCaptureVideoPreviewLayer *previewLayer = [[AVCaptureVideoPreviewLayer alloc] initWithSession:session];
-    [previewLayer setVideoGravity:AVLayerVideoGravityResizeAspectFill];
-    
-    
-    CALayer *rootLayer = self.view.layer;
-    //    [rootLayer setMasksToBounds:YES];
-
-    [previewLayer setFrame:CGRectMake(0, vPlayAudio.frame.origin.y + vPlayAudio.frame.size.height + 1, rootLayer.bounds.size.width, rootLayer.bounds.size.width)];
-    //    [previewLayer setFrame:rootLayer.frame];
-    
-    [rootLayer addSublayer:previewLayer];
-    
-    
-//    //testing the size of the preview layer
-//    NSLog(@"vplayaudio y is %f, height %f, width %f",vPlayAudio.frame.origin.y, vPlayAudio.bounds.size.height, vPlayAudio.bounds.size.width);
-//    NSLog(@"screen width %f, height %f",[UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height);
-//    
-//    UIView *testViewAndWillBeDeletedLater = [[UIView alloc] initWithFrame:previewLayer.frame];
-//    testViewAndWillBeDeletedLater.backgroundColor = [UIColor orangeColor];
-//    [self.view addSubview:testViewAndWillBeDeletedLater];
-//    [self.view bringSubviewToFront:testViewAndWillBeDeletedLater];
-    
-    
-    _movieFileOutput = [[AVCaptureMovieFileOutput alloc] init];
-    
-    if ([session canAddOutput:_movieFileOutput]) {
-        NSLog(@"add movie file output");
-        [session addOutput:_movieFileOutput];
-        
-    }
-    
-    AVCaptureConnection *videoConnection = nil;
-    
-    //    for ( AVCaptureConnection *connection in [_movieFileOutput connections] )
-    //    {
-    //        NSLog(@"%@", connection);
-    //        for ( AVCaptureInputPort *port in [connection inputPorts] )
-    //        {
-    //            NSLog(@"%@", port);
-    //            if ( [[port mediaType] isEqual:AVMediaTypeVideo] )
-    //            {
-    //                videoConnection = connection;
-    //            }
-    //        }
+    //    if (IS_IPHONE_4) {
+    //        CGRect f = vPlayAudio.frame;
+    //        f.size.height = 0;
+    //        vPlayAudio.frame = f;
     //    }
-    videoConnection = [_movieFileOutput connectionWithMediaType:AVMediaTypeVideo];
-    
-    if([videoConnection isVideoOrientationSupported]) // **Here it is, its always false**
-    {
-        [videoConnection setVideoOrientation:AVCaptureVideoOrientationPortrait];
+    if (!session.isRunning) {
+        AVCaptureVideoPreviewLayer *previewLayer = [[AVCaptureVideoPreviewLayer alloc] initWithSession:session];
+        [previewLayer setVideoGravity:AVLayerVideoGravityResizeAspectFill];
+        
+        
+        CALayer *rootLayer = self.view.layer;
+        //    [rootLayer setMasksToBounds:YES];
+        
+        [previewLayer setFrame:CGRectMake(0, vPlayAudio.frame.origin.y + vPlayAudio.frame.size.height + 1, rootLayer.bounds.size.width, rootLayer.bounds.size.width)];
+        
+        
+        [rootLayer addSublayer:previewLayer];
+        
+        _movieFileOutput = [[AVCaptureMovieFileOutput alloc] init];
+        
+        if ([session canAddOutput:_movieFileOutput]) {
+            NSLog(@"add movie file output");
+            [session addOutput:_movieFileOutput];
+            
+        }
+        
+        AVCaptureConnection *videoConnection = nil;
+        
+        
+        videoConnection = [_movieFileOutput connectionWithMediaType:AVMediaTypeVideo];
+        
+        if([videoConnection isVideoOrientationSupported]) // **Here it is, its always false**
+        {
+            [videoConnection setVideoOrientation:AVCaptureVideoOrientationPortrait];
+        }
+        
+        [session commitConfiguration];
+        
+        [session startRunning];
     }
     
-    [session commitConfiguration];
-    [session startRunning];
 }
 
 - (void) viewWillAppear:(BOOL)animated
