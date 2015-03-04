@@ -871,7 +871,7 @@
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = mie;
-				PROVISIONING_PROFILE = "0ce203be-1704-4d4d-b552-86c4f2824ffa";
+				PROVISIONING_PROFILE = "c25d280f-351c-495a-80b8-0f84fe59855d";
 				VALID_ARCHS = "armv7 armv7s arm64";
 			};
 			name = Debug;
@@ -915,7 +915,7 @@
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = mie;
-				PROVISIONING_PROFILE = "0ce203be-1704-4d4d-b552-86c4f2824ffa";
+				PROVISIONING_PROFILE = "c25d280f-351c-495a-80b8-0f84fe59855d";
 				VALID_ARCHS = "armv7 armv7s arm64";
 			};
 			name = Release;

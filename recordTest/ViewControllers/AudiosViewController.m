@@ -220,9 +220,10 @@
             
             [self playAudioWithURL:filePath];
             /**ui setting**/
-            [currentToBePlayedCell setStateForAudioState:PLAYING];
-            currentPlayingAudioCellIndex = sender.tag;
-            
+            if (!error) {
+                [currentToBePlayedCell setStateForAudioState:PLAYING];
+                currentPlayingAudioCellIndex = sender.tag;
+            }
 
         }];
         [downloadTask resume];
