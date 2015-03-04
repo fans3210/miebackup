@@ -48,20 +48,52 @@
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2T6-gx-VFl" userLabel="cameraPlaceHolder">
                                 <rect key="frame" x="0.0" y="61" width="600" height="600"/>
-                                <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" alpha="0.25" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mielogo_purple.png" translatesAutoresizingMaskIntoConstraints="NO" id="F9Q-5n-Eo5">
+                                        <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="250" id="LJO-Ns-xBm"/>
+                                            <constraint firstAttribute="width" constant="250" id="fHX-J8-mWq"/>
+                                        </constraints>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="LJO-Ns-xBm"/>
+                                                <exclude reference="fHX-J8-mWq"/>
+                                            </mask>
+                                        </variation>
+                                        <variation key="heightClass=regular">
+                                            <mask key="constraints">
+                                                <include reference="LJO-Ns-xBm"/>
+                                                <include reference="fHX-J8-mWq"/>
+                                            </mask>
+                                        </variation>
+                                    </imageView>
+                                </subviews>
                                 <constraints>
+                                    <constraint firstItem="F9Q-5n-Eo5" firstAttribute="centerX" secondItem="2T6-gx-VFl" secondAttribute="centerX" id="4jM-FQ-y7i"/>
+                                    <constraint firstItem="F9Q-5n-Eo5" firstAttribute="centerY" secondItem="2T6-gx-VFl" secondAttribute="centerY" id="azZ-Ke-ndD"/>
                                     <constraint firstAttribute="width" secondItem="2T6-gx-VFl" secondAttribute="height" multiplier="1:1" id="gM6-Sy-fhl"/>
                                     <constraint firstAttribute="width" secondItem="2T6-gx-VFl" secondAttribute="height" multiplier="1:1" id="xob-Dy-arV"/>
                                 </constraints>
                                 <variation key="default">
+                                    <mask key="subviews">
+                                        <exclude reference="F9Q-5n-Eo5"/>
+                                    </mask>
                                     <mask key="constraints">
                                         <exclude reference="xob-Dy-arV"/>
+                                        <exclude reference="4jM-FQ-y7i"/>
+                                        <exclude reference="azZ-Ke-ndD"/>
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=regular">
+                                    <mask key="subviews">
+                                        <include reference="F9Q-5n-Eo5"/>
+                                    </mask>
                                     <mask key="constraints">
                                         <exclude reference="gM6-Sy-fhl"/>
                                         <include reference="xob-Dy-arV"/>
+                                        <include reference="4jM-FQ-y7i"/>
+                                        <include reference="azZ-Ke-ndD"/>
                                     </mask>
                                 </variation>
                             </view>
@@ -128,7 +160,6 @@
                                         </variation>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="centerX" secondItem="REp-Vc-KiV" secondAttribute="centerX" id="0p9-ZM-WlO"/>
                                     <constraint firstAttribute="trailing" secondItem="REp-Vc-KiV" secondAttribute="trailing" constant="72" id="1ra-K8-z1j">
@@ -727,6 +758,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="mielogo_purple.png" width="1024" height="1024"/>
         <image name="play.png" width="158" height="79"/>
     </resources>
     <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>

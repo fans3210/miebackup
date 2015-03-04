@@ -13,6 +13,7 @@
 		38105D231A93037900284860 /* pause.png in Resources */ = {isa = PBXBuildFile; fileRef = 38105D201A93037900284860 /* pause.png */; };
 		38105D241A93037900284860 /* play.png in Resources */ = {isa = PBXBuildFile; fileRef = 38105D211A93037900284860 /* play.png */; };
 		38105D251A93037900284860 /* stop.png in Resources */ = {isa = PBXBuildFile; fileRef = 38105D221A93037900284860 /* stop.png */; };
+		382B7D241AA77922000956C9 /* mielogo_purple.png in Resources */ = {isa = PBXBuildFile; fileRef = 382B7D231AA77922000956C9 /* mielogo_purple.png */; };
 		384E06871A7380DB0008AFF8 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 384E06861A7380DB0008AFF8 /* libc++.dylib */; };
 		3852B8111A7A841100C7C7C5 /* funny.png in Resources */ = {isa = PBXBuildFile; fileRef = 3852B8101A7A841100C7C7C5 /* funny.png */; };
 		3852B8FD1A7BDA5900C7C7C5 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3852B8FC1A7BDA5900C7C7C5 /* BaseViewController.m */; };
@@ -99,6 +100,7 @@
 		38105D201A93037900284860 /* pause.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pause.png; sourceTree = "<group>"; };
 		38105D211A93037900284860 /* play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play.png; sourceTree = "<group>"; };
 		38105D221A93037900284860 /* stop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stop.png; sourceTree = "<group>"; };
+		382B7D231AA77922000956C9 /* mielogo_purple.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mielogo_purple.png; sourceTree = "<group>"; };
 		384E06861A7380DB0008AFF8 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		3852B8101A7A841100C7C7C5 /* funny.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = funny.png; sourceTree = "<group>"; };
 		3852B8FB1A7BDA5900C7C7C5 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
@@ -272,6 +274,7 @@
 		3852B80F1A7A83FC00C7C7C5 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				382B7D231AA77922000956C9 /* mielogo_purple.png */,
 				38F932DD1A9A319B00415FE1 /* mielogo.png */,
 				38105D201A93037900284860 /* pause.png */,
 				38105D211A93037900284860 /* play.png */,
@@ -635,6 +638,7 @@
 				3852B8111A7A841100C7C7C5 /* funny.png in Resources */,
 				38105D121A90F2C500284860 /* firstlaunch2.png in Resources */,
 				38105D231A93037900284860 /* pause.png in Resources */,
+				382B7D241AA77922000956C9 /* mielogo_purple.png in Resources */,
 				38F932DE1A9A319B00415FE1 /* mielogo.png in Resources */,
 				38105D241A93037900284860 /* play.png in Resources */,
 				3852B9DD1A7CF53D00C7C7C5 /* Resource.bundle in Resources */,

@@ -440,7 +440,7 @@
 
     exportSession.videoComposition = videoCompositionInst; //add video composition to exporter
     
-    bStartOrStop.alpha = 0.5;
+    bStartOrStop.alpha = 0.0;//better totally hide the button
     bStartOrStop.userInteractionEnabled = NO;
     [self showRecordStatusWithText:@"视频生成中..."];
     
