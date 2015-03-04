@@ -93,18 +93,12 @@
                                         <subviews>
                                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="wU9-UT-8RW">
                                                 <rect key="frame" x="20" y="20" width="20" height="20"/>
-                                                <variation key="heightClass=regular" ambiguous="YES">
-                                                    <rect key="frame" x="20" y="20" width="20" height="20"/>
-                                                </variation>
                                             </activityIndicatorView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Processing..." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KoP-zr-lCa">
                                                 <rect key="frame" x="53" y="20" width="99.5" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
-                                                <variation key="heightClass=regular" ambiguous="YES">
-                                                    <rect key="frame" x="53" y="20" width="115" height="20.5"/>
-                                                </variation>
                                             </label>
                                         </subviews>
                                         <constraints>
@@ -127,8 +121,7 @@
                                                 <exclude reference="y6Q-bh-hVc"/>
                                             </mask>
                                         </variation>
-                                        <variation key="heightClass=regular" ambiguous="YES" misplaced="YES">
-                                            <rect key="frame" x="188" y="20" width="173" height="61"/>
+                                        <variation key="heightClass=regular">
                                             <mask key="constraints">
                                                 <include reference="y6Q-bh-hVc"/>
                                             </mask>
@@ -143,6 +136,8 @@
                                     </constraint>
                                     <constraint firstItem="REp-Vc-KiV" firstAttribute="leading" secondItem="S7s-5e-olK" secondAttribute="leading" constant="20" id="9kc-2L-y5C"/>
                                     <constraint firstAttribute="centerX" secondItem="REp-Vc-KiV" secondAttribute="centerX" id="Xp6-1R-b1O"/>
+                                    <constraint firstAttribute="centerY" secondItem="eOa-96-qyo" secondAttribute="centerY" id="h4k-j8-eBL"/>
+                                    <constraint firstAttribute="centerX" secondItem="eOa-96-qyo" secondAttribute="centerX" id="lfe-2K-iei"/>
                                     <constraint firstAttribute="centerY" secondItem="REp-Vc-KiV" secondAttribute="centerY" id="ydc-eX-VAK"/>
                                 </constraints>
                                 <variation key="default">
@@ -152,6 +147,8 @@
                                         <exclude reference="9kc-2L-y5C"/>
                                         <exclude reference="Xp6-1R-b1O"/>
                                         <exclude reference="ydc-eX-VAK"/>
+                                        <exclude reference="h4k-j8-eBL"/>
+                                        <exclude reference="lfe-2K-iei"/>
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=regular">
@@ -161,6 +158,8 @@
                                         <include reference="9kc-2L-y5C"/>
                                         <exclude reference="Xp6-1R-b1O"/>
                                         <include reference="ydc-eX-VAK"/>
+                                        <include reference="h4k-j8-eBL"/>
+                                        <include reference="lfe-2K-iei"/>
                                     </mask>
                                 </variation>
                             </view>
