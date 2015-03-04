@@ -57,6 +57,6 @@
 #define kCategoryName       @"categoryTitle"
 #define kQuote              @"Quote"
 #define kUrgentQuote       @"年轻人，你的手速太快了！鸡汤还没好呢你咋就这么急呢？\n俗话说得好，饭要一口一口吃，路要一步一步走。 你说你连看个鸡汤都这么木有耐心，你如何能够成功呢？\n不过你也不要气馁啊年轻人，好好反思，重新做人吧！"
-#define kDefaultQuote       @"好消息——今天木有鸡汤！！"
+#define kDefaultQuote       @"您木有联网或者做鸡汤的人今天休假"
 
 #endif

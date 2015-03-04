@@ -35,6 +35,7 @@
 - (void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [self loadQuote];//every time quote view appears, load quote again to update the todaysquote variable
     if (todaysQuote && [todaysQuote length] > 0) {
         tvQuote.text = todaysQuote;
     } else {
