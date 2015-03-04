@@ -56,7 +56,7 @@
 
 #define kCategoryName       @"categoryTitle"
 #define kQuote              @"Quote"
-#define kUrgentQuote       @"年轻人，你的手速太快了！鸡汤还没好呢你咋就这么急呢？\n俗话说得好，饭要一口一口吃，路要一步一步走。 你说你连看个鸡汤都这么木有耐心，你如何能够成功呢？\n不过你也不要气馁啊年轻人，好好反思，重新做人吧！"
+#define kUrgentQuote       @"\n同志，您的手速超过了我们服务器响应速度亦或是光速。我们对此表示遗憾并对即将对您实施处罚。\n\n请点击\"回到首页\"按钮并握紧手机然后以光速甩向自己头部。"
 #define kDefaultQuote       @"您木有联网或者做鸡汤的人今天休假"
 
 #endif
