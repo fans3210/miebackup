@@ -38,19 +38,19 @@
     if (todaysQuote && [todaysQuote length] > 0) {
         tvQuote.text = todaysQuote;
     } else {
-        tvQuote.text = kDefaultQuote;
+        tvQuote.text = kUrgentQuote;
     }
 }
 
 - (void) loadQuote
 {
-    NSLog(@"load quote");
+    NSLog(@"load quote, ktodaysquote");
     AVQuery *queryQuote = [AVQuery queryWithClassName:kTodaysQuote];
     //    queryQuote.cachePolicy = kPFCachePolicyCacheElseNetwork;
     [queryQuote findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (error) {
             NSLog(@"error in find quote, error is %@",error);
-            tvQuote.text = kDefaultQuote;
+            todaysQuote = kDefaultQuote;
         } else {
             NSMutableArray *quotes = [NSMutableArray arrayWithArray:objects];
             if (quotes && quotes.count > 0) {
