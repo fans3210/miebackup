@@ -56,6 +56,6 @@
 
 #define kCategoryName       @"categoryTitle"
 #define kQuote              @"Quote"
-#define kDefaultQuote       @"欢迎使用咩拍！"
+#define kDefaultQuote       @"对不起您手速太快，请稍后儿再来。。。"
 
 #endif

@@ -28,11 +28,23 @@
     tvQuote.layer.borderColor = [UIColor whiteColor].CGColor;
     tvQuote.layer.cornerRadius = 20;
 //    [self loadQuote];
-    tvQuote.text = todaysQuote;
+
+    
+}
+
+- (void) viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    if (todaysQuote && [todaysQuote length] > 0) {
+        tvQuote.text = todaysQuote;
+    } else {
+        tvQuote.text = kDefaultQuote;
+    }
 }
 
 - (void) loadQuote
 {
+    NSLog(@"load quote");
     AVQuery *queryQuote = [AVQuery queryWithClassName:kTodaysQuote];
     //    queryQuote.cachePolicy = kPFCachePolicyCacheElseNetwork;
     [queryQuote findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
