@@ -1,18 +1,16 @@
 //
 //  miepai.pch
-//  recordTest
+//  mie
 //
 //  Created by YAO DONG LI on 24/1/15.
 //  Copyright (c) 2015 ThreeStones. All rights reserved.
 //
 
-#ifndef recordTest_miepai_pch
-#define recordTest_miepai_pch
+#ifndef mie_miepai_pch
+#define mie_miepai_pch
 
 // Include any system framework and library headers here that should be included in all compilation units.
 // You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
-
-#import <NewRelicAgent/NewRelic.h>
 
 
 /*

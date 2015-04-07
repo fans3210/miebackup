@@ -1,13 +1,13 @@
 //
 //  PlayViewController.m
-//  recordTest
+//  mie
 //
 //  Created by YAO DONG LI on 17/1/15.
 //  Copyright (c) 2015 ThreeStones. All rights reserved.
 //
 
 #import "PlayViewController.h"
-#import <ShareSDK/ShareSDK.h>
+//#import <ShareSDK/ShareSDK.h>
 #import <AssetsLibrary/AssetsLibrary.h>
 
 
@@ -87,35 +87,35 @@
     //tst share
 //    id<ISSCAttachment> video = [ShareSDK imageWithUrl:[_movieURL absoluteString]];
     NSLog(@"video url absolute string is %@",[_movieURL absoluteString]);
-    id<ISSContent> publishContent = [ShareSDK content:@"咩拍"
-                                       defaultContent:@"咩拍"
-                                                image:nil
-                                                title:@"欢迎使用咩拍"
-                                                  url:[_movieURL absoluteString]
-                                          description:@"这是一条测试信息"
-                                            mediaType:SSPublishContentMediaTypeImage];
+//    id<ISSContent> publishContent = [ShareSDK content:@"咩拍"
+//                                       defaultContent:@"咩拍"
+//                                                image:nil
+//                                                title:@"欢迎使用咩拍"
+//                                                  url:[_movieURL absoluteString]
+//                                          description:@"这是一条测试信息"
+//                                            mediaType:SSPublishContentMediaTypeImage];
     
     
 //    [publishContent addWeixinSessionUnitWithType:[NSNumber numberWithInt:4] content:nil title:nil url:[_movieURL absoluteString] image:nil musicFileUrl:[_movieURL absoluteString] extInfo:nil fileData:[NSData dataWithContentsOfFile:[_movieURL absoluteString]] emoticonData:nil];
     
-    id<ISSContainer> container = [ShareSDK container];
-    [container setIPadContainerWithView:sender arrowDirect:UIPopoverArrowDirectionUp];
-    
-    
-    
-    [ShareSDK showShareActionSheet:container
-                         shareList:nil
-                           content:publishContent
-                     statusBarTips:YES
-                       authOptions:nil
-                      shareOptions:nil
-                            result:^(ShareType type, SSResponseState state, id<ISSPlatformShareInfo> statusInfo, id<ICMErrorInfo> error, BOOL end) {
-                                if (state == SSResponseStateSuccess) {
-                                    NSLog(@"share succeed");
-                                } else if (state == SSResponseStateFail) {
-                                    NSLog(@"share failed error is %@",error.description);
-                                }
-                            }];
+//    id<ISSContainer> container = [ShareSDK container];
+//    [container setIPadContainerWithView:sender arrowDirect:UIPopoverArrowDirectionUp];
+//    
+//    
+//    
+//    [ShareSDK showShareActionSheet:container
+//                         shareList:nil
+//                           content:publishContent
+//                     statusBarTips:YES
+//                       authOptions:nil
+//                      shareOptions:nil
+//                            result:^(ShareType type, SSResponseState state, id<ISSPlatformShareInfo> statusInfo, id<ICMErrorInfo> error, BOOL end) {
+//                                if (state == SSResponseStateSuccess) {
+//                                    NSLog(@"share succeed");
+//                                } else if (state == SSResponseStateFail) {
+//                                    NSLog(@"share failed error is %@",error.description);
+//                                }
+//                            }];
 }
 
 - (void) moviePlayBackDidFinish

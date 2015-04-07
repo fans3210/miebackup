@@ -1,15 +1,11 @@
 //
 //  AppDelegate.m
-//  recordTest
 //
 //  Created by YAO DONG LI on 17/1/15.
 //  Copyright (c) 2015 ThreeStones. All rights reserved.
 //
 
 #import "AppDelegate.h"
-#import <Realm.h>
-#import <ShareSDK/ShareSDK.h>
-#import "WXApi.h"
 #import <AVOSCloud/AVOSCloud.h>
 
 #import "FirstViewController.h"
@@ -20,28 +16,28 @@
 
 @implementation AppDelegate
 
-- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
-{
-    return [ShareSDK handleOpenURL:url wxDelegate:self];
-}
+//- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
+//{
+//    return [ShareSDK handleOpenURL:url wxDelegate:self];
+//}
 
-- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
-{
-    return [ShareSDK handleOpenURL:url sourceApplication:sourceApplication annotation:annotation wxDelegate:self];
-}
+//- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+//{
+//    return [ShareSDK handleOpenURL:url sourceApplication:sourceApplication annotation:annotation wxDelegate:self];
+//}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
     //newrelic
-    [NewRelicAgent startWithApplicationToken:@"AA92a066f5b84ec9780ee08db1e65e9bb95b8ae988"];
+//    [NewRelicAgent startWithApplicationToken:@"AA92a066f5b84ec9780ee08db1e65e9bb95b8ae988"];
     
     //lean cloud
     [AVOSCloud setApplicationId:kLeanCloudAppId clientKey:kLeanCloudClientKey];
     
-    //sharesdk
-    [ShareSDK registerApp:@"5539daadaff8"];
-    [ShareSDK connectWeChatWithAppId:kWechatAppId appSecret:kWechatAppKey wechatCls:[WXApi class]];
+//    //sharesdk
+//    [ShareSDK registerApp:@"5539daadaff8"];
+//    [ShareSDK connectWeChatWithAppId:kWechatAppId appSecret:kWechatAppKey wechatCls:[WXApi class]];
     
     //check first launch
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
@@ -103,7 +99,7 @@
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 
 - (NSURL *)applicationDocumentsDirectory {
-    // The directory the application uses to store the Core Data store file. This code uses a directory named "com.ThreeStones.recordTest" in the application's documents directory.
+
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
 }
 
@@ -112,7 +108,7 @@
     if (_managedObjectModel != nil) {
         return _managedObjectModel;
     }
-    NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"recordTest" withExtension:@"momd"];
+    NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"mie" withExtension:@"momd"];
     _managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
     return _managedObjectModel;
 }
@@ -126,7 +122,7 @@
     // Create the coordinator and store
     
     _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
-    NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"recordTest.sqlite"];
+    NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"mie.sqlite"];
     NSError *error = nil;
     NSString *failureReason = @"There was an error creating or loading the application's saved data.";
     if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {

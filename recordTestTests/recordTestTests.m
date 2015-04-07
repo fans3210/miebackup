@@ -1,6 +1,6 @@
 //
-//  recordTestTests.m
-//  recordTestTests
+//  mieTests.m
+//  mieTests
 //
 //  Created by YAO DONG LI on 17/1/15.
 //  Copyright (c) 2015 ThreeStones. All rights reserved.
@@ -9,11 +9,11 @@
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
 
-@interface recordTestTests : XCTestCase
+@interface mieTests : XCTestCase
 
 @end
 
-@implementation recordTestTests
+@implementation mieTests
 
 - (void)setUp {
     [super setUp];

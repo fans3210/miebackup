@@ -1,6 +1,6 @@
 //
 //  BaseViewController.m
-//  recordTest
+//  mie
 //
 //  Created by YAO DONG LI on 30/1/15.
 //  Copyright (c) 2015 ThreeStones. All rights reserved.
@@ -39,8 +39,6 @@
     if (_player.isPlaying) {
         [_player stop];
         
-//        NSLog(@"player playing file is %@",[_player.url.absoluteString lastPathComponent]);
-//        NSLog(@"to be played file  is %@",[filePath lastPathComponent]);
         
         if ([[_player.url.absoluteString lastPathComponent] isEqualToString:[filePath.absoluteString lastPathComponent]]) {
             return;

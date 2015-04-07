@@ -1,1 +1,1 @@
-../../../AVOSCloud/iOS/release-v2.6.10/AVOSCloud.framework/PrivateHeaders/AVImageRequestOperation.h
+../../../AVOSCloud/iOS/release-v3.0.2/AVOSCloud.framework/PrivateHeaders/AVImageRequestOperation.h

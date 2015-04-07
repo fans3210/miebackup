@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>9BE1914D-4345-49B5-82C1-B531EC2AAAA7</string>
+	<key>IDESourceControlProjectName</key>
+	<string>mie</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>AE86029401DE1251FDDC661E0B19CDF6F9AE639F</key>
+		<string>https://bitbucket.org/funplay/testrecord-ios.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>mie.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>AE86029401DE1251FDDC661E0B19CDF6F9AE639F</key>
+		<string>..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://bitbucket.org/funplay/testrecord-ios.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>AE86029401DE1251FDDC661E0B19CDF6F9AE639F</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>AE86029401DE1251FDDC661E0B19CDF6F9AE639F</string>
+			<key>IDESourceControlWCCName</key>
+			<string>recordTest</string>
+		</dict>
+	</array>
+</dict>
+</plist>
